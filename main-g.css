@@ -303,7 +303,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .career-live__list a {
   display: flex;
   align-items: center;
-  gap: var(--space-16);
+  gap: var(--space-12);
   height: 100%;
   min-width: 0;
   font-size: var(--text-14);
@@ -338,7 +338,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .qbox__title--logo { justify-content: center; } /* MOS 박스 : 로고만 가운데 */
 .qbox__title img { height: 30px; width: auto; }
-.qbox__grid { flex: 1; display: grid; gap: 6px; }
+.qbox__grid { flex: 1; display: grid; gap: var(--space-12); }
 .qbox__grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .qbox__grid--2x2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -383,7 +383,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
    칸 배치는 아래 --compact / --static 에서 각각 한 번만 지정 */
 .cta-card {
   display: grid;
-  column-gap: var(--space-16);
+  column-gap: var(--space-12);
   padding: var(--space-20);
   background: var(--surface-default);
   border-radius: var(--radius-16);
