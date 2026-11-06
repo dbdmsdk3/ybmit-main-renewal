@@ -1,0 +1,825 @@
+/* =========================================================
+   공용 헤더 (채용정보 배너 + 헤더 + 메가메뉴 + 모바일 전체 메뉴)
+   원본: localhost:5577 헤더 네비게이션 (style.css)
+   - 공통 토큰은 common.css 에 있으므로 여기에는 헤더 전용 확장 토큰만 둠
+   - 데모 본문(.demo-content) 스타일은 제외
+   ========================================================= */
+:root {
+  /* 색상 */
+  --nvb-blue: #0068f0;            /* 채용정보 배너 기업명 */
+  --color-shadow: #0000001a;      /* 관련사이트 드롭다운 그림자 */
+  --color-card-shadow: #0000000d; /* 채용정보 카드 그림자 */
+  --color-dim: #00000066;         /* 메가메뉴 배경 딤 (검정 40%) */
+
+  /* 행간 */
+  --line-height-normal: normal;
+  --line-height-130: 1.3;
+  --line-height-150: 1.5;
+
+  /* 간격 */
+  --space-30: 30px;
+
+  /* 크기 */
+  --header-top-h: 58px;
+  --gnb-h: 60px;
+  --gnb-col-w: 130px;
+  --gnb-mobile-h: 52px;
+  --logo-ybmit-w: 94.739px;
+  --logo-ybm-w: 55.161px;
+  --logo-h: 30px;
+  --icon-14: 14px;
+  --icon-16: 16px;
+  --icon-24: 24px;
+  --icon-32: 32px;
+  --dropdown-w: 94px;
+  --menu-line-w: 18px;
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-3: 3px;
+  --shadow-dropdown: 0 0 4px var(--color-shadow);
+  --banner-btn-size: 40px;
+  --banner-body-max-h: 260px;
+  --shadow-card: 0 2px 8px var(--color-card-shadow);
+
+  /* 모션 */
+  --duration-slow: 300ms;
+  --ease-default: ease;
+
+  /* 쌓임 순서 */
+  --z-header: 100;
+  --z-dim: 99;
+  --z-banner: 100;
+  --z-dropdown: 10;
+}
+
+/* 원본(5577) 기본 글꼴 환경 그대로 고정
+   - 시안 본문(body)의 폰트·크기·행간·줄바꿈 설정이 헤더로 상속되지 않게 차단 */
+.recruit-banner,
+.header {
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 16px;
+  line-height: normal;
+  word-break: normal;
+}
+
+/* 헤더 내부 컨테이너 */
+.container {
+  width: 100%;
+  max-width: calc(var(--container-max) + var(--space-20) * 2);
+  margin: var(--space-0) auto;
+  padding: var(--space-0) var(--space-20);
+}
+
+/* =========================================================
+   채용정보 배너 (헤더 위)
+   - 토글로 카드 영역을 접고 펼침, X 로 배너 전체 닫기
+   ========================================================= */
+.recruit-banner {
+  position: relative;
+  z-index: var(--z-banner);
+  overflow-x: clip; /* 좁은 데스크톱에서 바깥 화살표가 가로 스크롤을 만들지 않게 */
+  background: var(--surface-subtle);
+  border-bottom: var(--border-1) solid var(--border-default);
+}
+
+.recruit-banner.is-hidden {
+  display: none;
+}
+
+.recruit-banner-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding: var(--space-12) var(--space-0);
+}
+
+.recruit-banner-logo {
+  height: 20px; /* 요청에 따라 변수 대신 숫자로 명시 */
+}
+
+.recruit-banner-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.recruit-banner-title {
+  font-size: var(--text-15);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.recruit-banner-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-10);
+  border: var(--border-1) solid var(--border-default);
+  border-radius: var(--radius-8);
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* 펼친 상태에서는 위쪽 화살표(닫기), 접힌 상태에서는 아래쪽 화살표(열기) */
+.recruit-banner-badge .recruit-banner-badge-icon {
+  width: var(--icon-14);
+  height: var(--icon-14);
+  transform: rotate(180deg);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.recruit-banner.is-collapsed .recruit-banner-badge .recruit-banner-badge-icon {
+  transform: none;
+}
+
+.recruit-banner-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  font-size: var(--text-12);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.recruit-banner-today {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  cursor: pointer;
+}
+
+.recruit-banner-today-check {
+  margin: var(--space-0);
+}
+
+.recruit-banner-close {
+  padding: var(--space-2);
+  line-height: 0;
+  color: var(--text-tertiary);
+}
+
+.recruit-banner-close:hover,
+.recruit-banner-close:focus-visible {
+  color: var(--text-secondary);
+}
+
+/* 카드 영역: 최대 높이 전환으로 접고 펼침
+   펼침이 끝나면(.is-settled) 바깥 화살표가 잘리지 않도록 overflow 해제 */
+.recruit-banner-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--duration-normal) var(--ease-out);
+}
+
+.recruit-banner-body.is-open {
+  max-height: var(--banner-body-max-h);
+}
+
+.recruit-banner-body.is-open.is-settled {
+  overflow: visible;
+}
+
+/* --slider-inset: 화면 양옆 여백이 화살표 자리(56px + 여유 16px)보다 좁으면
+   모자란 만큼 카드 영역을 안쪽으로 밀어 화살표가 화면 밖으로 나가거나 카드와 겹치지 않게 함
+   (100% = 콘텐츠 폭, (100vw - 100%) / 2 = 한쪽 여백) */
+.recruit-slider {
+  /* max() 안에서는 단위 없는 0(--space-0)을 쓸 수 없어 0px 사용 */
+  --slider-inset: max(0px, calc(var(--space-56) + var(--space-16) - (100vw - 100%) / 2));
+  position: relative;
+  padding: var(--space-8) var(--slider-inset) var(--space-24);
+}
+
+.recruit-slider-viewport {
+  overflow: hidden;
+}
+
+/* 이동 거리는 script.js 에서 카드 폭 + 간격으로 계산 */
+.recruit-slider-track {
+  display: flex;
+  gap: var(--space-16);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+/* 데스크톱: 한 화면에 4장 */
+.recruit-card {
+  flex: 0 0 calc((100% - var(--space-16) * 3) / 4);
+  padding: var(--space-20) var(--space-24);
+  background: var(--surface-default);
+  border: var(--border-1) solid var(--border-subtle);
+  border-radius: var(--radius-12);
+  box-shadow: var(--shadow-card);
+}
+
+.recruit-card-company {
+  margin-bottom: var(--space-10);
+  font-size: var(--text-18);
+  font-weight: var(--weight-bold);
+  color: var(--nvb-blue);
+}
+
+.recruit-card-status {
+  padding-bottom: var(--space-12);
+  border-bottom: var(--border-1) solid var(--border-default);
+  font-size: var(--text-14);
+  color: var(--text-primary);
+}
+
+.recruit-card-desc {
+  margin-top: var(--space-12);
+  font-size: var(--text-14);
+  color: var(--text-tertiary);
+}
+
+/* 좌우 화살표: 카드 바깥 56px 위치 (여백이 좁으면 --slider-inset 만큼 안쪽으로) */
+.recruit-slider-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--banner-btn-size);
+  height: var(--banner-btn-size);
+  color: var(--text-tertiary);
+  transform: translateY(-50%);
+}
+
+.recruit-slider-btn svg {
+  width: var(--icon-32);
+  height: var(--icon-32);
+}
+
+.recruit-slider-btn:hover,
+.recruit-slider-btn:focus-visible {
+  color: var(--brand-700);
+}
+
+.recruit-slider-prev {
+  left: calc(var(--slider-inset) - var(--space-56));
+}
+
+.recruit-slider-next {
+  right: calc(var(--slider-inset) - var(--space-56));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recruit-banner-badge-icon,
+  .recruit-banner-body,
+  .recruit-slider-track {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   헤더
+   - .header 는 본문 흐름에서 접힌 높이만 차지하고,
+     .header-wrap 이 그 위에 떠서 펼쳐질 때 본문을 덮는다.
+   ========================================================= */
+.header {
+  position: relative;
+  z-index: var(--z-header);
+  height: calc(var(--header-top-h) + var(--gnb-h));
+}
+
+.header-wrap {
+  position: absolute;
+  top: var(--space-0);
+  left: var(--space-0);
+  right: var(--space-0);
+  background: var(--surface-default);
+  /* 메가메뉴 열림/닫힘: 레퍼런스(현대자동차그룹 UX 스튜디오)처럼
+     높이가 0.2초 동안 늘어나고 줄어들며 커튼처럼 드러남.
+     열린 높이는 script.js 에서 실제 높이를 재서 지정 */
+  height: calc(var(--header-top-h) + var(--gnb-h));
+  overflow: hidden;
+  transition: height var(--duration-normal) var(--ease-out);
+}
+
+/* 관련사이트 드롭다운이 열려 있을 때는 헤더 밖으로 나와도 잘리지 않게 함
+   (드롭다운을 연 상태에서 메가메뉴가 열리면 script.js 가 드롭다운을 먼저 닫음) */
+.header-wrap:has(.util-related.is-open) {
+  overflow: visible;
+}
+
+/* ---------- 상단 바 ---------- */
+.header-top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* 높이는 내용(로고 30px)과 위아래 패딩으로 결정 */
+  padding-top: var(--space-14);
+  padding-bottom: var(--space-14);
+}
+
+/* 로고: 피그마 YBMIT 인스턴스의 두 그룹 위치를 비율 그대로 배치 */
+.logo-ybmit {
+  position: relative;
+  display: block;
+  width: var(--logo-ybmit-w);
+  height: var(--logo-h);
+}
+
+.logo-ybmit-symbol {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 59.61%;
+  height: 100%;
+}
+
+.logo-ybmit-text {
+  position: absolute;
+  top: 4.76%;
+  left: 68.7%;
+  width: 31.3%;
+  height: 95.14%;
+}
+
+/* ---------- 유틸 메뉴 ---------- */
+.util {
+  display: flex;
+  align-items: center;
+  gap: var(--space-20);
+}
+
+.util-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-14);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.util-link:hover,
+.util-link:focus-visible {
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.icon-chevron {
+  width: var(--icon-16);
+  height: var(--icon-16);
+}
+
+/* 관련사이트 드롭다운 */
+.util-related {
+  position: relative;
+}
+
+.util-related.is-open .icon-chevron {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  z-index: var(--z-dropdown);
+  top: calc(100% + var(--space-6));
+  right: var(--space-0);
+  display: none;
+  width: var(--dropdown-w);
+  border-radius: var(--radius-6);
+  background: var(--surface-default);
+  filter: drop-shadow(var(--shadow-dropdown));
+  overflow: hidden;
+}
+
+.util-related.is-open .dropdown {
+  display: block;
+}
+
+.dropdown-link {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-12);
+  font-size: var(--text-14);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.dropdown-link:hover,
+.dropdown-link:focus-visible {
+  background: var(--surface-muted);
+  font-weight: var(--weight-semibold);
+}
+
+/* 모바일 전용 요소는 기본 숨김 */
+.menu-btn,
+.gnb-util {
+  display: none;
+}
+
+/* ---------- GNB ---------- */
+.gnb-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.gnb-item {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 var(--gnb-col-w);
+  min-width: 0;
+}
+
+.gnb-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--gnb-h);
+  font-size: var(--text-16);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* 상위 메뉴 밑줄
+   - ::before 로 그려 글자 세로 위치에 영향이 없게 함
+   - 왼쪽 끝에서 오른쪽으로 늘어남 */
+.gnb-link::before {
+  content: "";
+  position: absolute;
+  left: var(--space-0);
+  right: var(--space-0);
+  bottom: var(--space-0);
+  height: var(--border-3);
+  background: var(--text-primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duration-slow) var(--ease-default);
+}
+
+/* 펼침 상태에서 마우스/포커스가 있는 열의 상위 메뉴 강조 */
+.header.is-open .gnb-item:hover .gnb-link,
+.header.is-open .gnb-item:focus-within .gnb-link {
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.header.is-open .gnb-item:hover .gnb-link::before,
+.header.is-open .gnb-item:focus-within .gnb-link::before {
+  transform: scaleX(1);
+}
+
+/* 움직임 줄이기 설정을 켠 사용자는 모션 없이 표시 */
+@media (prefers-reduced-motion: reduce) {
+  .gnb-link::before {
+    transition: none;
+  }
+}
+
+/* ---------- 메가메뉴 (펼침) ----------
+   - 소메뉴와 하단 로고는 항상 배치해 두고 .header-wrap 높이로 가림
+   - 닫혀 있을 때는 visibility 로 숨겨 Tab 포커스가 들어가지 않게 함
+     (닫히는 0.2초 동안은 보이도록 visibility 전환을 늦춤) */
+.gnb-sub,
+.gnb-footer {
+  visibility: hidden;
+  transition: visibility 0s linear var(--duration-normal);
+}
+
+.header.is-open .gnb-sub,
+.header.is-open .gnb-footer {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.gnb-sub {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  padding: var(--space-20) var(--space-0);
+}
+
+.gnb-sub-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+/* 그룹 사이 구분선
+   - 피그마 선은 높이 0이라 간격(24 + 24)에 선 두께를 포함시킴 */
+.gnb-sub-group + .gnb-sub-group {
+  padding-top: calc(var(--space-24) - var(--border-1));
+  border-top: var(--border-1) solid var(--border-default);
+}
+
+.gnb-sub-link {
+  display: block;
+  font-size: var(--text-14);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-height-130);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* 피그마에서 두세 줄로 나뉜 항목 */
+.gnb-sub-link.is-multiline {
+  line-height: var(--line-height-150);
+}
+
+.gnb-sub-link:hover,
+.gnb-sub-link:focus-visible {
+  font-weight: var(--weight-semibold);
+  color: var(--brand-600);
+}
+
+.gnb-footer {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-30) var(--space-0);
+}
+
+/* 움직임 줄이기 설정을 켠 사용자는 높이 전환 없이 바로 열고 닫음 */
+@media (prefers-reduced-motion: reduce) {
+  .header-wrap,
+  .gnb-sub,
+  .gnb-footer {
+    transition: none;
+  }
+}
+
+.logo-ybm {
+  width: var(--logo-ybm-w);
+  height: var(--logo-h);
+}
+
+/* ---------- 배경 딤 ----------
+   - 메가메뉴가 열리면(.header.is-open) 헤더 아래 본문을 어둡게 덮음
+   - 클릭을 막지 않도록 pointer-events 없음 */
+.dim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dim);
+  background: var(--color-dim);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--duration-slow) var(--ease-default),
+              visibility var(--duration-slow) var(--ease-default);
+}
+
+.header.is-open ~ .dim {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dim {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   태블릿
+   ========================================================= */
+@media (max-width: 1024px) {
+  /* 열 폭이 좁아지므로 메뉴 글자는 단어 단위로 줄바꿈 */
+  .gnb-link {
+    font-size: var(--text-14);
+    line-height: var(--line-height-130);
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  .gnb-sub-link {
+    font-size: var(--text-13);
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  /* 피그마 강제 줄바꿈 대신 열 폭에 맞춰 자연스럽게 줄바꿈 */
+  .gnb-sub-link.is-multiline br {
+    display: none;
+  }
+
+  .gnb-item + .gnb-item {
+    margin-left: var(--space-12);
+  }
+
+  /* 채용정보 배너: 한 화면에 3장, 화살표는 카드 양옆 여백 안으로 */
+  .recruit-slider {
+    --slider-inset: var(--space-40);
+  }
+
+  .recruit-card {
+    flex-basis: calc((100% - var(--space-16) * 2) / 3);
+  }
+
+  .recruit-slider-prev {
+    left: var(--space-0);
+  }
+
+  .recruit-slider-next {
+    right: var(--space-0);
+  }
+
+  .recruit-slider-btn svg {
+    width: var(--icon-24);
+    height: var(--icon-24);
+  }
+}
+
+/* =========================================================
+   모바일
+   - 유틸 메뉴와 GNB를 햄버거 버튼 안의 전체 메뉴로 이동
+   - 상위 메뉴를 누르면 하위 메뉴가 아코디언으로 열림
+   ========================================================= */
+@media (max-width: 768px) {
+  .header {
+    height: var(--header-top-h);
+  }
+
+  /* 모바일은 높이 커튼 대신 전체 메뉴가 자연 높이로 열림 */
+  .header-wrap {
+    height: auto;
+    overflow: visible;
+    transition: none;
+  }
+
+  .util {
+    display: none;
+  }
+
+  /* 햄버거 버튼 */
+  .menu-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    width: var(--icon-24);
+    height: var(--icon-24);
+  }
+
+  .menu-btn-line {
+    width: var(--menu-line-w);
+    height: var(--border-2);
+    background: var(--text-primary);
+  }
+
+  /* 열린 상태: X 모양 */
+  .header.is-menu-open .menu-btn-line:nth-child(1) {
+    transform: translateY(calc(var(--space-4) + var(--border-2))) rotate(45deg);
+  }
+
+  .header.is-menu-open .menu-btn-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header.is-menu-open .menu-btn-line:nth-child(3) {
+    transform: translateY(calc((var(--space-4) + var(--border-2)) * -1)) rotate(-45deg);
+  }
+
+  /* 전체 메뉴 */
+  .gnb {
+    display: none;
+    max-height: calc(100vh - var(--header-top-h));
+    overflow-y: auto;
+    border-bottom: var(--border-1) solid var(--border-default);
+  }
+
+  .header.is-menu-open .gnb {
+    display: block;
+  }
+
+  .gnb-list {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gnb-item {
+    flex: none;
+    border-bottom: var(--border-1) solid var(--border-default);
+  }
+
+  .gnb-item + .gnb-item {
+    margin-left: var(--space-0);
+  }
+
+  .gnb-item:last-child {
+    border-bottom: 0;
+  }
+
+  .gnb-link {
+    justify-content: space-between;
+    height: var(--gnb-mobile-h);
+    font-size: var(--text-16);
+  }
+
+  /* 하위 메뉴가 있는 항목에만 화살표 표시 */
+  .gnb-item.has-sub .gnb-link::after {
+    content: "";
+    width: var(--icon-16);
+    height: var(--icon-16);
+    background: url("images/icon-chevron-down.svg") no-repeat center / contain;
+  }
+
+  .gnb-item.is-expanded .gnb-link::after {
+    transform: rotate(180deg);
+  }
+
+  /* 모바일은 밑줄 없음 */
+  .gnb-link::before {
+    content: none;
+  }
+
+  .gnb-item.is-expanded .gnb-link {
+    font-weight: var(--weight-bold);
+    color: var(--text-primary);
+  }
+
+  /* 데스크톱 펼침 규칙 대신 아코디언 상태만 따름 */
+  .gnb-sub {
+    display: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  .header .gnb-item.is-expanded .gnb-sub {
+    display: flex;
+  }
+
+  .gnb-sub {
+    padding: var(--space-0) var(--space-0) var(--space-20);
+  }
+
+  .gnb-sub-link {
+    font-size: var(--text-14);
+  }
+
+  .gnb-footer {
+    display: none;
+  }
+
+  /* 모바일 유틸 메뉴 */
+  .gnb-util {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-12) var(--space-20);
+    padding: var(--space-20);
+    background: var(--surface-muted);
+    font-size: var(--text-12);
+    font-weight: var(--weight-medium);
+    color: var(--text-secondary);
+  }
+
+  /* 채용정보 배너
+     - 1줄: 로고 + 오늘 하루 닫기 / X, 2줄: 안내 문구 + 열기·닫기
+     - 카드는 한 화면에 2장 */
+  .recruit-banner-head {
+    flex-wrap: wrap;
+    gap: var(--space-10) var(--space-16);
+  }
+
+  .recruit-banner-toggle {
+    order: 2;
+    flex: 1 1 100%;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .recruit-banner-right {
+    order: 1;
+  }
+
+  .recruit-banner-title {
+    font-size: var(--text-14);
+    word-break: keep-all;
+  }
+
+  .recruit-slider {
+    --slider-inset: var(--space-30);
+  }
+
+  .recruit-card {
+    flex-basis: calc((100% - var(--space-16)) / 2);
+    padding: var(--space-16);
+  }
+
+  .recruit-card-company {
+    font-size: var(--text-16);
+  }
+
+  .recruit-card-status,
+  .recruit-card-desc {
+    font-size: var(--text-13);
+    word-break: keep-all;
+  }
+
+  .recruit-slider-btn {
+    width: var(--space-30);
+  }
+}
+
+/* 공용 리셋(img max-width)과 충돌 방지 */
+.header img, .recruit-banner img { max-width: none; }
