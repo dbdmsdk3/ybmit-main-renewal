@@ -151,7 +151,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-8);
+  gap: 6px;
   margin-top: var(--space-20);
 }
 .hero-banner__count { color: var(--text-tertiary); font-variant-numeric: tabular-nums; border-color: transparent; } /* 넘버링 칩 : 선 없이 (높이 유지)*/
