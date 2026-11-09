@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1차시안 | YBM IT</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <!-- 헤더 원본과 동일한 Pretendard(정적) -->
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <!-- ybmit.com 실제 DS 토큰 -->
+  <link rel="stylesheet" href="https://www.ybmit.com/resources/css/ds/ybm-ds-tokens.css">
+  <!-- 원본 헤더 · 푸터 + 시안 E 단독 스타일 (공용 common/banner/career.css 미사용) -->
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="main-h.css">
+</head>
+<body>
+
+  <!-- 채용정보 배너 (ybmit.com 상단 배너) -->
+  <div class="recruit-banner" id="recruit-banner">
+    <div class="container">
+      <div class="recruit-banner-head">
+        <img class="recruit-banner-logo" src="https://imagesisa.ybmnet.co.kr/platform/common/logo/ybm_ybm.svg" alt="YBM 와이비엠">
+
+        <!-- 배너 펼치기 / 접기 -->
+        <button type="button" class="recruit-banner-toggle" aria-expanded="true" aria-controls="recruit-banner-body">
+          <span class="recruit-banner-title">MOS, COS, COS Pro 활용 기업을 확인해 보세요 !</span>
+          <span class="recruit-banner-badge">
+            <span class="recruit-banner-badge-text">닫기</span>
+            <svg class="icon-chevron recruit-banner-badge-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+
+        <div class="recruit-banner-right">
+          <label class="recruit-banner-today">
+            <input type="checkbox" class="recruit-banner-today-check"> 오늘 하루 닫기
+          </label>
+          <button type="button" class="recruit-banner-close" aria-label="배너 닫기">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="recruit-banner-body is-open" id="recruit-banner-body">
+        <div class="recruit-slider">
+          <div class="recruit-slider-viewport">
+            <ul class="recruit-slider-track">
+              <li class="recruit-card"><h3 class="recruit-card-company">코레일</h3><p class="recruit-card-status">채용 예정</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">SK 하이닉스</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">롯데</h3><p class="recruit-card-status">신입, 경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">대한항공</h3><p class="recruit-card-status">경력직 채용 중</p><p class="recruit-card-desc">COS Pro, COS 소지자 우대</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">대한민국 육군</h3><p class="recruit-card-status">부사관 일반 전형</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">대한민국 해군</h3><p class="recruit-card-status">부사관 일반 전형</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">네이버</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">카카오</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">셀트리온</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 참고</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">LS</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">SM그룹</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+              <li class="recruit-card"><h3 class="recruit-card-company">삼성전자</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+            </ul>
+          </div>
+          <button type="button" class="recruit-slider-btn recruit-slider-prev" aria-label="이전 기업">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="recruit-slider-btn recruit-slider-next" aria-label="다음 기업">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="header-wrap">
+
+      <!-- 상단 바: 로고 + 유틸 메뉴 -->
+      <div class="header-top">
+        <div class="container header-top-inner">
+          <h1 class="header-logo">
+            <a href="/" title="YBM IT 메인으로 이동">
+              <img class="logo-ybmit" src="images/logo-ybmit.svg" alt="YBM IT">
+            </a>
+          </h1>
+
+          <ul class="util">
+            <li><a class="util-link" href="https://www.ybmnet.co.kr/common/login.asp?url=/&amp;what=www.ybmit.com">로그인</a></li>
+            <li><a class="util-link" href="/mytest/mytest_app.jsp">마이페이지</a></li>
+            <li><a class="util-link" href="/cs/notice_list.jsp">고객센터</a></li>
+            <li class="util-related">
+              <button type="button" class="util-link util-related-btn" aria-expanded="false" aria-controls="related-list">
+                관련사이트
+                <!-- hover 시 글자색을 따라가도록 인라인 SVG + currentColor 사용 (원본: images/icon-chevron-down.svg) -->
+                <svg class="icon-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <!-- 관련사이트 드롭다운 -->
+              <ul class="dropdown" id="related-list">
+                <li><a class="dropdown-link" href="http://www.ybmit.com/ybmsisacom.jsp?SiteURL=exam.ybmnet.co.kr" target="_blank" rel="noopener noreferrer">어학시험</a></li>
+                <li><a class="dropdown-link" href="https://www.ybmcc.com/v2/index.asp?utm_source=IT_Main&amp;utm_medium=IT_Main&amp;utm_campaign=MOS_Util" target="_blank" rel="noopener noreferrer">온라인 강의</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- 모바일 전용: 메뉴 열기 버튼 -->
+          <button type="button" class="menu-btn" aria-expanded="false" aria-controls="gnb" aria-label="전체 메뉴 열기">
+            <span class="menu-btn-line"></span>
+            <span class="menu-btn-line"></span>
+            <span class="menu-btn-line"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- GNB + 메가메뉴 -->
+      <nav class="gnb" id="gnb" aria-label="주 메뉴">
+        <div class="container">
+          <ul class="gnb-list">
+
+            <li class="gnb-item">
+              <a class="gnb-link" href="/test_rec/gen_rec.jsp">시험접수</a>
+              <div class="gnb-sub">
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/test_rec/gen_rec.jsp">시험접수</a></li>
+                  <li><a class="gnb-sub-link" href="/mytest/mytest_app.jsp">접수확인 / 수험표출력</a></li>
+                  <li><a class="gnb-sub-link" href="/mytest/mytest_app_change.jsp">접수변경 / 취소</a></li>
+                </ul>
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/test_rec/search_schedule.jsp">시험센터 / 시험일정조회</a></li>
+                  <li><a class="gnb-sub-link" href="/test_rec/test_s_center.jsp">시험센터 안내</a></li>
+                  <li><a class="gnb-sub-link" href="/test_rec/test_guide.jsp">수험자 가이드</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="gnb-item">
+              <a class="gnb-link" href="#">Generative AI</a>
+              <div class="gnb-sub">
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="#">Generative AI 소개</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="gnb-item">
+              <a class="gnb-link" href="/mos/int_test.jsp">MOS</a>
+              <div class="gnb-sub">
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/mos/int_test.jsp">MOS 소개</a></li>
+                  <li><a class="gnb-sub-link" href="/mos/mos_use_ex.jsp">MOS 활용사례</a></li>
+                </ul>
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/mos/course_info_list.jsp">MOS 온라인 강의</a></li>
+                  <li><a class="gnb-sub-link" href="/mos/skill_pds_list.jsp">오피스 스킬 자료실</a></li>
+                  <li><a class="gnb-sub-link" href="/mos/institute_info_list.jsp">지역별 MOS 학원 정보</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="gnb-item">
+              <a class="gnb-link" href="/cos/cos_info.jsp">COS</a>
+              <div class="gnb-sub">
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/cos/cos_info.jsp">COS 소개</a></li>
+                  <li><a class="gnb-sub-link" href="/cos/cos_ex_test.jsp">COS 시험 체험하기</a></li>
+                  <li><a class="gnb-sub-link" href="/cos/cos_sam.jsp">COS 샘플문제</a></li>
+                  <li><a class="gnb-sub-link" href="/cos/cos_use_ex.jsp">COS 활용사례</a></li>
+                </ul>
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/cos/course_info_list.jsp">COS 온라인 강의</a></li>
+                  <li><a class="gnb-sub-link" href="/mos_use/cos_teacher.jsp">COS 공인 강사</a></li>
+                  <li><a class="gnb-sub-link" href="/cos/institute_COSinfo_list.jsp">지역별 COS 학원 정보</a></li>
+                  <li><a class="gnb-sub-link" href="/cos/cos_best_ins.jsp">COS 우수 교육기관</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="gnb-item">
+              <a class="gnb-link" href="/cos_pro/cos_pro_info.jsp">COS Pro</a>
+              <div class="gnb-sub">
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/cos_pro/cos_pro_info.jsp">COS Pro 소개</a></li>
+                  <li><a class="gnb-sub-link" href="/cos_pro/cos_pro_r_test.jsp">COS Pro 샘플문제</a></li>
+                  <li><a class="gnb-sub-link" href="/cos_pro/cos_pro_use_ex.jsp">COS Pro 활용사례</a></li>
+                </ul>
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/cos_pro/course_info_list.jsp">COS Pro 온라인 강의</a></li>
+                  <li><a class="gnb-sub-link is-multiline" href="/cos_pro/institute_PROinfo_list.jsp">지역별 COS Pro <br>학원 정보</a></li>
+                  <li><a class="gnb-sub-link is-multiline" href="https://verify-certificate.sotatek.edu.vn" target="_blank" rel="noopener noreferrer">Global COS Pro <br>Certificate <br>Verification</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="gnb-item">
+              <a class="gnb-link" href="/data/data_info.jsp">DATA</a>
+              <div class="gnb-sub">
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/data/data_info.jsp">DATA 소개</a></li>
+                  <li><a class="gnb-sub-link" href="/data/data_test.jsp">DATA 샘플문제</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="gnb-item">
+              <a class="gnb-link" href="/mos_use/mos_news_list.jsp">시험활용</a>
+              <div class="gnb-sub">
+                <ul class="gnb-sub-group">
+                  <li><a class="gnb-sub-link" href="/mos_use/mos_news_list.jsp">채용정보</a></li>
+                  <li><a class="gnb-sub-link" href="/mos_use/mos_use_ex.jsp">활용사례</a></li>
+                  <li><a class="gnb-sub-link" href="/mos_use/press_list.jsp">보도자료</a></li>
+                  <li><a class="gnb-sub-link" href="/mos_use/mos_movie.jsp">홍보영상</a></li>
+                  <li><a class="gnb-sub-link" href="/mos_use/book_list.jsp">시험교재</a></li>
+                  <li><a class="gnb-sub-link" href="/mos_use/mos_can_do/page.jsp">MOS Can do List</a></li>
+                  <li><a class="gnb-sub-link is-multiline" href="https://my.incruit.com/service/trustmarkcenter.asp" target="_blank" rel="noopener noreferrer">인크루트 이력서 인증 <br>MOS · COS · COS Pro</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- 이벤트: 하위 메뉴 없음 -->
+            <li class="gnb-item">
+              <a class="gnb-link" href="/cs/event_list.jsp">이벤트</a>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- 메가메뉴 하단 YBM 로고 -->
+        <div class="gnb-footer">
+          <img class="logo-ybm" src="images/logo-ybm.svg" alt="YBM">
+        </div>
+
+        <!-- 모바일 전용: 상단 유틸 (메뉴 목록 위에 표시) -->
+        <ul class="gnb-util">
+          <li><a href="https://www.ybmnet.co.kr/common/login.asp?url=/&amp;what=www.ybmit.com">로그인</a></li>
+          <li><a href="/mytest/mytest_app.jsp">마이페이지</a></li>
+          <li><a href="/cs/notice_list.jsp">고객센터</a></li>
+        </ul>
+
+        <!-- 모바일 전용: 하단 고정 바 (외부 바로가기) -->
+        <ul class="gnb-bottom">
+          <li><a href="http://www.ybmit.com/ybmsisacom.jsp?SiteURL=exam.ybmnet.co.kr" target="_blank" rel="noopener noreferrer">어학시험</a></li>
+          <li><a href="https://www.ybmcc.com/v2/index.asp?utm_source=IT_Main&amp;utm_medium=IT_Main&amp;utm_campaign=MOS_Util" target="_blank" rel="noopener noreferrer">온라인 강의</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- 메가메뉴가 열릴 때 본문을 덮는 배경 딤 -->
+  <div class="dim" aria-hidden="true"></div>
+
+  <main class="main">
+
+    <!-- 메인 배너 : 2장 나란히 (현재 ybmit.com 구도 유지) -->
+    <section class="hero-banner">
+      <div class="wrap">
+        <h2 class="blind">메인 배너</h2>
+        <div class="hero-banner__stage">
+          <ul class="hero-banner__list">
+            <li><a href="https://www.ybmit.com/event/revent/2026/0930/event.jsp"><img src="https://moscontrol.ybmit.com/Data/main/YBM%20IT%20%EB%A9%94%EC%9D%B8%20%EB%A1%A4%EB%A7%81%20540_360(2).png" alt="YBM IT 이벤트"></a></li>
+            <li><a href="https://www.ybmit.com/cs/group_test.jsp"><img src="https://moscontrol.ybmit.com/Data/main/%EB%8B%A8%EC%B2%B4%EC%8B%9C%ED%97%98%20%ED%99%8D%EB%B3%B4%20%EB%B0%B0%EB%84%88%201.png" alt="단체시험 안내"></a></li>
+          </ul>
+        </div>
+        <!-- 이전 화살표 + 넘버링 + 다음 화살표 + 전체보기 -->
+        <div class="hero-banner__meta">
+          <button type="button" class="icon-btn hero-banner__arrow--prev" aria-label="이전 배너"><svg class="ico" aria-hidden="true"><use href="images/icons.svg#icon-chevron-left"/></svg></button>
+          <span class="hero-banner__count"><strong>1</strong> / 6</span>
+          <button type="button" class="icon-btn hero-banner__arrow--next" aria-label="다음 배너"><svg class="ico" aria-hidden="true"><use href="images/icons.svg#icon-chevron-right"/></svg></button>
+          <a href="#" class="more-link">전체보기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 시험 : 카드 5장 (로고 → 설명 → 접수 버튼), 호버 시 시험별 색 -->
+    <section class="section exam">
+      <div class="wrap">
+        <h2 class="blind">시험접수</h2> <!-- 화면에는 숨기고 스크린리더용 제목만 유지 -->
+        <ul class="exam-list">
+          <!-- 순서 : AI → Office → COS → COS Pro → DATA (피그마 19:2) -->
+          <li class="exam-card exam--new">
+            <div class="exam-card__head">
+              <p class="exam-card__title">생성형 AI 자격증</p>
+              <!-- 텍스트 로고 : Generative AI + Foundations (피그마 19:2) -->
+              <p class="exam-card__logo exam-card__logo--text">
+                <span class="exam-card__logo-main">Generative AI</span>
+                <span class="exam-card__logo-sub">Foundations</span>
+              </p>
+            </div>
+            <a href="#" class="exam-card__link">시험접수</a>
+          </li>
+          <li class="exam-card exam--mos">
+            <div class="exam-card__head">
+              <p class="exam-card__title">Microsoft 인증 자격증</p>
+              <div class="exam-card__logo"><img src="images/exam/logo-mos.svg" alt="Microsoft Office Specialist"></div>
+            </div>
+            <a href="#" class="exam-card__link">시험접수</a>
+          </li>
+          <li class="exam-card exam--cos">
+            <div class="exam-card__head">
+              <p class="exam-card__title">코딩활용능력시험</p>
+              <div class="exam-card__logo"><img src="images/exam/logo-cos.svg" alt="COS 코딩활용능력시험"></div>
+            </div>
+            <a href="#" class="exam-card__link">시험접수</a>
+          </li>
+          <li class="exam-card exam--cospro">
+            <div class="exam-card__head">
+              <p class="exam-card__title">코딩전문가자격시험</p>
+              <div class="exam-card__logo"><img src="images/exam/logo-cospro.svg" alt="COS Pro"></div>
+            </div>
+            <a href="#" class="exam-card__link">시험접수</a>
+          </li>
+          <li class="exam-card exam--data">
+            <div class="exam-card__head">
+              <p class="exam-card__title">데이터분석기술평가</p>
+              <div class="exam-card__logo"><img src="images/exam/logo-data.svg" alt="DATA 데이터분석기술평가"></div>
+            </div>
+            <a href="#" class="exam-card__link">시험접수</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 소식 + 시험활용 채용정보 : 같은 높이의 두 박스 -->
+    <section class="section news">
+      <div class="wrap news__grid news__grid--3">
+
+        <!-- 공지사항 · 자주묻는 질문 · 보도자료 : 한 박스 + 탭 (시안 C 스타일) -->
+        <div class="board-box" data-tabs>
+          <div class="board-box__head">
+            <h2 class="board-box__title">YBM IT 소식</h2>
+            <a href="#" class="icon-btn" aria-label="YBM IT 소식 전체보기"><svg class="ico" aria-hidden="true"><use href="images/icons.svg#icon-arrow-up-right"/></svg></a>
+          </div>
+          <div class="board-box__bar">
+            <div class="tab" role="tablist" aria-label="소식 카테고리">
+              <button type="button" class="tab__item is-active" role="tab" id="board-tab-press" aria-controls="board-panel-press" aria-selected="true">보도자료</button>
+              <button type="button" class="tab__item" role="tab" id="board-tab-faq" aria-controls="board-panel-faq" aria-selected="false" tabindex="-1">자주묻는 질문</button>
+              <button type="button" class="tab__item" role="tab" id="board-tab-notice" aria-controls="board-panel-notice" aria-selected="false" tabindex="-1">공지사항</button>
+            </div>
+          </div>
+          <div class="board-box__panel" role="tabpanel" id="board-panel-press" aria-labelledby="board-tab-press">
+            <ul class="board-list">
+              <li><a href="#"><span class="board-list__title">MOS 시험, 'MOS 365 버전'으로 전면 전환</span></a></li>
+              <li><a href="#"><span class="board-list__title">MOS 자격증 취득자 92% "실무에 도움"</span></a></li>
+              <li><a href="#"><span class="board-list__title">YBM "MOS 자격증, 채용 현장서 실무형 OA 역량 지표로 활용"</span></a></li>
+              <li><a href="#"><span class="board-list__title">YBM커리어캠퍼스, MOS 365 과정 운영</span></a></li>
+            </ul>
+          </div>
+          <div class="board-box__panel" role="tabpanel" id="board-panel-faq" aria-labelledby="board-tab-faq" hidden>
+            <ul class="board-list">
+              <li><a href="#"><span class="board-list__title">MOS 시험 아이디/비밀번호 찾는 방법</span></a></li>
+              <li><a href="#"><span class="board-list__title">만 14세 미만 수험자 가입 방법</span></a></li>
+              <li><a href="#"><span class="board-list__title">MOS 시험 아이디 생성 안내</span></a></li>
+              <li><a href="#"><span class="board-list__title">군인 할인 접수 방법</span></a></li>
+            </ul>
+          </div>
+          <div class="board-box__panel" role="tabpanel" id="board-panel-notice" aria-labelledby="board-tab-notice" hidden>
+            <ul class="board-list">
+              <li><a href="#"><span class="board-list__title">[중요] MOS 시험 아이디 생성 안내</span><span class="board-list__date">2026.10.30</span></a></li>
+              <li><a href="#"><span class="board-list__title">MOS, COS, COS Pro, DATA 시험관리규정 개정 안내</span><span class="board-list__date">2026.08.03</span></a></li>
+              <li><a href="#"><span class="board-list__title">MOS 정기시험 응시료 인상 안내</span><span class="board-list__date">2026.05.01</span></a></li>
+              <li><a href="#"><span class="board-list__title">2026년 COS 정기시험 일정 안내</span><span class="board-list__date">2025.11.01</span></a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 시험활용 채용정보 : 시안 B (실시간 롤링 + 카테고리 탭) -->
+          <div class="career-live career-box">
+            <div class="career-live__head">
+              <div class="career-live__title">
+                <h2>시험활용</h2>
+              </div>
+              <a href="#" class="icon-btn" aria-label="시험활용 전체보기"><svg class="ico" aria-hidden="true"><use href="images/icons.svg#icon-arrow-up-right"/></svg></a>
+            </div>
+            <div class="career-live__bar">
+              <div class="tab" role="tablist" aria-label="채용정보 카테고리">
+                <button type="button" class="tab__item is-active" role="tab" id="career-tab-news" aria-controls="career-panel-news" aria-selected="true">채용정보</button>
+                <button type="button" class="tab__item" role="tab" id="career-tab-comp" aria-controls="career-panel-comp" aria-selected="false" tabindex="-1">기업</button>
+                <button type="button" class="tab__item" role="tab" id="career-tab-univ" aria-controls="career-panel-univ" aria-selected="false" tabindex="-1">대학</button>
+              </div>
+            </div>
+            <div class="career-live__panel" role="tabpanel" id="career-panel-news" aria-labelledby="career-tab-news" aria-live="off">
+              <ul class="career-live__list">
+                <li><a href="#"><span class="career-live__co">씨아이지네트웍스(주)</span><span class="career-live__desc">[인천신항] 차량 입출고 접수 및 전산 데이터 관리원</span></a></li>
+                <li><a href="#"><span class="career-live__co">(주)유니포인트</span><span class="career-live__desc">[유니포인트] 경영기획실 재무회계팀 경력직 채용(팀장급)</span></a></li>
+                <li><a href="#"><span class="career-live__co">(주)미소조경건설</span><span class="career-live__desc">조달청 나라장터 MAS 등록, 제품인증 담당자 채용</span></a></li>
+              </ul>
+            </div>
+            <div class="career-live__panel" role="tabpanel" id="career-panel-comp" aria-labelledby="career-tab-comp" hidden>
+              <ul class="career-live__list">
+                <li><a href="#"><span class="career-live__co">㈜SK증권</span><span class="career-live__desc">직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">한국농수산식품유통공사</span><span class="career-live__desc">직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">후니드</span><span class="career-live__desc">인사팀 경력 모집 · 직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">코레일공항철도</span><span class="career-live__desc">인턴사원 채용 · 직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">케이산업</span><span class="career-live__desc">신입 및 경력사원 모집 · 직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">코레일네트웍스</span><span class="career-live__desc">경력사원 채용 공고 · 직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">풀무원</span><span class="career-live__desc">부문별 신입/경력 채용 · 직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">국립암센터</span><span class="career-live__desc">각 부문 신입/경력 공개채용 · 직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">ING생명보험</span><span class="career-live__desc">각 부문 신입/경력 공개채용 · 직원 채용시 가산점, 우대</span></a></li>
+                <li><a href="#"><span class="career-live__co">YES24㈜</span><span class="career-live__desc">직원 채용시 가산점, 우대</span></a></li>
+              </ul>
+            </div>
+            <div class="career-live__panel" role="tabpanel" id="career-panel-univ" aria-labelledby="career-tab-univ" hidden>
+              <ul class="career-live__list">
+                <li><a href="#"><span class="career-live__co">위덕대학교</span><span class="career-live__desc">과목명 : MOS(교양선택) 1학기(Excel Expert)</span></a></li>
+                <li><a href="#"><span class="career-live__co">한성대학교</span><span class="career-live__desc">과목명 : 엑셀기초, 엑셀실무 (교양선택)</span></a></li>
+                <li><a href="#"><span class="career-live__co">한림대학교</span><span class="career-live__desc">과목명 : 취업컴퓨터 (교양선택) MOS-CORE</span></a></li>
+                <li><a href="#"><span class="career-live__co">서울신학대</span><span class="career-live__desc">과목명 : MOS Master</span></a></li>
+                <li><a href="#"><span class="career-live__co">세명대학교</span><span class="career-live__desc">과목명 : 컴퓨터활용 I, II</span></a></li>
+                <li><a href="#"><span class="career-live__co">삼육대학교</span><span class="career-live__desc">과목명 : MOS Excel Expert (Cyber)</span></a></li>
+                <li><a href="#"><span class="career-live__co">백석대학교</span><span class="career-live__desc">과목명 : MS 엑셀과 아웃룩 / MS 워드와 파워포인트</span></a></li>
+                <li><a href="#"><span class="career-live__co">동명대학교</span><span class="career-live__desc">과목명 : MOS (EXCEL EXPERT, POWERPOINT)</span></a></li>
+                <li><a href="#"><span class="career-live__co">남서울대학교</span><span class="career-live__desc">과목명 : 비즈니스프리젠테이션, 비즈니스데이터관리</span></a></li>
+                <li><a href="#"><span class="career-live__co">나사렛대학교</span><span class="career-live__desc">과목명 : 컴퓨터 응용 및 실습, 컴퓨터 활용 및 실습</span></a></li>
+              </ul>
+            </div>
+          </div>
+
+        <!-- 자주 찾는 메뉴 + MOS 활용 : 소식 줄 3번째 칸 (위치 ④) -->
+        <div class="news__side">
+          <div class="qbox">
+            <h2 class="blind">자주 찾는 메뉴</h2>
+            <div class="qbox__grid qbox__grid--2x2">
+              <a href="#" class="qtile"><span class="qtile__icon"><img src="images/e-icons/past-score.svg" alt=""></span><span>과거성적 연동신청</span></a>
+              <a href="#" class="qtile"><span class="qtile__icon"><img src="images/e-icons/regulation.svg" alt=""></span><span>IT 시험관리규정</span></a>
+              <a href="#" class="qtile"><span class="qtile__icon"><img src="images/e-icons/exam-guide.svg" alt=""></span><span>시험진행안내</span></a>
+              <a href="#" class="qtile"><span class="qtile__icon"><img src="images/e-icons/faq.svg" alt=""></span><span>FAQ</span></a>
+            </div>
+          </div>
+          <div class="qbox qbox--mos">
+            <h2 class="qbox__title qbox__title--logo"><img src="https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_mos_rec.png" alt="MOS 활용"></h2>
+            <div class="qbox__grid qbox__grid--3">
+              <a href="#" class="qtile"><span class="qtile__icon"><img src="images/e-icons/can-do-list.svg" alt=""></span><span>Can do List</span></a>
+              <a href="#" class="qtile"><span class="qtile__icon"><img src="images/e-icons/promo-video.svg" alt=""></span><span>홍보영상</span></a>
+              <a href="#" class="qtile"><span class="qtile__icon"><img src="images/e-icons/effect.svg" alt=""></span><span>취득효과</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 문의 · 배너 : 3칸 (시안 B 게시판 3단 구성 참고) -->
+    <section class="section support">
+      <div class="wrap support__grid">
+
+        <!-- 1칸 : 단체시험 상담 + YBM 커리어캠퍼스 세로 정렬 -->
+        <div class="support__stack">
+          <a href="/cs/group_test.jsp" class="cta-card cta-card--compact">
+            <span class="cta-card__icon"><img src="images/e-icons/group-test.svg" alt=""></span>
+            <span class="cta-card__body"><strong class="cta-card__title">단체시험 상담</strong><span class="cta-card__desc">기업 · 기관 · 학교 단체시험 문의</span></span>
+            <span class="cta-card__link icon-btn"><svg class="ico" aria-hidden="true"><use href="images/icons.svg#icon-chevron-right"/></svg><span class="blind">상담 신청하기</span></span>
+          </a>
+          <a href="https://www.ybmcc.com/v2/custom/myqna_write.asp" class="cta-card cta-card--compact">
+            <span class="cta-card__icon"><img src="images/e-icons/career-campus.svg" alt=""></span>
+            <span class="cta-card__body"><strong class="cta-card__title">YBM 커리어캠퍼스</strong><span class="cta-card__desc">환불 · 취소 1:1 문의</span></span>
+            <span class="cta-card__link icon-btn"><svg class="ico" aria-hidden="true"><use href="images/icons.svg#icon-chevron-right"/></svg><span class="blind">1:1 문의 바로가기</span></span>
+          </a>
+        </div>
+
+        <!-- 2칸 : 고객센터 -->
+        <div class="cta-card cta-card--static">
+          <dl class="cs-contact">
+            <div><dt>시험문의</dt><dd><strong>02-2279-0505</strong><span class="cs-contact__note">평일 9:30~17:00 (점심 12:30~13:30)</span></dd></div>
+            <div><dt>회원가입 · 인증문의</dt><dd><strong>02-2008-5200</strong><span class="cs-contact__ext">후 '0'번</span><span class="cs-contact__note">평일 9:00~18:00 (점심 12:30~13:30)</span></dd></div>
+          </dl>
+        </div>
+
+        <!-- 3칸 : 소형 배너 (원본 453×205) -->
+        <div class="promo-banner">
+          <ul class="promo-banner__list">
+            <li><a href="https://smartstore.naver.com/kegbook/category/b3b533438a274d64979e981f0aedf386?cp=1"><img src="https://moscontrol.ybmit.com/Data/main/250728_260126.png" alt="MOS 365 교재 안내"></a></li>
+            <li><a href="https://www.ybmaidx.co.kr/"><img src="https://moscontrol.ybmit.com/Data/main/banner_250728_2.png" alt="YBM AI·DX 기술 교육"></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 : ybmit.com 기존 푸터 그대로 -->
+  <div class="footer-logo"><img src="https://imagesisa.ybmnet.co.kr/platform/common/logo/ybm_kor.svg" alt="YBM"></div>
+  <footer id="footer">
+    <!-- footer_wrap -->
+    <section class="footer_wrap">
+      <div class="footer_bottom">
+        <!-- footer_address -->
+        <div class="footer_address">
+          <ul class="f_menu">
+            <li><a href="#" title="" onclick="window.open('https://member.ybmnet.co.kr/join/terms/ybmexam_agree.html', 'popupName', 'width=700, height=600, statusbar=0, scrollbars=0'); return false;">이용약관</a></li>
+            <li><a href="https://member.ybmnet.co.kr/join/terms/ybmIndiv_new.html" target="_blank" class="pnt">개인정보처리방침</a></li>
+            <li><a href="/cs/faq_list.jsp" target="_blank" title="고객센터로 이동">고객센터</a></li>
+            <li class="sns_warp">
+              <ul class="sns_icon">
+                <li class="sns__item">
+                  <a href="https://www.instagram.com/ybmit/" class="sns_link"></a>
+                </li>
+                <li class="sns__item">
+                  <a href="https://blog.naver.com/ybmit" target="_blank" class="sns_link"></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <address>
+          수탁사업자 ㈜와이비엠넷 서울 종로구 종로 98, YBM별관 (우:03191) 대표이사 김종익<br>
+          사업자등록번호 <span class="letter_0">220-81-89608</span> / 통신판매업신고 <span class="letter_0">2021</span> - 서울종로 - <span class="letter_0">2211</span> /
+          <a href="#" onclick="window.open('https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2208189608', 'winRename', 'width=800, height=600, statusbar=0, scrollbars=0'); return false;" title="사업자정보확인">사업자정보확인</a><br>
+          시험,결제 : <span class="letter_0">02-2279-0505</span> / 회원인증 : <span class="letter_0">02-2008-5200 </span>
+          개인정보 : <a href="mailTo:privacy@ybm.co.kr" title="개인정보관련 문의메일 보내기">privacy@ybm.co.kr</a><br>호스팅사업자 : ㈜와이비엠넷 <br>
+          <span class="letter_0">Copyright © ㈜와이비엠&amp;㈜와이비엠넷. All rights reserved.</span>
+          </address>
+          <p class="noti_massage">
+          ㈜와이비엠넷은 통신판매중개자로서 YBM IT 서비스는 ㈜와이비엠의 책임하에 운영되고 있습니다.<br>
+          사업자 : ㈜와이비엠 서울 종로구 종로 104 / 대표이사 : 허문호 / 사업자등록번호 : 101-81-14655 / 02.2000.0509 / <a href="mailTo:ybmit@ybm.co.kr" title="개인정보관련 문의메일 보내기">ybmit@ybm.co.kr</a>
+          </p>
+        </div>
+        <!-- //footer_address -->
+
+        <!-- footer_right -->
+        <div class="footer_right">
+          <p class="title">기업은행 채무지급보증안내</p>
+          <p class="info">
+            전자상거래 등에서의 소비자보호에 관한 법률에 따라<br>
+            기업은행과 채무지급보증 계약을 체결하여 고객님의 <br>
+            결제금액에 대한 안전거래를 보장하고 있습니다.
+          </p>
+          <p class="confirm"><a href="https://www.ybmnet.co.kr/footer/ibkBank.htm" target="_blank" onclick="window.open(this.href, 'popupNam4', 'width=620, height=560, statusbar=0, scrollbars=1'); return false;" title="새창">서비스가입 사실 확인</a></p>
+        </div>
+        <!-- //footer_right -->
+      </div>
+    </section>
+    <!-- //footer_wrap -->
+  </footer>
+
+  <script src="header.js"></script>
+  <script src="career.js"></script>
+  <script src="tabs.js"></script>
+  <script src="hero-banner.js"></script>
+</body>
+</html>
