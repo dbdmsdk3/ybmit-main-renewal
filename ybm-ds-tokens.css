@@ -1,0 +1,71 @@
+/* ============================================================
+   YBM DS — 토큰 전용 추출본 (ybm-ds-tokens.css)
+   원본: design.ybmnet.co.kr/ds/dist/ybm-ds.css?ver1002 (176KB)
+   ------------------------------------------------------------
+   메가메뉴(nav-*)가 사용하는 토큰 + 의존 변수 49개만 포함.
+   리셋·태그 스타일·컴포넌트 클래스 없음 → 기존 페이지에 무영향.
+   ============================================================ */
+:root{
+  /* Color primitives */
+  --color-white:#ffffff;
+  --color-gray-50:#f9fafb;
+  --color-gray-100:#f3f4f6;
+  --color-gray-200:#e5e7eb;
+  --color-gray-400:#9ca3af;
+  --color-gray-600:#4b5563;
+  --color-gray-950:#030712;
+
+  /* Brand — DS 기본(블루). YBM IT 오렌지는 body.ybmit-brand 에서 오버라이드 */
+  --brand-50:#fff3ea;
+  --brand-100:#ffe2cc;
+  --brand-500:#ff8c40;
+  --brand-600:#ff761e;   /* YBM IT primary */
+  --brand-700:#e8600c;   /* hover  */
+  --brand-800:#c24e08;   /* active */
+  --color-focus-ring:var(--brand-600);
+
+  /* Semantic */
+  --text-primary:var(--color-gray-950);
+  --text-secondary:var(--color-gray-600);
+  --text-tertiary:var(--color-gray-400);
+  --surface-default:var(--color-white);
+  --surface-subtle:var(--color-gray-50);
+  --surface-muted:var(--color-gray-100);
+  --border-default:var(--color-gray-200);
+  --border-subtle:var(--color-gray-100);
+
+  /* Typography */
+  --text-12:12px;
+  --text-14:14px;
+  --text-15:15px;
+  --text-17:17px;
+  --text-18:18px;
+  --text-22:22px;
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-semibold:600;
+  --weight-bold:700;
+
+  /* Spacing */
+  --space-8:8px;
+  --space-10:10px;
+  --space-12:12px;
+  --space-16:16px;
+  --space-20:20px;
+  --space-24:24px;
+  --space-32:32px;
+  --space-40:40px;
+  --space-48:48px;
+  --space-64:64px;
+
+  /* Radius */
+  --radius-8:8px;
+  --radius-12:12px;
+  --radius-16:16px;
+
+  /* Motion & Shadow */
+  --duration-fast:120ms;
+  --duration-normal:200ms;
+  --ease-out:cubic-bezier(0, 0, 0.2, 1);
+  --shadow-2xl:0 8px 24px 0 rgba(0, 0, 0, 0.12);
+}
