@@ -453,12 +453,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .career-live__list.is-rolling { transition: none; }
 }
 
+/* ---------- GNB 글자 크기 : 공용 header.css 보다 2px 크게 (대메뉴 16→18, 하위 14→16) ---------- */
+.gnb-link { font-size: var(--text-18); }
+.gnb-sub-link { font-size: var(--text-16); }
+
 /* ---------- 8) 반응형 : 태블릿 ---------- */
 /* 모바일 전체 메뉴 하단 고정 바 : 데스크톱 · 태블릿에서는 숨김 (모바일 규칙은 아래 768 블록) */
 .gnb-bottom { display: none; }
 
 @media (max-width: 1024px) {
   .wrap { padding: 0 var(--space-20); }
+
+  /* GNB 글자 크기 : 태블릿도 공용보다 2px 크게 (대메뉴 14→16, 하위 13→15) */
+  .gnb-link { font-size: var(--text-16); }
+  .gnb-sub-link { font-size: var(--text-15); }
   .career-live__co { flex-basis: 150px; }
 
   .board-box__title,
