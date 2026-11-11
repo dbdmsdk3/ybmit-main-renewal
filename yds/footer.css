@@ -1,0 +1,90 @@
+/* =========================================================
+   푸터 — ybmit.com 기존 푸터 그대로 유지
+   원본: https://www.ybmit.com/ (resources/css/base.css · common.css · main.css 에서
+         #footer · .gnb_ybmlogo 에 적용되는 규칙만 추출)
+   - 배치는 원본 그대로 두고, 색 / 글자 크기 / 간격 값만 YDS 토큰(yds-token-map.css)으로 바꿈
+   - 시안 공통 스타일(Pretendard, keep-all 등)이 섞이지 않도록 원본 기본 글꼴 환경을 범위 안에 고정
+   - 원본은 1100px 고정 폭이라, 태블릿·모바일에서만 깨지지 않도록 최소한의 반응형을 덧붙임
+   ========================================================= */
+
+/* 원본 body 기본값 (base.css) */
+.gnb_ybmlogo,
+#footer {
+  font-family: Roboto, "Noto Sans", AppleGothic, sans-serif;
+  font-size: var(--text-15);            /* 15 → 14 */
+  line-height: 24px;
+  color: var(--footer-text-strong);     /* #333333 → fg/neutral */
+  letter-spacing: -0.4px;
+  word-break: normal;
+}
+/* 원본 리셋(base.css)의 vertical-align: top — 아이콘 줄 높이에 영향 */
+.gnb_ybmlogo *,
+#footer * { vertical-align: top; }
+#footer address { font-style: normal; }
+#footer a:link, #footer a:visited { text-decoration: none; color: inherit; }
+
+/* ---------- 원본 규칙 ---------- */
+.gnb_ybmlogo { display: flex; justify-content: center; flex-direction: column; margin-top: var(--space-24); }
+.gnb_ybmlogo img { width: 140px; text-align: center; margin: 0px auto; }
+.mb40 { margin-bottom: var(--space-40); }
+
+/* 위 여백 25 → 24, 아래 여백 30 → 32 */
+#footer { clear: both; padding: var(--space-24) 0px var(--space-30); border-top: 1px solid var(--footer-line); background: var(--surface-default); z-index: 9999; }
+#footer .footer_wrap { width: 1100px; margin: 0px auto; }
+#footer .footer_bottom { overflow: hidden; margin-bottom: var(--space-10); }
+#footer .footer_bottom > div { float: left; }
+#footer .footer_address { width: 795px; }
+#footer .f_menu { overflow: hidden; }
+#footer .f_menu li { float: left; }
+/* 메뉴 사이 여백 13 → 12 */
+#footer .f_menu li a { color: var(--footer-text); margin-left: var(--space-12); font-size: var(--text-14); padding-left: var(--space-12); background: url("https://www.ybmit.com/resources/images/common/f_menu_line.gif") left center no-repeat; }
+#footer .f_menu li a.pnt { color: var(--footer-text-strong); font-weight: var(--weight-bold); }
+#footer .f_menu li:first-child a { margin-left: 0px; padding-left: 0px; background: none; }
+#footer address { font-size: var(--text-12); line-height: 24px; color: var(--footer-text); margin-top: var(--space-20); }
+#footer address a { letter-spacing: 0px; color: var(--footer-text); }
+/* 안쪽 여백 23 → 24 */
+#footer .footer_right { padding: 0px 0px var(--space-24) var(--space-24); border-left: 1px solid var(--footer-line); }
+#footer .footer_right .title { color: var(--footer-text-strong); }
+/* 위 여백 15 → 16 */
+#footer .footer_right .info { font-size: var(--text-12); margin-top: var(--space-16); line-height: 22px; color: var(--footer-text); }
+#footer .footer_right .confirm { font-size: var(--text-12); color: var(--footer-text-strong); line-height: 27px; padding-top: var(--space-8); }
+#footer .footer_right .confirm a { display: inline-block; background: url("https://www.ybmit.com/resources/images/common/ic_sm_arr.png") right 70% no-repeat; padding-right: var(--space-24); }
+.noti_massage { width: 1100px; margin: 0px auto; padding-top: var(--space-20); font-size: var(--text-12); text-align: left; color: var(--footer-text-weak); letter-spacing: -0.5px; }
+.letter_0 { letter-spacing: normal; }
+
+/* 원본의 float: right !important 대신, 선택자를 한 단계 구체적으로 써서 #footer .f_menu li(float: left)를 이긴다 */
+#footer .f_menu li.sns_warp { margin: 0px var(--space-24) 0px 0px; float: right; }
+.sns_icon { display: flex; justify-content: flex-end; align-items: center; line-height: 32px; }
+.sns__item { width: 100%; }
+.sns_link { position: relative; display: block; text-align: center; height: 100%; box-sizing: border-box; }
+.sns_link::before { content: ""; display: inline-block; background-repeat: no-repeat; background-size: cover; vertical-align: middle; }
+.sns__item:nth-child(1) .sns_link::before { background-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/sns-insta.png"); width: 24px; height: 24px; }
+.sns__item:nth-child(2) .sns_link::before { background-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/sns-naver.png"); width: 24px; height: 24px; }
+/* 원본 페이지는 DOCTYPE 이 없어 quirks 모드로 렌더링되어, 아이콘만 있는 줄이 아이콘 높이(24px)로 잡힘.
+   시안(표준 모드)에서도 같은 높이가 되도록 링크를 아이콘 크기에 맞춤 */
+.sns_link { display: flex; }
+.sns__item:nth-child(3) .sns_link::before { background-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/sns-facebook.svg"); width: 24px; height: 24px; }
+
+/* 시안용 보완 : 화면이 1100px 보다 조금 좁은 구간(1025~1120)에서 가로 스크롤이 생기지 않게
+   (1120px 이상에서는 영향 없음 → 원본과 동일) */
+#footer .footer_wrap,
+.noti_massage { max-width: 100%; }
+
+/* ---------- 태블릿 (시안용 보완 : 고정 폭 해제) ---------- */
+@media (max-width: 1024px) {
+  #footer .footer_wrap { width: auto; padding: 0px var(--space-20); }
+  #footer .footer_bottom > div { float: none; }
+  #footer .footer_address { width: auto; }
+  #footer .footer_right { margin-top: var(--space-20); padding: var(--space-20) 0px 0px; border-left: 0; border-top: 1px solid var(--footer-line); }
+  .noti_massage { width: auto; }
+}
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 768px) {
+  #footer .footer_wrap { padding: 0px var(--space-16); }
+  #footer .f_menu li a { font-size: var(--text-13); margin-left: var(--space-10); padding-left: var(--space-10); }
+  #footer .f_menu li.sns_warp { margin: 0px; }
+  #footer address,
+  .noti_massage { word-break: keep-all; }
+  #footer .footer_right .info br { display: none; }
+}

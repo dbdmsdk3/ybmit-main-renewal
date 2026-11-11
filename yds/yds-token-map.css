@@ -1,0 +1,112 @@
+/* ==========================================================================
+   YDS 토큰 연결표 (yds-token-map.css)
+   --------------------------------------------------------------------------
+   기존 화면 CSS(header / main-yds / footer)가 쓰던 변수 이름은 그대로 두고,
+   값만 YDS 토큰(--ds-*)으로 연결한다. 그래서 기존 규칙과 배치는 바뀌지 않는다.
+   - YDS CSS 다음, 화면 CSS 앞에 불러온다.
+   - 원래 값과 달라지는 곳은 줄 끝 주석에 "원래 값 → YDS 값"으로 적는다.
+   ========================================================================== */
+
+:root {
+  /* ---- 색 : 기본 팔레트 ---- */
+  --color-white: var(--ds-color-palette-static-white);            /* #ffffff 그대로 */
+  --color-gray-50: var(--ds-color-palette-gray-100);              /* #f9fafb → #f7f8f9 */
+  --color-gray-100: var(--ds-color-palette-gray-200);             /* #f3f4f6 → #f3f4f5 */
+  --color-gray-200: var(--ds-color-palette-gray-400);             /* #e5e7eb → #dcdee3 */
+  --color-gray-400: var(--ds-color-palette-gray-600);             /* #9ca3af → #b0b3ba */
+  --color-gray-600: var(--ds-color-palette-gray-800);             /* #4b5563 → #555d6d */
+  --color-gray-950: var(--ds-color-palette-gray-1000);            /* #030712 → #1a1c20 */
+
+  /* ---- 색 : 브랜드 오렌지 (YDS 팔레트 orange 에서 가장 가까운 값) ---- */
+  --brand-50: var(--ds-color-palette-orange-100);                 /* #fff3ea → #fff2ec */
+  --brand-100: var(--ds-color-palette-orange-200);                /* #ffe2cc → #ffe8db */
+  --brand-500: var(--ds-color-palette-orange-500);                /* #ff8c40 → #ff9364 */
+  --brand-600: var(--ds-color-palette-orange-600);                /* #ff761e → #ff6600 */
+  --brand-700: var(--ds-color-palette-orange-700);                /* #e8600c → #e14d00 */
+  --brand-800: var(--ds-color-palette-orange-800);                /* #c24e08 → #b93901 */
+  --color-focus-ring: var(--ds-color-palette-orange-600);         /* #ff761e → #ff6600 */
+
+  /* ---- 색 : 역할 ---- */
+  --text-primary: var(--ds-color-fg-neutral);                     /* #030712 → #1a1c20 */
+  --text-secondary: var(--ds-color-fg-neutral-muted);             /* #4b5563 → #555d6d */
+  --text-tertiary: var(--ds-color-fg-neutral-subtle);             /* #9ca3af → #868b94 (조금 진해짐) */
+  --surface-default: var(--ds-color-bg-layer-default);            /* #ffffff 그대로 */
+  --surface-subtle: var(--ds-color-bg-neutral-muted);             /* #f9fafb → #f7f8f9 */
+  --surface-muted: var(--ds-color-bg-neutral);                    /* #f3f4f6 → #f3f4f5 */
+  --border-default: var(--ds-color-stroke-neutral-weak);          /* #e5e7eb → #dcdee3 */
+  --border-subtle: var(--ds-color-stroke-neutral-muted);          /* #f3f4f6 → 검정 6% (흰 바탕에서 #f0f0f0) */
+  --nvb-blue: var(--ds-color-fg-informative);                     /* #0068f0 → #217cf9 (채용 배너 기업명) */
+  --color-dim: var(--ds-color-bg-overlay);                        /* 검정 40% → 검정 45% */
+
+  /* 시험 카드 호버 그라데이션 색 (시험별 상징색과 가장 가까운 팔레트) */
+  --exam-color-ai: var(--ds-color-palette-orange-600);            /* #ff761e → #ff6600 */
+  --exam-color-mos: var(--ds-color-palette-purple-800);           /* #a9007f → #6d50cb (YDS 에 자홍색 없음) */
+  --exam-color-cos: var(--ds-color-palette-blue-700);             /* #0092e5 → #217cf9 */
+  --exam-color-cospro: var(--ds-color-palette-blue-800);          /* #0065b8 → #135fcd */
+  --exam-color-data: var(--ds-color-palette-purple-700);          /* #5759a9 → #8969ea */
+
+  /* 푸터 (footer.css 의 직접 쓴 색) */
+  --footer-text: var(--ds-color-fg-neutral-muted);                /* #666666 → #555d6d */
+  --footer-text-strong: var(--ds-color-fg-neutral);               /* #000000, #222222, #333333 → #1a1c20 */
+  --footer-text-weak: var(--ds-color-fg-neutral-subtle);          /* #717883 → #868b94 */
+  --footer-line: var(--ds-color-stroke-neutral-weak);             /* #e5e5e5 → #dcdee3 */
+
+  /* ---- 그림자 ---- */
+  --shadow-card: var(--ds-elevation-raised);                      /* 0 2px 8px 검정 5% → 살짝 뜬 면 */
+  --shadow-2xl: var(--ds-elevation-panel);                        /* 0 8px 24px 검정 12% → 펼침 메뉴 */
+
+  /* ---- 글자 크기 ---- */
+  --text-12: var(--ds-font-size-t02);                             /* 12 그대로 */
+  --text-13: var(--ds-font-size-t03);                             /* 13 그대로 */
+  --text-14: var(--ds-font-size-t04);                             /* 14 그대로 */
+  --text-15: var(--ds-font-size-t04);                             /* 15 → 14 (YDS 에 15 없음) */
+  --text-16: var(--ds-font-size-t05);                             /* 16 그대로 */
+  --text-17: var(--ds-font-size-t06);                             /* 17 → 18 (YDS 에 17 없음) */
+  --text-18: var(--ds-font-size-t06);                             /* 18 그대로 */
+  --text-20: var(--ds-font-size-t07);                             /* 20 그대로 */
+  --text-22: var(--ds-font-size-t08);                             /* 22 그대로 */
+  --text-24: var(--ds-font-size-t09);                             /* 24 그대로 */
+  --text-26: var(--ds-font-size-t10);                             /* 26 그대로 */
+
+  /* ---- 글자 굵기 ---- */
+  --weight-regular: var(--ds-font-weight-regular);
+  --weight-medium: var(--ds-font-weight-medium);
+  --weight-semibold: var(--ds-font-weight-semibold);
+  --weight-bold: var(--ds-font-weight-bold);
+
+  /* ---- 간격 ---- */
+  --space-0: var(--ds-space-x0);
+  --space-2: var(--ds-space-x0_5);
+  --space-4: var(--ds-space-x1);
+  --space-6: var(--ds-space-x1_5);
+  --space-8: var(--ds-space-x2);
+  --space-10: var(--ds-space-x2_5);
+  --space-12: var(--ds-space-x3);
+  --space-14: var(--ds-space-x3_5);
+  --space-16: var(--ds-space-x4);
+  --space-18: var(--ds-space-x4_5);
+  --space-20: var(--ds-space-x5);
+  --space-24: var(--ds-space-x6);
+  --space-28: var(--ds-space-x7);
+  --space-30: var(--ds-space-x8);                                 /* 30 → 32 (YDS 에 30 없음) */
+  --space-32: var(--ds-space-x8);
+  --space-40: var(--ds-space-x10);
+  --space-48: var(--ds-space-x12);
+  --space-56: var(--ds-space-x14);
+  --space-64: var(--ds-space-x16);
+
+  /* ---- 모서리 ---- */
+  --radius-6: var(--ds-shape-xs);
+  --radius-8: var(--ds-shape-sm);
+  --radius-10: var(--ds-shape-md);
+  --radius-12: var(--ds-shape-lg);
+  --radius-16: var(--ds-shape-xl);
+  --radius-pill: var(--ds-shape-pill);                            /* 999px */
+
+  /* ---- 움직임 ---- */
+  --duration-fast: var(--ds-duration-fast);                       /* 120ms → 150ms */
+  --duration-normal: var(--ds-duration-normal);                   /* 200ms 그대로 */
+  --duration-slow: var(--ds-duration-slow);                       /* 300ms 그대로 */
+  --ease-out: var(--ds-easing-enter);                             /* (0,0,.2,1) → (0,0,.15,1) */
+  --ease-default: var(--ds-easing-standard);                      /* ease → (.35,0,.35,1) */
+}

@@ -1,0 +1,600 @@
+/* =========================================================
+   시안 H · 시안 1(E) 기반 + 시안 2(G) 시험접수 호버 — 단독 스타일시트
+   - 공용 파일(common.css · banner.css · career.css)을 불러오지 않고
+     시안 E 에 쓰이는 값만 이 파일에 한 번씩만 선언 (덮어쓰기 · 중복 없음)
+   - 헤더(header.css) · 푸터(footer.css)는 원본 그대로 별도 파일 사용
+   - 반응형 블록에는 실제로 값이 바뀌는 속성만 둠
+
+   - 토큰은 ybmit.com 실제 DS 파일(ybm-ds-tokens.css)만 사용하고,
+     거기에 없는 값은 변수를 만들지 않고 실제 값으로 직접 적음
+
+   1) 헤더 의존 값  2) 리셋 · 레이아웃  3) 공용 컴포넌트(원형 버튼 · 칩 · 탭 · 배지)
+   4) 메인 배너  5) 시험접수  6) 소식 · 시험활용 · 바로가기  7) 문의 · 배너
+   8) 반응형
+   ========================================================= */
+
+/* ---------- 1) 헤더 의존 값 (헤더 전용 · 시안 E 본문에서는 쓰지 않음) ----------
+   원본 header.css 가 쓰는데 DS 토큰 파일에 없는 값 (A~D 는 common.css 에서 받음)
+   이 값이 없으면 헤더 폭 · 간격이 깨지므로 시안 E 에서만 채워 둠
+   헤더 원본 값이므로 --text-13(13px)도 그대로 유지 */
+:root {
+  --container-max: 1100px; /* 본문 · 푸터(1100)와 같은 폭 */
+}
+
+/* ---------- 2) 리셋 · 레이아웃 ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--surface-muted); /* 메인 배경 : gray-50 → gray-100 한 단계 올림 */
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.blind {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1148px; /* 본문 1100 + 좌우 여백 24 × 2 */
+  margin: 0 auto;
+  padding: 0 var(--space-24);
+}
+/* 그리드 자식이 말줄임 텍스트 때문에 늘어나지 않도록 */
+.news__grid > *, .support__grid > * { min-width: 0; }
+
+/* 섹션 간격 : 배너 → 시험접수 → 소식 → 문의 사이 24 로 통일 */
+.exam    { padding: var(--space-24) 0px; }
+.news    { padding: 0px 0px var(--space-24); }
+.support { padding: 0px; } /* + 푸터 로고 위 여백 24(원본) = 24 */
+
+
+/* ---------- 3) 공용 컴포넌트 ---------- */
+
+/* 원형 아이콘 버튼 : 배너 좌우 화살표 · IT 소식 / 시험활용 ↗ · 단체시험 / 커리어캠퍼스 ›
+   (jet.or.kr 카드의 원형 바로가기 버튼 착안) */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0px;
+  color: var(--text-primary);
+  background: var(--surface-muted);
+  border: 0;
+  border-radius: var(--radius-pill);
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+.icon-btn .ico {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 칩 : 배너 아래 넘버링 · 전체보기 (옆 화살표와 같은 32px) */
+.hero-banner__count,
+.hero-banner__meta .more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 32px;
+  padding: 0px var(--space-12);
+  font-size: var(--text-14);
+  line-height: 1;
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+}
+
+/* 배너 좌우 화살표 : 칩과 같은 라인 타입 (흰 바탕 + 1px 회색 선)
+   — 아래 공통 호버가 덮어쓸 수 있도록 호버 규칙보다 앞에 둠 */
+.hero-banner .icon-btn { background: var(--surface-default); border: 1px solid var(--border-default); }
+
+/* 호버 : 진한 바탕 + 흰 글자·아이콘 (원형 버튼 · 전체보기 칩 공통, 카드 전체가 링크면 카드 호버에도 반응) */
+.icon-btn:hover,
+.icon-btn:focus-visible,
+.cta-card:hover .icon-btn,
+.hero-banner__meta .more-link:hover,
+.hero-banner__meta .more-link:focus-visible {
+  color: var(--color-white);
+  background: var(--color-gray-950);
+  border-color: var(--text-primary);
+}
+
+/* 탭 : 활성 탭은 글자색으로만 구분 */
+.tab { display: flex; gap: var(--space-20); }
+.tab__item {
+  padding: var(--space-12) 0px;
+  font-size: var(--text-16);
+  font-weight: var(--weight-semibold);
+  color: var(--text-tertiary);
+}
+/* 선택된 탭 · 마우스 올린 탭 : 같은 글자색 */
+.tab__item:hover,
+.tab__item.is-active { color: var(--text-primary); }
+
+/* ---------- 4) 메인 배너 : 540×360 두 장 + 아래 [화살표 · 넘버링 · 화살표 · 전체보기] ---------- */
+.hero-banner { padding: var(--space-32) 0px 0px; }
+/* 1100 = 배너 540 + 간격 20 + 배너 540 (배너는 540×360 그대로, 화살표는 아래 넘버링 양옆으로 이동) */
+.hero-banner__stage { display: block; }
+.hero-banner__list { display: flex; justify-content: space-between; gap: var(--space-20); }
+.hero-banner__list li { flex: 0 1 540px; min-width: 0; }
+.hero-banner__list a { display: block; }
+.hero-banner__list img { width: 100%; aspect-ratio: 540 / 360; object-fit: cover; border-radius: var(--radius-10); }
+
+.hero-banner__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-20);
+}
+.hero-banner__count { color: var(--text-tertiary); font-variant-numeric: tabular-nums; border-color: transparent; } /* 넘버링 칩 : 선 없이 (높이 유지)*/
+.hero-banner__count strong { margin-right: var(--space-2); font-weight: var(--weight-semibold); color: var(--text-primary); }
+.hero-banner__meta .more-link { flex: none; font-weight: var(--weight-medium); color: var(--text-secondary); }
+
+/* ---------- 5) 시험접수 : 카드 5장, 호버 시 시험별 색 ---------- */
+.exam-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-12);
+}
+/* 카드 : 시안 2 구조 — 위(시험명 · 로고) / 아래(버튼) 양끝 정렬
+   피그마 기준 바깥에서 30 / 20 / 20 이므로 테두리 2px 를 뺀 값으로 여백 지정 */
+.exam-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  padding: var(--space-28) var(--space-18) var(--space-18);
+  background: var(--surface-default);
+  border: 2px solid transparent; /* 호버 때 그라데이션 라인만 나타나도록 자리 확보 */
+  border-radius: var(--radius-16);
+}
+/* 시험명 + 로고 묶음 : 높이 90, 위 = 시험명 / 아래 = 로고 → 5장 로고 아래끝이 같아짐 */
+.exam-card__head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 90px;
+}
+.exam-card__title {
+  font-size: var(--text-16);
+  line-height: normal;
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.exam-card__logo { display: flex; align-items: center; height: 40px; }
+.exam-card__logo img { height: 100%; width: auto; }
+/* AI 자격증 : 텍스트 로고 2줄 — Generative AI(26 · SemiBold) + Foundations(12 · Medium), 줄 사이 -2px (피그마 19:2) */
+.exam-card__logo--text {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: auto;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.exam-card__logo-main {
+  font-size: var(--text-26);
+  font-weight: var(--weight-semibold);
+  line-height: 31px;
+  letter-spacing: -1px;
+}
+.exam-card__logo-sub {
+  margin-top: calc(var(--space-2) * -1);
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: 14px;  letter-spacing: -1px;
+}
+.exam-card__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--space-6);
+  font-size: var(--text-16);
+  font-weight: var(--weight-medium);
+  color: var(--color-white);
+  background: var(--color-gray-600);
+  border-radius: var(--radius-8);
+}
+/* 시험접수 버튼 호버 · 포커스 (시안 2 방식)
+   - 버튼 : 검정 + SemiBold
+   - 카드 : 피그마(19:2) 라인 그대로 2px 그라데이션이 나타남 — 흰 배경(padding-box) 위에 그라데이션(border-box)
+     왼쪽 위 = 자기 색 → 오른쪽 아래 = 다음 카드 색 (AI → Office → COS → COS Pro → DATA → AI) */
+.exam-card__link:hover,
+.exam-card__link:focus-visible { font-weight: var(--weight-semibold); background: var(--color-gray-950); }
+.exam--new:has(.exam-card__link:hover, .exam-card__link:focus-visible) { background: linear-gradient(var(--surface-default), var(--surface-default)) padding-box, linear-gradient(135deg, var(--exam-color-ai), var(--exam-color-mos)) border-box; }
+.exam--mos:has(.exam-card__link:hover, .exam-card__link:focus-visible) { background: linear-gradient(var(--surface-default), var(--surface-default)) padding-box, linear-gradient(135deg, var(--exam-color-mos), var(--exam-color-cos)) border-box; }
+.exam--cos:has(.exam-card__link:hover, .exam-card__link:focus-visible) { background: linear-gradient(var(--surface-default), var(--surface-default)) padding-box, linear-gradient(135deg, var(--exam-color-cos), var(--exam-color-cospro)) border-box; }
+.exam--cospro:has(.exam-card__link:hover, .exam-card__link:focus-visible) { background: linear-gradient(var(--surface-default), var(--surface-default)) padding-box, linear-gradient(135deg, var(--exam-color-cospro), var(--exam-color-data)) border-box; }
+.exam--data:has(.exam-card__link:hover, .exam-card__link:focus-visible) { background: linear-gradient(var(--surface-default), var(--surface-default)) padding-box, linear-gradient(135deg, var(--exam-color-data), var(--exam-color-ai)) border-box; }
+
+/* ---------- 6) 소식 · 시험활용 · 바로가기 : 3칸 같은 높이 ---------- */
+.news__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 300px;
+  gap: var(--space-12);
+  align-items: stretch;
+}
+
+/* 흰 박스 */
+.board-box,
+.career-box,
+.qbox {
+  padding: var(--space-20);
+  background: var(--surface-default);
+  border-radius: var(--radius-16);
+}
+
+/* 박스 머리 : 제목 + 원형 버튼 */
+.board-box__head,
+.career-live__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); margin-bottom: var(--space-16); }
+.board-box__title,
+.career-live__title h2 { font-size: var(--text-24); font-weight: var(--weight-bold); }
+
+/* 탭 줄 : 아래 1px 연한 회색 */
+.board-box__bar,
+.career-live__bar { border-bottom: 1px solid var(--border-default); }
+.career-live__bar { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-12); }
+
+/* 목록 영역 높이 = 줄 높이 × 줄 수 → 두 박스 하단 라인 일치 */
+.board-box__panel,
+.career-live__panel { height: 224px; overflow: hidden; } /* 한 줄 56px × 4줄 */
+.board-box__panel[hidden],
+.career-live__panel[hidden] { display: none; }
+
+/* YBM IT 소식 목록 */
+.board-list { display: flex; flex-direction: column; height: 100%; }
+.board-list li { flex: 1; display: flex; border-bottom: 1px solid var(--border-subtle); }
+.board-list a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-width: 0;
+  font-size: var(--text-14);
+}
+.board-list__title { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: var(--weight-medium); }
+.board-list__date { flex: none; font-size: var(--text-14); font-weight: var(--weight-medium); color: var(--text-tertiary); }
+
+/* 시험활용 롤링 목록 (career.js) */
+.career-live__list.is-rolling { transform: translateY(-56px); transition: transform 450ms var(--ease-out); }
+.career-live__list li { height: 56px; border-bottom: 1px solid var(--border-subtle); }
+.career-live__list a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  height: 100%;
+  min-width: 0;
+  font-size: var(--text-14);
+}
+.career-live__co { flex: 0 0 180px; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: var(--weight-semibold); }
+.career-live__desc { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: var(--weight-medium); color: var(--text-secondary); }
+
+/* 목록 글자 호버 : 헤더 유틸 메뉴(.util-link:hover)와 같은 색 · 굵기 */
+.board-list a:hover .board-list__title,
+.board-list a:focus-visible .board-list__title,
+.career-live__list a:hover .career-live__desc,
+.career-live__list a:focus-visible .career-live__desc {
+  color: var(--text-primary);
+  font-weight: var(--weight-semibold);
+}
+
+/* 3번째 칸 : 자주 찾는 메뉴 + MOS 활용 */
+.news__side { display: flex; flex-direction: column; gap: var(--space-12); }
+.qbox { flex: 1; display: flex; flex-direction: column; gap: var(--space-10); }
+.qbox__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+}
+.qbox__title--logo { justify-content: center; } /* MOS 박스 : 로고만 가운데 */
+.qbox__title img { height: 20px; width: auto; }
+.qbox__grid { flex: 1; display: grid; gap: var(--space-12); }
+.qbox__grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.qbox__grid--2x2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* 아이콘 + 이름 타일 */
+.qtile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  min-width: 0;
+  padding: var(--space-6) var(--space-2);
+  font-size: var(--text-14);
+  font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+  text-align: center;
+  border-radius: var(--radius-12);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.qtile:hover,
+.qtile:focus-visible { color: var(--text-primary); font-weight: var(--weight-semibold); background: var(--surface-subtle); }
+/* 피그마 컬러 아이콘 (images/e-icons) : 바탕 없이 이미지만 */
+.qtile__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--text-primary);
+  border-radius: var(--radius-8);
+}
+.qtile__icon img { width: 32px; height: 32px; object-fit: contain; }
+
+/* ---------- 7) 문의 · 배너 : [단체시험 / 커리어캠퍼스] [고객센터] [소형 배너 453×205] ---------- */
+.support__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 453px;
+  gap: var(--space-12);
+  align-items: stretch;
+}
+.support__stack { display: flex; flex-direction: column; gap: var(--space-12); }
+
+/* 안내 카드 공통 (테두리 · 카드 호버 없음 — 원형 버튼 호버만)
+   칸 배치는 아래 --compact / --static 에서 각각 한 번만 지정 */
+.cta-card {
+  display: grid;
+  column-gap: var(--space-12);
+  padding: var(--space-20);
+  background: var(--surface-default);
+  border-radius: var(--radius-16);
+}
+.cta-card__icon {
+  grid-area: icon;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--text-primary);
+  border-radius: var(--radius-12);
+}
+.cta-card__icon img { width: 36px; height: 36px; object-fit: contain; }
+.cta-card__body { grid-area: body; display: flex; flex-direction: column; gap: var(--space-6); min-width: 0; }
+/* 카드 제목 : 단체시험 상담 · 커리어캠퍼스 제목과 고객센터 시험문의 · 회원가입 · 인증문의 공통 */
+.cta-card__title,
+.cs-contact dt { font-size: var(--text-16); font-weight: var(--weight-bold); color: var(--text-primary); }
+.cta-card__desc {
+  overflow: hidden;
+  font-size: var(--text-14);
+  font-weight: var(--weight-medium);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cta-card__link { grid-area: link; justify-self: end; } /* 모양은 .icon-btn */
+
+/* 가로 한 줄형 (단체시험 상담 · 커리어캠퍼스) : 아이콘 · 제목/설명 · 원형 버튼 */
+.cta-card--compact {
+  flex: 1;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "icon body link";
+  align-items: center;
+  align-content: center;
+}
+
+/* 고객센터 (링크 아님) : 시험문의 · 회원가입 두 묶음을 위아래 끝에 붙이고 사이 간격 자동 */
+.cta-card--static {
+  grid-template-columns: minmax(0, 1fr); /* 전화기 아이콘 없이 내용만 */
+  grid-template-areas:
+    "body"
+    "link";
+  row-gap: var(--space-14);
+  align-content: stretch;
+  height: 100%;
+}
+.cs-contact {
+  grid-area: body / body / link / body;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-12);
+  align-self: stretch;
+}
+.cs-contact dd { font-size: var(--text-12); }
+.cs-contact dd strong { display: inline-block; font-size: var(--text-20); font-weight: var(--weight-bold); color: var(--text-primary); } /* 번호 옆에 후 0번 */
+.cs-contact__ext { margin-left: var(--space-6); font-size: var(--text-20); font-weight: var(--weight-semibold); color: var(--text-secondary); }
+.cs-contact__note { display: block; font-size: var(--text-14); font-weight: var(--weight-regular); color: var(--text-tertiary); } /* 번호 아래 운영 시간 */
+
+/* 소형 배너 (원본 453×205, 2장 중 첫 장 노출) */
+.promo-banner {
+  width: 453px;
+  height: 205px;
+  overflow: hidden;
+  border-radius: var(--radius-10);
+}
+.promo-banner__list li + li { display: none; }
+.promo-banner__list a { display: block; width: 100%; height: 100%; }
+.promo-banner__list img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- 푸터 (원본 footer.css 는 A~D 공용이라 시안 E 에서만 조정) ---------- */
+#footer { border-top: 0; } /* 푸터 위 구분선 제거 */
+/* 푸터 위 YBM 로고 : 시안 E 전용 (원본 .gnb_ybmlogo 를 쓰지 않아 덮어쓰기 없음) */
+.footer-logo { display: flex; justify-content: center; margin: var(--space-24) 0px var(--space-40); }
+.footer-logo img { height: 20px; }
+
+/* ---------- 움직임 줄이기 설정 : 롤링 이동 없이 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .career-live__list.is-rolling { transition: none; }
+}
+
+/* ---------- GNB 글자 크기 : 공용 header.css 보다 2px 크게 (대메뉴 16→18, 하위 14→16) ---------- */
+.gnb-link { font-size: var(--text-18); }
+.gnb-sub-link { font-size: var(--text-16); }
+
+/* ---------- 8) 반응형 : 태블릿 ---------- */
+/* 모바일 전체 메뉴 하단 고정 바 : 데스크톱 · 태블릿에서는 숨김 (모바일 규칙은 아래 768 블록) */
+.gnb-bottom { display: none; }
+
+@media (max-width: 1024px) {
+  .wrap { padding: 0 var(--space-20); }
+
+  /* GNB 글자 크기 : 태블릿도 공용보다 2px 크게 (대메뉴 14→16, 하위 13→15) */
+  .gnb-link { font-size: var(--text-16); }
+  .gnb-sub-link { font-size: var(--text-15); }
+  .career-live__co { flex-basis: 150px; }
+
+  .board-box__title,
+  .career-live__title h2 { font-size: var(--text-22); }
+
+  .hero-banner__list { gap: var(--space-12); }
+
+  /* 시험 카드 : 한 줄씩 (시험명 | 배지 | 로고 | 버튼) */
+  .exam-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12); } /* 시안 2 와 같은 3열 */
+
+  .news__grid { grid-template-columns: 1fr; }
+  .news__side { flex-direction: row; }
+
+  .support__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .promo-banner { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 453px; height: auto; aspect-ratio: 453 / 205; }
+}
+
+/* ---------- 8) 반응형 : 모바일 ---------- */
+@media (max-width: 768px) {
+  /* ---------- 모바일 전체 메뉴 : 라인형 → 아코디언형 (mobile-menu-proposal A 안) ----------
+     공용 header.css 는 그대로 두고 여기서 덮어씀 · 호버는 PC 와 같게(대메뉴 Bold, 하위 SemiBold + 주황, 유틸 SemiBold) */
+  .gnb { border-bottom: 0px; }
+  .header.is-menu-open .gnb { display: flex; flex-direction: column; }
+
+  /* 상단 유틸 : 메뉴 목록 위 · 회색 알약 버튼 */
+  .gnb-util {
+    order: -1;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-20) var(--space-16);
+    font-size: var(--text-14);
+    font-weight: var(--weight-regular);
+    background: var(--surface-default);
+  }
+  .gnb-util a {
+    display: block;
+    padding: var(--space-8) var(--space-12);
+    color: var(--text-secondary);
+    background: var(--surface-muted);
+    border-radius: var(--radius-pill);
+  }
+  .gnb-util a:hover,
+  .gnb-util a:focus-visible { font-weight: var(--weight-semibold); color: var(--text-primary); }
+
+  /* 메뉴 목록 : 위쪽 8px 연회색 띠로 구분, 항목 사이 선 없음 */
+  .gnb .container { padding: 0px; border-top: 8px solid var(--surface-subtle); }
+  .gnb-item { border-bottom: 0px; }
+  .gnb-link {
+    height: 56px;
+    padding: 0px var(--space-20);
+    font-size: var(--text-17);
+    font-weight: var(--weight-medium);
+  }
+  .gnb-link:hover,
+  .gnb-link:focus-visible { font-weight: var(--weight-bold); }
+
+  /* 펼친 하위 메뉴 : 연회색 바탕 · 그룹 구분선 없이 한 목록으로 */
+  .gnb-sub { gap: 0px; padding: var(--space-8) 0px; background: var(--surface-subtle); }
+  .gnb-sub-group { gap: 0px; }
+  .gnb-sub-group + .gnb-sub-group { padding-top: 0px; border-top: 0px; }
+  .gnb-sub-link {
+    padding: var(--space-10) var(--space-20) var(--space-10) var(--space-32);
+    font-size: var(--text-15);
+    white-space: normal;
+  }
+
+  /* 하단 고정 바 : 어학시험 | 온라인 강의 (메뉴를 스크롤해도 아래에 붙어 있음) */
+  .gnb-bottom {
+    position: sticky;
+    bottom: 0px;
+    display: flex;
+    background: var(--surface-default);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .gnb-bottom li { flex: 1; }
+  .gnb-bottom li + li { border-left: 1px solid var(--border-subtle); }
+  .gnb-bottom a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    font-size: var(--text-15);
+    color: var(--text-secondary);
+  }
+  .gnb-bottom a:hover,
+  .gnb-bottom a:focus-visible { font-weight: var(--weight-semibold); color: var(--text-primary); }
+
+  /* 메뉴 열림 : 채용 배너는 숨기고 헤더(로고 · ✕ + 메뉴)만 화면 전체를 덮음, 뒤 페이지 스크롤 잠금 */
+  body:has(.header.is-menu-open) { overflow: hidden; }
+  body:has(.header.is-menu-open) .recruit-banner { display: none; }
+  .header.is-menu-open { position: fixed; inset: 0px; z-index: 1000; height: auto; }
+  .header.is-menu-open .header-wrap { bottom: 0px; display: flex; flex-direction: column; }
+  .header.is-menu-open .gnb { flex: 1; min-height: 0px; max-height: none; }
+  .gnb-bottom { margin-top: auto; } /* 메뉴가 짧아도 하단 바는 화면 맨 아래 */
+
+  .wrap { padding: 0 var(--space-16); }
+  /* 시험활용 롤링 : 한 줄 64px × 4줄 */
+  .career-live__panel { height: 256px; }
+  .career-live__list.is-rolling { transform: translateY(-64px); }
+  .career-live__list li { height: 64px; }
+
+  .board-box__title,
+  .career-live__title h2 { font-size: var(--text-20); }
+
+  /* 배너 : 폭에 꽉 채우고 손가락으로 넘기기 (스크롤 스냅) · 아래 넘버링 양옆 화살표는 유지 */
+  .hero-banner { padding-top: var(--space-16); }
+  .hero-banner__list {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* 스크롤바 숨김 */
+  }
+  .hero-banner__list::-webkit-scrollbar { display: none; }
+  .hero-banner__list li { flex: 0 0 100%; scroll-snap-align: start; }
+  .hero-banner__meta { margin-top: var(--space-12); }
+  .hero-banner__meta .more-link { display: none; } /* 모바일은 넘버링만 */
+
+  /* 시험 카드 : 시험명 → 배지 → 로고 → 버튼 세로 */
+  /* 시험 카드 : 한 칸 (높이는 내용만큼) — 시안 2 와 같음 */
+  .exam-list { grid-template-columns: 1fr; }
+  .exam-card { height: auto; gap: var(--space-20); }
+
+  .tab__item { font-size: var(--text-15); }
+  .career-live__bar { flex-wrap: wrap; }
+
+  /* 시험활용 : 기관명 / 설명 두 줄 */
+  .career-live__list a { flex-direction: column; align-items: flex-start; justify-content: center; gap: var(--space-2); }
+  .career-live__co { flex: none; width: 100%; font-size: var(--text-14); font-weight: var(--weight-medium); color: var(--text-tertiary); }
+  .career-live__desc { flex: none; width: 100%; color: var(--text-primary); }
+
+  .news__side { flex-direction: column; gap: var(--space-10); }
+
+  .support__grid { grid-template-columns: 1fr; }
+  .cta-card { column-gap: var(--space-14); }
+  .cta-card--static { row-gap: var(--space-12); }
+  .cs-contact__note { font-size: var(--text-12); } /* 좁은 화면에서 한 줄 유지 */
+  .cta-card__icon { width: 40px; height: 40px; }
+
+  /* 푸터 메뉴 글씨 : 원본 13px → 14px (footer.css 는 공용이라 여기서 덮어씀) */
+  #footer .f_menu li a { font-size: var(--text-14); }
+}
