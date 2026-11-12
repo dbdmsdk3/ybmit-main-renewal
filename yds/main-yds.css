@@ -444,9 +444,17 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .career-live__list.is-rolling { transition: none; }
 }
 
-/* ---------- GNB 글자 크기 : 공용 header.css 보다 2px 크게 (대메뉴 16→18, 하위 14→16) ---------- */
+/* ---------- GNB 글자 크기 : 대메뉴는 공용보다 2px 크게(16→18), 하위 메뉴는 14 ---------- */
 .gnb-link { font-size: var(--text-18); }
-.gnb-sub-link { font-size: var(--text-16); }
+.gnb-sub-link { font-size: var(--text-14); }
+
+/* ---------- GNB 정렬 : 대메뉴는 칸 가운데, 소메뉴 묶음도 대메뉴 아래 가운데 · 글자는 왼쪽 정렬 ----------
+   모바일(768 이하)은 아코디언 메뉴라 제외 */
+@media (min-width: 769px) {
+  .gnb-link { justify-content: center; } /* 칸 폭은 그대로 둬서 호버 밑줄 길이 유지 */
+  .gnb-sub { align-self: center; }       /* 소메뉴 묶음을 내용 폭으로 줄여 칸 가운데에 */
+  .gnb-sub-link { text-align: left; }
+}
 
 /* ---------- 8) 반응형 : 태블릿 ---------- */
 /* 모바일 전체 메뉴 하단 고정 바 : 데스크톱 · 태블릿에서는 숨김 (모바일 규칙은 아래 768 블록) */
