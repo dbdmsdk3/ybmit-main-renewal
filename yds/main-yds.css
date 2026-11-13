@@ -473,7 +473,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-weight: var(--weight-regular);
   color: var(--ds-color-fg-neutral);
   white-space: nowrap;
-  text-align: start;
+  text-align: center;                              /* 항목 글자 가운데 */
 }
 .related-pop__link:hover,
 .related-pop__link:focus-visible {
