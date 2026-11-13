@@ -75,7 +75,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   height: 32px;
   padding: 0px;
   color: var(--text-primary);
-  background: var(--surface-muted);
+  background: var(--ds-color-bg-neutral-weak-alpha); /* YDS 2026-11-11 : 약한 버튼 같은 옅은 회색 칸은 반투명 회색 */
   border: 0;
   border-radius: var(--radius-pill);
   transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
@@ -553,7 +553,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     display: block;
     padding: var(--space-8) var(--space-12);
     color: var(--text-secondary);
-    background: var(--surface-muted);
+    background: var(--ds-color-bg-neutral-weak-alpha); /* YDS 2026-11-11 : 옅은 회색 칸은 반투명 회색 */
     border-radius: var(--radius-pill);
   }
   .gnb-util a:hover,
