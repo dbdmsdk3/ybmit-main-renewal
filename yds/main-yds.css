@@ -454,6 +454,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .gnb-link { justify-content: center; } /* 칸 폭은 그대로 둬서 호버 밑줄 길이 유지 */
   .gnb-sub { align-self: center; }       /* 소메뉴 묶음을 내용 폭으로 줄여 칸 가운데에 */
   .gnb-sub-link { text-align: left; }
+
+  /* 호버로 굵어져도 글자 위치가 밀리지 않게 : 굵은 글자 폭만큼 보이지 않는 자리를 미리 잡아 둠
+     (data-text 에 같은 글자를 넣어 두고, 글자 아래 줄에 높이 0으로 숨김 → 칸 폭은 굵은 글자 기준) */
+  .gnb-link[data-text] { display: grid; align-content: center; justify-content: center; text-align: left; } /* 굵은 폭 칸을 가운데에 두고 글자는 칸 왼쪽부터 → 굵어져도 시작점 고정 */
+  .gnb-sub-link[data-text] { display: grid; }
+  .gnb-link[data-text]::after,
+  .gnb-sub-link[data-text]::after {
+    content: attr(data-text);
+    height: 0px;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+  .gnb-link[data-text]::after { font-weight: var(--weight-bold); }         /* 대메뉴 호버 굵기 */
+  .gnb-sub-link[data-text]::after { font-weight: var(--weight-semibold); } /* 소메뉴 호버 굵기 */
+  .gnb-sub-link.is-multiline[data-text]::after { white-space: pre; }      /* 두세 줄 항목 : data-text 의 줄바꿈(&#10;)대로 폭 계산 */
 }
 
 /* ---------- 8) 반응형 : 태블릿 ---------- */
@@ -466,6 +482,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   /* GNB 글자 크기 : 태블릿도 공용보다 2px 크게 (대메뉴 14→16, 하위 13→15) */
   .gnb-link { font-size: var(--text-16); }
   .gnb-sub-link { font-size: var(--text-15); }
+  .gnb-sub-link.is-multiline[data-text]::after { white-space: normal; } /* 태블릿은 br 을 숨기고 칸 폭대로 줄바꿈하므로 숨긴 글자도 같게 */
   .career-live__co { flex-basis: 150px; }
 
   .board-box__title,
