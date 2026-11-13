@@ -105,16 +105,12 @@
                   <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="ds-popover" id="related-list" role="dialog" aria-labelledby="related-list-t" hidden data-placement="bottom-end">
-                <div class="ds-popover__header">
-                  <div class="ds-popover__texts"><strong class="ds-popover__title" id="related-list-t">관련사이트</strong></div>
-                </div>
-                <div class="ds-popover__body">
-                  <ul class="ds-list">
-                    <li><a class="ds-list-item" data-size="small" href="http://www.ybmit.com/ybmsisacom.jsp?SiteURL=exam.ybmnet.co.kr" target="_blank" rel="noopener noreferrer"><span class="ds-list-item__content"><span class="ds-list-item__title">어학시험</span></span><i class="ds-icon ds-icon--external-link ds-list-item__chevron" aria-hidden="true"></i></a></li>
-                    <li><a class="ds-list-item" data-size="small" href="https://www.ybmcc.com/v2/index.asp?utm_source=IT_Main&amp;utm_medium=IT_Main&amp;utm_campaign=MOS_Util" target="_blank" rel="noopener noreferrer"><span class="ds-list-item__content"><span class="ds-list-item__title">온라인 강의</span></span><i class="ds-icon ds-icon--external-link ds-list-item__chevron" aria-hidden="true"></i></a></li>
-                  </ul>
-                </div>
+              <div class="ds-popover related-pop" id="related-list" role="dialog" aria-label="관련사이트" hidden data-placement="bottom-end">
+                <!-- YDS Menu 모양 착안 : 제목 없이 항목만, 가로는 글자에 맞춤 -->
+                <ul class="related-pop__list">
+                  <li><a class="related-pop__link" href="http://www.ybmit.com/ybmsisacom.jsp?SiteURL=exam.ybmnet.co.kr" target="_blank" rel="noopener noreferrer">어학시험</a></li>
+                  <li><a class="related-pop__link" href="https://www.ybmcc.com/v2/index.asp?utm_source=IT_Main&amp;utm_medium=IT_Main&amp;utm_campaign=MOS_Util" target="_blank" rel="noopener noreferrer">온라인 강의</a></li>
+                </ul>
               </div>
             </li>
           </ul>

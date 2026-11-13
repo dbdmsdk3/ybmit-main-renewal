@@ -22,7 +22,11 @@
 }
 
 /* ---------- 2) 리셋 · 레이아웃 ---------- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; }
+/* 여백 초기화 : YDS 컴포넌트(ds-*)는 빼서 YDS 기본 여백을 살림 (:where 로 우선순위 0 유지) */
+:where(:not([class*="ds-"])),
+:where(:not([class*="ds-"]))::before,
+:where(:not([class*="ds-"]))::after { margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
@@ -447,6 +451,35 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* ---------- GNB 글자 크기 : 대메뉴는 공용보다 2px 크게(16→18), 하위 메뉴는 14 ---------- */
 .gnb-link { font-size: var(--text-18); }
 .gnb-sub-link { font-size: var(--text-14); }
+
+/* ---------- 관련사이트 드롭다운 : YDS Menu 모양을 착안 ----------
+   열고 닫기는 YDS Popover(ybm-ds.js) 그대로, 모양은 YDS Menu(.ds-menu / .ds-menu-item) 값으로 맞춤
+   - Menu 는 화면 이동용이 아니라 클래스는 쓰지 않고 같은 토큰 값만 가져옴
+   - 가로는 글자에 맞춤(hug) : Menu 최소 폭 220 · Popover 320 대신 max-content, 아이콘 없음 ---------- */
+.related-pop {
+  width: max-content;
+  padding: var(--ds-space-x1);                      /* Menu 안쪽 여백 4 */
+  gap: 0px;
+  border-radius: var(--ds-shape-md);                /* 호버 항목과 같은 모서리 10 (Menu 기본 20 대신) */
+  box-shadow: var(--ds-elevation-overlay);          /* Menu 그림자 */
+}
+.related-pop__list { display: flex; flex-direction: column; }
+.related-pop__link {
+  display: block;
+  padding: var(--ds-space-x2_5) var(--ds-space-x3); /* Menu 항목 여백 10 · 12 */
+  border-radius: var(--ds-shape-md);                /* Menu 항목 모서리 10 */
+  font-size: var(--ds-font-size-t04);               /* 14 */
+  line-height: var(--ds-line-height-t04);           /* 21 → 항목 높이 41 */
+  font-weight: var(--weight-regular);
+  color: var(--ds-color-fg-neutral);
+  white-space: nowrap;
+  text-align: start;
+}
+.related-pop__link:hover,
+.related-pop__link:focus-visible {
+  background: var(--ds-color-bg-neutral-weak-alpha); /* Menu 항목 호버 바탕 */
+  outline: none;
+}
 
 /* ---------- GNB 정렬 : 대메뉴는 칸 가운데, 소메뉴 묶음도 대메뉴 아래 가운데 · 글자는 왼쪽 정렬 ----------
    모바일(768 이하)은 아코디언 메뉴라 제외 */
