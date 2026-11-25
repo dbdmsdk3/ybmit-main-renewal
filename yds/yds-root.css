@@ -1,15 +1,14 @@
 /* ==========================================================================
    YDS 시안 :root 값 모음 (yds-root.css)
    --------------------------------------------------------------------------
-   이 파일에는 :root 값만 둔다. 화면 모양(요소 스타일)은 header.css · main-yds.css · footer.css 에 있다.
-   불러오는 순서 : YDS CSS → 이 파일 → header.css · footer.css · main-yds.css
+   이 파일에는 YDS 원본 토큰만 둔다. 시안 전용 변수는 만들지 않는다.
+   화면 CSS(main-yds.css · nav.css)는 --ds-* 토큰을 바로 쓰고, YDS 에 없는 값은 원래 숫자를 그대로 적는다.
+   불러오는 순서 : YDS CSS → 이 파일 → main-yds.css → nav.css
 
    0) YDS 전체 토큰 (원본 그대로)
       https://design.ybmnet.co.kr/yds/dist/tokens.css (YDS v1.2.0, 2026-11-25 받음)
       한 글자도 고치지 않고 그대로 붙였다. 다른 화면에서도 이 부분을 그대로 쓸 수 있다.
       YDS 가 새 버전을 내면 이 부분만 새 tokens.css 로 통째로 바꾼다.
-   1) YDS 토큰 연결 : 시안이 쓰던 변수 이름 → YDS 토큰
-   2) 화면 고정 크기 : YDS 에 없는 값. 원본 시안 숫자를 그대로 적는다(바꾸지 않음).
    ========================================================================== */
 
 
@@ -559,131 +558,3 @@
    0) YDS 전체 토큰 — 원본 tokens.css (v1.2.0) 끝
    ########################################################################## */
 
-
-:root {
-  /* ==================== 1) YDS 토큰 연결 ==================== */
-
-  /* ---------- 색 : 글자 · 면 · 선 (역할 색) ---------- */
-  --text-primary: var(--ds-color-fg-neutral);                     /* #030712 → #1a1c20 */
-  --text-secondary: var(--ds-color-fg-neutral-muted);             /* #4b5563 → #555d6d */
-  --text-tertiary: var(--ds-color-fg-neutral-subtle);             /* #9ca3af → #868b94 */
-  --surface-default: var(--ds-color-bg-layer-default);            /* #ffffff 그대로 */
-  --surface-subtle: var(--ds-color-bg-neutral-muted);             /* #f9fafb → #f7f8f9 */
-  --surface-muted: var(--ds-color-bg-neutral);                    /* #f3f4f6 → #f3f4f5 */
-  --border-default: var(--ds-color-stroke-neutral-weak);          /* #e5e7eb → #dcdee3 */
-  --border-subtle: var(--ds-color-stroke-neutral-muted);          /* #f3f4f6 → 검정 6% */
-  --color-dim: var(--ds-color-bg-overlay);                        /* 검정 40% → 검정 45% */
-  --nvb-blue: var(--ds-color-fg-informative);                     /* #0068f0 → #217cf9 (채용 배너 기업명) */
-
-  /* ---------- 색 : 팔레트 (역할 색으로 표현할 수 없는 곳만) ---------- */
-  --color-white: var(--ds-color-palette-static-white);            /* #ffffff 그대로 */
-  --color-gray-600: var(--ds-color-palette-gray-800);             /* #4b5563 → #555d6d */
-  --color-gray-950: var(--ds-color-palette-gray-1000);            /* #030712 → #1a1c20 */
-
-  /* 브랜드 오렌지 : YDS 기본 브랜드(파랑) 대신 orange 팔레트에서 가장 가까운 값 */
-  --brand-600: var(--ds-color-palette-orange-600);                /* #ff761e → #ff6600 */
-  --brand-700: var(--ds-color-palette-orange-700);                /* #e8600c → #e14d00 */
-  --color-focus-ring: var(--ds-color-palette-orange-600);         /* #ff761e → #ff6600 */
-
-  /* 시험 카드 호버 테두리 그라데이션 (시험별 상징색과 가장 가까운 팔레트) */
-  --exam-color-ai: var(--ds-color-palette-orange-600);            /* #ff761e → #ff6600 */
-  --exam-color-mos: var(--ds-color-palette-purple-800);           /* #a9007f → #6d50cb (YDS 에 자홍색 없음) */
-  --exam-color-cos: var(--ds-color-palette-blue-700);             /* #0092e5 → #217cf9 */
-  --exam-color-cospro: var(--ds-color-palette-blue-800);          /* #0065b8 → #135fcd */
-  --exam-color-data: var(--ds-color-palette-purple-700);          /* #5759a9 → #8969ea */
-
-  /* 푸터 (footer.css 에 직접 쓰여 있던 색) */
-  --footer-text: var(--ds-color-fg-neutral-muted);                /* #666666 → #555d6d */
-  --footer-text-strong: var(--ds-color-fg-neutral);               /* #000000 · #222222 · #333333 → #1a1c20 */
-  --footer-text-weak: var(--ds-color-fg-neutral-subtle);          /* #717883 → #868b94 */
-  --footer-line: var(--ds-color-stroke-neutral-weak);             /* #e5e5e5 → #dcdee3 */
-
-  /* ---------- 글자 크기 ---------- */
-  --text-12: var(--ds-font-size-t02);                             /* 12 그대로 */
-  --text-13: var(--ds-font-size-t03);                             /* 13 그대로 */
-  --text-14: var(--ds-font-size-t04);                             /* 14 그대로 */
-  --text-15: var(--ds-font-size-t04);                             /* 15 → 14 (YDS 에 15 없음) */
-  --text-16: var(--ds-font-size-t05);                             /* 16 그대로 */
-  --text-17: var(--ds-font-size-t06);                             /* 17 → 18 (YDS 에 17 없음) */
-  --text-18: var(--ds-font-size-t06);                             /* 18 그대로 */
-  --text-20: var(--ds-font-size-t07);                             /* 20 그대로 */
-  --text-22: var(--ds-font-size-t08);                             /* 22 그대로 */
-  --text-24: var(--ds-font-size-t09);                             /* 24 그대로 */
-  --text-26: var(--ds-font-size-t10);                             /* 26 그대로 */
-
-  /* ---------- 글자 굵기 ---------- */
-  --weight-regular: var(--ds-font-weight-regular);                /* 400 */
-  --weight-medium: var(--ds-font-weight-medium);                  /* 500 */
-  --weight-semibold: var(--ds-font-weight-semibold);              /* 600 */
-  --weight-bold: var(--ds-font-weight-bold);                      /* 700 */
-
-  /* ---------- 간격 (변수 이름의 숫자 = px) ---------- */
-  --space-0: var(--ds-space-x0);
-  --space-2: var(--ds-space-x0_5);
-  --space-4: var(--ds-space-x1);
-  --space-6: var(--ds-space-x1_5);
-  --space-8: var(--ds-space-x2);
-  --space-10: var(--ds-space-x2_5);
-  --space-12: var(--ds-space-x3);
-  --space-14: var(--ds-space-x3_5);
-  --space-16: var(--ds-space-x4);
-  --space-18: var(--ds-space-x4_5);
-  --space-20: var(--ds-space-x5);
-  --space-24: var(--ds-space-x6);
-  --space-28: var(--ds-space-x7);
-  --space-30: var(--ds-space-x8);                                 /* 30 → 32 (YDS 에 30 없음) */
-  --space-32: var(--ds-space-x8);
-  --space-40: var(--ds-space-x10);
-  --space-56: var(--ds-space-x14);
-
-  /* ---------- 모서리 ---------- */
-  --radius-8: var(--ds-shape-sm);                                 /* 8 */
-  --radius-10: var(--ds-shape-md);                                /* 10 */
-  --radius-12: var(--ds-shape-lg);                                /* 12 */
-  --radius-16: var(--ds-shape-xl);                                /* 16 */
-  --radius-pill: var(--ds-shape-pill);                            /* 양 끝 둥글게 */
-
-  /* ---------- 그림자 ---------- */
-  --shadow-card: var(--ds-elevation-raised);                      /* 0 2px 8px 검정 5% → YDS 살짝 뜬 면 */
-
-  /* ---------- 움직임 ---------- */
-  --duration-fast: var(--ds-duration-fast);                       /* 120ms → 150ms */
-  --duration-normal: var(--ds-duration-normal);                   /* 200ms 그대로 */
-  --duration-slow: var(--ds-duration-slow);                       /* 300ms 그대로 */
-  --ease-out: var(--ds-easing-enter);                             /* (0,0,.2,1) → (0,0,.15,1) */
-  --ease-default: var(--ds-easing-standard);                      /* ease → (.35,0,.35,1) */
-
-  /* ==================== 2) 화면 고정 크기 (원본 시안 값) ==================== */
-
-  /* ---------- 행간 ---------- */
-  --line-height-normal: normal;
-  --line-height-130: 1.3;
-  --line-height-150: 1.5;
-
-  /* ---------- 폭 · 높이 ---------- */
-  --container-max: 1100px;        /* 본문 · 푸터 폭 */
-  --header-top-h: 58px;           /* 로고 · 유틸 메뉴 줄 */
-  --gnb-h: 60px;                  /* GNB 줄 */
-  --gnb-col-w: 130px;             /* GNB 한 칸 폭 */
-  --gnb-mobile-h: 52px;           /* 모바일 메뉴 한 줄 */
-  --logo-ybmit-w: 94.739px;
-  --logo-ybm-w: 55.161px;
-  --logo-h: 30px;
-  --menu-line-w: 18px;            /* 모바일 메뉴 버튼 선 길이 */
-  --banner-btn-size: 40px;        /* 채용 배너 화살표 버튼 */
-  --banner-body-max-h: 260px;     /* 채용 배너 펼친 높이 */
-
-  /* ---------- 아이콘 · 선 두께 ---------- */
-  --icon-14: 14px;
-  --icon-16: 16px;
-  --icon-24: 24px;
-  --icon-32: 32px;
-  --border-1: 1px;
-  --border-2: 2px;
-  --border-3: 3px;
-
-  /* ---------- 쌓임 순서 ---------- */
-  --z-dim: 99;
-  --z-header: 100;
-  --z-banner: 100;
-}

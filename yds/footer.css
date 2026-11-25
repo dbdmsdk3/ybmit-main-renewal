@@ -11,9 +11,9 @@
 .gnb_ybmlogo,
 #footer {
   font-family: Roboto, "Noto Sans", AppleGothic, sans-serif;
-  font-size: var(--text-15);            /* 15 → 14 */
+  font-size: var(--ds-font-size-t04);            /* 15 → 14 */
   line-height: 24px;
-  color: var(--footer-text-strong);     /* #333333 → fg/neutral */
+  color: var(--ds-color-fg-neutral);     /* #333333 → fg/neutral */
   letter-spacing: -0.4px;
   word-break: normal;
 }
@@ -24,36 +24,36 @@
 #footer a:link, #footer a:visited { text-decoration: none; color: inherit; }
 
 /* ---------- 원본 규칙 ---------- */
-.gnb_ybmlogo { display: flex; justify-content: center; flex-direction: column; margin-top: var(--space-24); }
+.gnb_ybmlogo { display: flex; justify-content: center; flex-direction: column; margin-top: var(--ds-space-x6); }
 .gnb_ybmlogo img { width: 140px; text-align: center; margin: 0px auto; }
-.mb40 { margin-bottom: var(--space-40); }
+.mb40 { margin-bottom: var(--ds-space-x10); }
 
 /* 위 여백 25 → 24, 아래 여백 30 → 32 */
-#footer { clear: both; padding: var(--space-24) 0px var(--space-30); border-top: 1px solid var(--footer-line); background: var(--surface-default); z-index: 9999; }
+#footer { clear: both; padding: var(--ds-space-x6) 0px var(--ds-space-x8); border-top: 1px solid var(--ds-color-stroke-neutral-weak); background: var(--ds-color-bg-layer-default); z-index: 9999; }
 #footer .footer_wrap { width: 1100px; margin: 0px auto; }
-#footer .footer_bottom { overflow: hidden; margin-bottom: var(--space-10); }
+#footer .footer_bottom { overflow: hidden; margin-bottom: var(--ds-space-x2_5); }
 #footer .footer_bottom > div { float: left; }
 #footer .footer_address { width: 795px; }
 #footer .f_menu { overflow: hidden; }
 #footer .f_menu li { float: left; }
 /* 메뉴 사이 여백 13 → 12 */
-#footer .f_menu li a { color: var(--footer-text); margin-left: var(--space-12); font-size: var(--text-14); padding-left: var(--space-12); background: url("https://www.ybmit.com/resources/images/common/f_menu_line.gif") left center no-repeat; }
-#footer .f_menu li a.pnt { color: var(--footer-text-strong); font-weight: var(--weight-bold); }
+#footer .f_menu li a { color: var(--ds-color-fg-neutral-muted); margin-left: var(--ds-space-x3); font-size: var(--ds-font-size-t04); padding-left: var(--ds-space-x3); background: url("https://www.ybmit.com/resources/images/common/f_menu_line.gif") left center no-repeat; }
+#footer .f_menu li a.pnt { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-bold); }
 #footer .f_menu li:first-child a { margin-left: 0px; padding-left: 0px; background: none; }
-#footer address { font-size: var(--text-12); line-height: 24px; color: var(--footer-text); margin-top: var(--space-20); }
-#footer address a { letter-spacing: 0px; color: var(--footer-text); }
+#footer address { font-size: var(--ds-font-size-t02); line-height: 24px; color: var(--ds-color-fg-neutral-muted); margin-top: var(--ds-space-x5); }
+#footer address a { letter-spacing: 0px; color: var(--ds-color-fg-neutral-muted); }
 /* 안쪽 여백 23 → 24 */
-#footer .footer_right { padding: 0px 0px var(--space-24) var(--space-24); border-left: 1px solid var(--footer-line); }
-#footer .footer_right .title { color: var(--footer-text-strong); }
+#footer .footer_right { padding: 0px 0px var(--ds-space-x6) var(--ds-space-x6); border-left: 1px solid var(--ds-color-stroke-neutral-weak); }
+#footer .footer_right .title { color: var(--ds-color-fg-neutral); }
 /* 위 여백 15 → 16 */
-#footer .footer_right .info { font-size: var(--text-12); margin-top: var(--space-16); line-height: 22px; color: var(--footer-text); }
-#footer .footer_right .confirm { font-size: var(--text-12); color: var(--footer-text-strong); line-height: 27px; padding-top: var(--space-8); }
-#footer .footer_right .confirm a { display: inline-block; background: url("https://www.ybmit.com/resources/images/common/ic_sm_arr.png") right 70% no-repeat; padding-right: var(--space-24); }
-.noti_massage { width: 1100px; margin: 0px auto; padding-top: var(--space-20); font-size: var(--text-12); text-align: left; color: var(--footer-text-weak); letter-spacing: -0.5px; }
+#footer .footer_right .info { font-size: var(--ds-font-size-t02); margin-top: var(--ds-space-x4); line-height: 22px; color: var(--ds-color-fg-neutral-muted); }
+#footer .footer_right .confirm { font-size: var(--ds-font-size-t02); color: var(--ds-color-fg-neutral); line-height: 27px; padding-top: var(--ds-space-x2); }
+#footer .footer_right .confirm a { display: inline-block; background: url("https://www.ybmit.com/resources/images/common/ic_sm_arr.png") right 70% no-repeat; padding-right: var(--ds-space-x6); }
+.noti_massage { width: 1100px; margin: 0px auto; padding-top: var(--ds-space-x5); font-size: var(--ds-font-size-t02); text-align: left; color: var(--ds-color-fg-neutral-subtle); letter-spacing: -0.5px; }
 .letter_0 { letter-spacing: normal; }
 
 /* 원본의 float: right !important 대신, 선택자를 한 단계 구체적으로 써서 #footer .f_menu li(float: left)를 이긴다 */
-#footer .f_menu li.sns_warp { margin: 0px var(--space-24) 0px 0px; float: right; }
+#footer .f_menu li.sns_warp { margin: 0px var(--ds-space-x6) 0px 0px; float: right; }
 .sns_icon { display: flex; justify-content: flex-end; align-items: center; line-height: 32px; }
 .sns__item { width: 100%; }
 .sns_link { position: relative; display: block; text-align: center; height: 100%; box-sizing: border-box; }
@@ -72,17 +72,17 @@
 
 /* ---------- 태블릿 (시안용 보완 : 고정 폭 해제) ---------- */
 @media (max-width: 1024px) {
-  #footer .footer_wrap { width: auto; padding: 0px var(--space-20); }
+  #footer .footer_wrap { width: auto; padding: 0px var(--ds-space-x5); }
   #footer .footer_bottom > div { float: none; }
   #footer .footer_address { width: auto; }
-  #footer .footer_right { margin-top: var(--space-20); padding: var(--space-20) 0px 0px; border-left: 0; border-top: 1px solid var(--footer-line); }
+  #footer .footer_right { margin-top: var(--ds-space-x5); padding: var(--ds-space-x5) 0px 0px; border-left: 0; border-top: 1px solid var(--ds-color-stroke-neutral-weak); }
   .noti_massage { width: auto; }
 }
 
 /* ---------- 모바일 ---------- */
 @media (max-width: 768px) {
-  #footer .footer_wrap { padding: 0px var(--space-16); }
-  #footer .f_menu li a { font-size: var(--text-13); margin-left: var(--space-10); padding-left: var(--space-10); }
+  #footer .footer_wrap { padding: 0px var(--ds-space-x4); }
+  #footer .f_menu li a { font-size: var(--ds-font-size-t03); margin-left: var(--ds-space-x2_5); padding-left: var(--ds-space-x2_5); }
   #footer .f_menu li.sns_warp { margin: 0px; }
   #footer address,
   .noti_massage { word-break: keep-all; }
@@ -98,11 +98,11 @@
 /* ---------- 푸터 (원본 footer.css 는 A~D 공용이라 시안 E 에서만 조정) ---------- */
 #footer { border-top: 0; } /* 푸터 위 구분선 제거 */
 /* 푸터 위 YBM 로고 : 시안 E 전용 (원본 .gnb_ybmlogo 를 쓰지 않아 덮어쓰기 없음) */
-.footer-logo { display: flex; justify-content: center; margin: var(--space-24) 0px var(--space-40); }
+.footer-logo { display: flex; justify-content: center; margin: var(--ds-space-x6) 0px var(--ds-space-x10); }
 .footer-logo img { height: 20px; }
 
 @media (max-width: 768px) {
 
   /* 푸터 메뉴 글씨 : 원본 13px → 14px (footer.css 는 공용이라 여기서 덮어씀) */
-  #footer .f_menu li a { font-size: var(--text-14); }
+  #footer .f_menu li a { font-size: var(--ds-font-size-t04); }
 }
