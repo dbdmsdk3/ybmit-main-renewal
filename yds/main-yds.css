@@ -61,7 +61,7 @@
 /* 섹션 간격 : 배너 → 시험접수 → 소식 → 문의 사이 24 로 통일 */
 .IT_main .exam    { padding: var(--space-24) 0px; }
 .IT_main .news    { padding: 0px 0px var(--space-24); }
-.IT_main .support { padding: 0px; } /* + 푸터 로고 위 여백 24(원본) = 24 */
+.IT_main .support { padding: 0px 0px var(--space-24); } /* 마지막 카드 아래 회색 여백 24 (.IT_main 배경 안에서 끝나도록) */
 
 
 /* ---------- 3) 공용 컴포넌트 ---------- */
