@@ -1,0 +1,243 @@
+<!-- =========================================================================
+     nav.html — 상단 영역 (채용정보 배너 + 헤더 + GNB 메가메뉴 + 관련사이트 + 모바일 전체 메뉴)
+     - 스타일 : yds.css → nav.css 순서로 불러온다
+     - 동작   : header.js (메가메뉴 · 관련사이트 · 모바일 메뉴 · 채용 배너), 관련사이트 열고 닫기는 YDS JS
+     - 모든 스타일은 .IT_nav 안에서만 적용된다
+     ========================================================================= -->
+<div class="IT_nav">
+<div class="recruit-banner" id="recruit-banner">
+  <div class="container">
+    <div class="recruit-banner-head">
+      <img class="recruit-banner-logo" src="https://imagesisa.ybmnet.co.kr/platform/common/logo/ybm_ybm.svg" alt="YBM 와이비엠">
+
+      <!-- 배너 펼치기 / 접기 -->
+      <button type="button" class="recruit-banner-toggle" aria-expanded="true" aria-controls="recruit-banner-body">
+        <span class="recruit-banner-title">MOS, COS, COS Pro 활용 기업을 확인해 보세요 !</span>
+        <span class="recruit-banner-badge">
+          <span class="recruit-banner-badge-text">닫기</span>
+          <svg class="icon-chevron recruit-banner-badge-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <div class="recruit-banner-right">
+        <label class="recruit-banner-today">
+          <input type="checkbox" class="recruit-banner-today-check"> 오늘 하루 닫기
+        </label>
+        <button type="button" class="recruit-banner-close" aria-label="배너 닫기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="recruit-banner-body is-open" id="recruit-banner-body">
+      <div class="recruit-slider">
+        <div class="recruit-slider-viewport">
+          <ul class="recruit-slider-track">
+            <li class="recruit-card"><h3 class="recruit-card-company">코레일</h3><p class="recruit-card-status">채용 예정</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">SK 하이닉스</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">롯데</h3><p class="recruit-card-status">신입, 경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">대한항공</h3><p class="recruit-card-status">경력직 채용 중</p><p class="recruit-card-desc">COS Pro, COS 소지자 우대</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">대한민국 육군</h3><p class="recruit-card-status">부사관 일반 전형</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">대한민국 해군</h3><p class="recruit-card-status">부사관 일반 전형</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">네이버</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">카카오</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">셀트리온</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 참고</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">LS</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">SM그룹</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+            <li class="recruit-card"><h3 class="recruit-card-company">삼성전자</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
+          </ul>
+        </div>
+        <button type="button" class="recruit-slider-btn recruit-slider-prev" aria-label="이전 기업">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="recruit-slider-btn recruit-slider-next" aria-label="다음 기업">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="header" id="header">
+  <div class="header-wrap">
+
+    <!-- 상단 바: 로고 + 유틸 메뉴 -->
+    <div class="header-top">
+      <div class="container header-top-inner">
+        <h1 class="header-logo">
+          <a href="/" title="YBM IT 메인으로 이동">
+            <img class="logo-ybmit" src="images/logo-ybmit.svg" alt="YBM IT">
+          </a>
+        </h1>
+
+        <ul class="util">
+          <li><a class="util-link" href="https://www.ybmnet.co.kr/common/login.asp?url=/&amp;what=www.ybmit.com">로그인</a></li>
+          <li><a class="util-link" href="/mytest/mytest_app.jsp">마이페이지</a></li>
+          <!-- 이벤트 : GNB에서 빼서 유틸 메뉴 마이페이지 옆으로 이동 -->
+          <li><a class="util-link" href="/cs/event_list.jsp">이벤트</a></li>
+          <li><a class="util-link" href="/cs/notice_list.jsp">고객센터</a></li>
+          <!-- 관련사이트 : YDS Popover (header.js 가 쓰는 util-related / util-related-btn 클래스는 그대로 둔다) -->
+          <li class="util-related ds-popover-anchor">
+            <button type="button" class="util-link util-related-btn" data-ds-popover="related-list" aria-expanded="false" aria-controls="related-list">
+              관련사이트
+              <!-- hover 시 글자색을 따라가도록 인라인 SVG + currentColor 사용 (원본: images/icon-chevron-down.svg) -->
+              <svg class="icon-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="ds-popover related-pop" id="related-list" role="dialog" aria-label="관련사이트" hidden data-placement="bottom-end">
+              <!-- YDS Menu 모양 착안 : 제목 없이 항목만, 가로는 글자에 맞춤 -->
+              <ul class="related-pop__list">
+                <li><a class="related-pop__link" href="http://www.ybmit.com/ybmsisacom.jsp?SiteURL=exam.ybmnet.co.kr" target="_blank" rel="noopener noreferrer">어학시험</a></li>
+                <li><a class="related-pop__link" href="https://www.ybmcc.com/v2/index.asp?utm_source=IT_Main&amp;utm_medium=IT_Main&amp;utm_campaign=MOS_Util" target="_blank" rel="noopener noreferrer">온라인 강의</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+
+        <!-- 모바일 전용: 메뉴 열기 버튼 -->
+        <button type="button" class="menu-btn" aria-expanded="false" aria-controls="gnb" aria-label="전체 메뉴 열기">
+          <span class="menu-btn-line"></span>
+          <span class="menu-btn-line"></span>
+          <span class="menu-btn-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- GNB + 메가메뉴 -->
+    <nav class="gnb" id="gnb" aria-label="주 메뉴">
+      <div class="container">
+        <ul class="gnb-list">
+
+          <li class="gnb-item">
+            <a class="gnb-link" href="/test_rec/gen_rec.jsp" data-text="시험접수">시험접수</a>
+            <div class="gnb-sub">
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/test_rec/gen_rec.jsp" data-text="시험접수">시험접수</a></li>
+                <li><a class="gnb-sub-link" href="/mytest/mytest_app.jsp" data-text="접수확인 / 수험표출력">접수확인 / 수험표출력</a></li>
+                <li><a class="gnb-sub-link" href="/mytest/mytest_app_change.jsp" data-text="접수변경 / 취소">접수변경 / 취소</a></li>
+              </ul>
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/test_rec/search_schedule.jsp" data-text="시험센터 / 시험일정조회">시험센터 / 시험일정조회</a></li>
+                <li><a class="gnb-sub-link" href="/test_rec/test_s_center.jsp" data-text="시험센터 안내">시험센터 안내</a></li>
+                <li><a class="gnb-sub-link" href="/test_rec/test_guide.jsp" data-text="수험자 가이드">수험자 가이드</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="gnb-item">
+            <a class="gnb-link" href="#" data-text="Generative AI">Generative AI</a>
+            <div class="gnb-sub">
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="#" data-text="Generative AI 소개">Generative AI 소개</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="gnb-item">
+            <a class="gnb-link" href="/mos/int_test.jsp" data-text="MOS">MOS</a>
+            <div class="gnb-sub">
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/mos/int_test.jsp" data-text="MOS 소개">MOS 소개</a></li>
+                <li><a class="gnb-sub-link" href="/mos/mos_use_ex.jsp" data-text="MOS 활용사례">MOS 활용사례</a></li>
+              </ul>
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/mos/course_info_list.jsp" data-text="MOS 온라인 강의">MOS 온라인 강의</a></li>
+                <li><a class="gnb-sub-link" href="/mos/skill_pds_list.jsp" data-text="오피스 스킬 자료실">오피스 스킬 자료실</a></li>
+                <li><a class="gnb-sub-link" href="/mos/institute_info_list.jsp" data-text="지역별 MOS 학원 정보">지역별 MOS 학원 정보</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="gnb-item">
+            <a class="gnb-link" href="/cos/cos_info.jsp" data-text="COS">COS</a>
+            <div class="gnb-sub">
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/cos/cos_info.jsp" data-text="COS 소개">COS 소개</a></li>
+                <li><a class="gnb-sub-link" href="/cos/cos_ex_test.jsp" data-text="COS 시험 체험하기">COS 시험 체험하기</a></li>
+                <li><a class="gnb-sub-link" href="/cos/cos_sam.jsp" data-text="COS 샘플문제">COS 샘플문제</a></li>
+                <li><a class="gnb-sub-link" href="/cos/cos_use_ex.jsp" data-text="COS 활용사례">COS 활용사례</a></li>
+              </ul>
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/cos/course_info_list.jsp" data-text="COS 온라인 강의">COS 온라인 강의</a></li>
+                <li><a class="gnb-sub-link" href="/mos_use/cos_teacher.jsp" data-text="COS 공인 강사">COS 공인 강사</a></li>
+                <li><a class="gnb-sub-link" href="/cos/institute_COSinfo_list.jsp" data-text="지역별 COS 학원 정보">지역별 COS 학원 정보</a></li>
+                <li><a class="gnb-sub-link" href="/cos/cos_best_ins.jsp" data-text="COS 우수 교육기관">COS 우수 교육기관</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="gnb-item">
+            <a class="gnb-link" href="/cos_pro/cos_pro_info.jsp" data-text="COS Pro">COS Pro</a>
+            <div class="gnb-sub">
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/cos_pro/cos_pro_info.jsp" data-text="COS Pro 소개">COS Pro 소개</a></li>
+                <li><a class="gnb-sub-link" href="/cos_pro/cos_pro_r_test.jsp" data-text="COS Pro 샘플문제">COS Pro 샘플문제</a></li>
+                <li><a class="gnb-sub-link" href="/cos_pro/cos_pro_use_ex.jsp" data-text="COS Pro 활용사례">COS Pro 활용사례</a></li>
+              </ul>
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/cos_pro/course_info_list.jsp" data-text="COS Pro 온라인 강의">COS Pro 온라인 강의</a></li>
+                <li><a class="gnb-sub-link is-multiline" href="/cos_pro/institute_PROinfo_list.jsp" data-text="지역별 COS Pro&#10;학원 정보">지역별 COS Pro <br>학원 정보</a></li>
+                <li><a class="gnb-sub-link is-multiline" href="https://verify-certificate.sotatek.edu.vn" target="_blank" rel="noopener noreferrer" data-text="Global COS Pro&#10;Certificate Verification">Global COS Pro <br>Certificate Verification</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="gnb-item">
+            <a class="gnb-link" href="/data/data_info.jsp" data-text="DATA">DATA</a>
+            <div class="gnb-sub">
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/data/data_info.jsp" data-text="DATA 소개">DATA 소개</a></li>
+                <li><a class="gnb-sub-link" href="/data/data_test.jsp" data-text="DATA 샘플문제">DATA 샘플문제</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="gnb-item">
+            <a class="gnb-link" href="/mos_use/mos_news_list.jsp" data-text="시험활용">시험활용</a>
+            <div class="gnb-sub">
+              <ul class="gnb-sub-group">
+                <li><a class="gnb-sub-link" href="/mos_use/mos_news_list.jsp" data-text="채용정보">채용정보</a></li>
+                <li><a class="gnb-sub-link" href="/mos_use/mos_use_ex.jsp" data-text="활용사례">활용사례</a></li>
+                <li><a class="gnb-sub-link" href="/mos_use/press_list.jsp" data-text="보도자료">보도자료</a></li>
+                <li><a class="gnb-sub-link" href="/mos_use/mos_movie.jsp" data-text="홍보영상">홍보영상</a></li>
+                <li><a class="gnb-sub-link" href="/mos_use/book_list.jsp" data-text="시험교재">시험교재</a></li>
+                <li><a class="gnb-sub-link" href="/mos_use/mos_can_do/page.jsp" data-text="MOS Can do List">MOS Can do List</a></li>
+                <li><a class="gnb-sub-link is-multiline" href="https://my.incruit.com/service/trustmarkcenter.asp" target="_blank" rel="noopener noreferrer" data-text="인크루트 이력서 인증&#10;MOS, COS, COS Pro">인크루트 이력서 인증 <br>MOS, COS, COS Pro</a></li>
+              </ul>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- 메가메뉴 하단 YBM 로고 -->
+      <div class="gnb-footer">
+        <img class="logo-ybm" src="images/logo-ybm.svg" alt="YBM">
+      </div>
+
+      <!-- 모바일 전용: 상단 유틸 (메뉴 목록 위에 표시) -->
+      <ul class="gnb-util">
+        <li><a href="https://www.ybmnet.co.kr/common/login.asp?url=/&amp;what=www.ybmit.com">로그인</a></li>
+        <li><a href="/mytest/mytest_app.jsp">마이페이지</a></li>
+        <li><a href="/cs/event_list.jsp">이벤트</a></li>
+        <li><a href="/cs/notice_list.jsp">고객센터</a></li>
+      </ul>
+
+      <!-- 모바일 전용: 하단 고정 바 (외부 바로가기) -->
+      <ul class="gnb-bottom">
+        <li><a href="http://www.ybmit.com/ybmsisacom.jsp?SiteURL=exam.ybmnet.co.kr" target="_blank" rel="noopener noreferrer">어학시험</a></li>
+        <li><a href="https://www.ybmcc.com/v2/index.asp?utm_source=IT_Main&amp;utm_medium=IT_Main&amp;utm_campaign=MOS_Util" target="_blank" rel="noopener noreferrer">온라인 강의</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<!-- 메가메뉴가 열릴 때 본문을 덮는 배경 딤 -->
+<div class="dim" aria-hidden="true"></div>
+</div><!-- // .IT_nav -->

@@ -1,3 +1,13 @@
+/* ==========================================================================
+   nav.css — 상단 영역(채용정보 배너 + 헤더 + GNB 메가메뉴 + 관련사이트 + 모바일 전체 메뉴)
+   --------------------------------------------------------------------------
+   - HTML 은 nav.html (<div class="IT_nav"> … </div>), 동작은 header.js
+   - :root 값은 yds.css(= yds-root.css)에 있다. 이 파일보다 먼저 불러온다.
+   - ybmit.com 기존 클래스와 겹치지 않도록 모든 선택자 앞에 .IT_nav 를 붙였다.
+     클래스 규칙은 ".IT_nav .이름", 태그 · 초기화 규칙은 ":where(.IT_nav)"(우선순위는 그대로)
+   - 원본 : header.css + main-yds.css 에 있던 헤더 덮어쓰기(GNB 글자 · 정렬, 관련사이트, 모바일 메뉴)
+   ========================================================================== */
+
 /* =========================================================
    공용 헤더 (채용정보 배너 + 헤더 + 메가메뉴 + 모바일 전체 메뉴)
    원본: localhost:5577 헤더 네비게이션 (style.css)
@@ -8,8 +18,8 @@
 
 /* 원본(5577) 기본 글꼴 환경 그대로 고정
    - 시안 본문(body)의 폰트·크기·행간·줄바꿈 설정이 헤더로 상속되지 않게 차단 */
-.recruit-banner,
-.header {
+.IT_nav .recruit-banner,
+.IT_nav .header {
   font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   font-size: var(--text-16);
   line-height: normal;
@@ -17,7 +27,7 @@
 }
 
 /* 헤더 내부 컨테이너 */
-.container {
+.IT_nav .container {
   width: 100%;
   max-width: calc(var(--container-max) + var(--space-20) * 2);
   margin: var(--space-0) auto;
@@ -28,7 +38,7 @@
    채용정보 배너 (헤더 위)
    - 토글로 카드 영역을 접고 펼침, X 로 배너 전체 닫기
    ========================================================= */
-.recruit-banner {
+.IT_nav .recruit-banner {
   position: relative;
   z-index: var(--z-banner);
   overflow-x: clip; /* 좁은 데스크톱에서 바깥 화살표가 가로 스크롤을 만들지 않게 */
@@ -36,11 +46,11 @@
   border-bottom: var(--border-1) solid var(--border-default);
 }
 
-.recruit-banner.is-hidden {
+.IT_nav .recruit-banner.is-hidden {
   display: none;
 }
 
-.recruit-banner-head {
+.IT_nav .recruit-banner-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -48,23 +58,23 @@
   padding: var(--space-12) var(--space-0);
 }
 
-.recruit-banner-logo {
+.IT_nav .recruit-banner-logo {
   height: 20px; /* 요청에 따라 변수 대신 숫자로 명시 */
 }
 
-.recruit-banner-toggle {
+.IT_nav .recruit-banner-toggle {
   display: flex;
   align-items: center;
   gap: var(--space-12);
 }
 
-.recruit-banner-title {
+.IT_nav .recruit-banner-title {
   font-size: var(--text-15);
   font-weight: var(--weight-semibold);
   color: var(--text-primary);
 }
 
-.recruit-banner-badge {
+.IT_nav .recruit-banner-badge {
   display: flex;
   align-items: center;
   gap: var(--space-4);
@@ -78,18 +88,18 @@
 }
 
 /* 펼친 상태에서는 위쪽 화살표(닫기), 접힌 상태에서는 아래쪽 화살표(열기) */
-.recruit-banner-badge .recruit-banner-badge-icon {
+.IT_nav .recruit-banner-badge .recruit-banner-badge-icon {
   width: var(--icon-14);
   height: var(--icon-14);
   transform: rotate(180deg);
   transition: transform var(--duration-fast) var(--ease-out);
 }
 
-.recruit-banner.is-collapsed .recruit-banner-badge .recruit-banner-badge-icon {
+.IT_nav .recruit-banner.is-collapsed .recruit-banner-badge .recruit-banner-badge-icon {
   transform: none;
 }
 
-.recruit-banner-right {
+.IT_nav .recruit-banner-right {
   display: flex;
   align-items: center;
   gap: var(--space-12);
@@ -98,67 +108,67 @@
   white-space: nowrap;
 }
 
-.recruit-banner-today {
+.IT_nav .recruit-banner-today {
   display: flex;
   align-items: center;
   gap: var(--space-4);
   cursor: pointer;
 }
 
-.recruit-banner-today-check {
+.IT_nav .recruit-banner-today-check {
   margin: var(--space-0);
 }
 
-.recruit-banner-close {
+.IT_nav .recruit-banner-close {
   padding: var(--space-2);
   line-height: 0;
   color: var(--text-tertiary);
 }
 
-.recruit-banner-close:hover,
-.recruit-banner-close:focus-visible {
+.IT_nav .recruit-banner-close:hover,
+.IT_nav .recruit-banner-close:focus-visible {
   color: var(--text-secondary);
 }
 
 /* 카드 영역: 최대 높이 전환으로 접고 펼침
    펼침이 끝나면(.is-settled) 바깥 화살표가 잘리지 않도록 overflow 해제 */
-.recruit-banner-body {
+.IT_nav .recruit-banner-body {
   max-height: 0;
   overflow: hidden;
   transition: max-height var(--duration-normal) var(--ease-out);
 }
 
-.recruit-banner-body.is-open {
+.IT_nav .recruit-banner-body.is-open {
   max-height: var(--banner-body-max-h);
 }
 
-.recruit-banner-body.is-open.is-settled {
+.IT_nav .recruit-banner-body.is-open.is-settled {
   overflow: visible;
 }
 
 /* --slider-inset: 화면 양옆 여백이 화살표 자리(56px + 여유 16px)보다 좁으면
    모자란 만큼 카드 영역을 안쪽으로 밀어 화살표가 화면 밖으로 나가거나 카드와 겹치지 않게 함
    (100% = 콘텐츠 폭, (100vw - 100%) / 2 = 한쪽 여백) */
-.recruit-slider {
+.IT_nav .recruit-slider {
   /* max() 안에서는 단위 없는 0(--space-0)을 쓸 수 없어 0px 사용 */
   --slider-inset: max(0px, calc(var(--space-56) + var(--space-16) - (100vw - 100%) / 2));
   position: relative;
   padding: var(--space-8) var(--slider-inset) var(--space-24);
 }
 
-.recruit-slider-viewport {
+.IT_nav .recruit-slider-viewport {
   overflow: hidden;
 }
 
 /* 이동 거리는 script.js 에서 카드 폭 + 간격으로 계산 */
-.recruit-slider-track {
+.IT_nav .recruit-slider-track {
   display: flex;
   gap: var(--space-16);
   transition: transform var(--duration-normal) var(--ease-out);
 }
 
 /* 데스크톱: 한 화면에 4장 */
-.recruit-card {
+.IT_nav .recruit-card {
   flex: 0 0 calc((100% - var(--space-16) * 3) / 4);
   padding: var(--space-20) var(--space-24);
   background: var(--surface-default);
@@ -167,28 +177,28 @@
   box-shadow: var(--shadow-card);
 }
 
-.recruit-card-company {
+.IT_nav .recruit-card-company {
   margin-bottom: var(--space-10);
   font-size: var(--text-18);
   font-weight: var(--weight-bold);
   color: var(--nvb-blue);
 }
 
-.recruit-card-status {
+.IT_nav .recruit-card-status {
   padding-bottom: var(--space-12);
   border-bottom: var(--border-1) solid var(--border-default);
   font-size: var(--text-14);
   color: var(--text-primary);
 }
 
-.recruit-card-desc {
+.IT_nav .recruit-card-desc {
   margin-top: var(--space-12);
   font-size: var(--text-14);
   color: var(--text-tertiary);
 }
 
 /* 좌우 화살표: 카드 바깥 56px 위치 (여백이 좁으면 --slider-inset 만큼 안쪽으로) */
-.recruit-slider-btn {
+.IT_nav .recruit-slider-btn {
   position: absolute;
   top: 50%;
   z-index: 2;
@@ -201,28 +211,28 @@
   transform: translateY(-50%);
 }
 
-.recruit-slider-btn svg {
+.IT_nav .recruit-slider-btn svg {
   width: var(--icon-32);
   height: var(--icon-32);
 }
 
-.recruit-slider-btn:hover,
-.recruit-slider-btn:focus-visible {
+.IT_nav .recruit-slider-btn:hover,
+.IT_nav .recruit-slider-btn:focus-visible {
   color: var(--brand-700);
 }
 
-.recruit-slider-prev {
+.IT_nav .recruit-slider-prev {
   left: calc(var(--slider-inset) - var(--space-56));
 }
 
-.recruit-slider-next {
+.IT_nav .recruit-slider-next {
   right: calc(var(--slider-inset) - var(--space-56));
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .recruit-banner-badge-icon,
-  .recruit-banner-body,
-  .recruit-slider-track {
+  .IT_nav .recruit-banner-badge-icon,
+  .IT_nav .recruit-banner-body,
+  .IT_nav .recruit-slider-track {
     transition: none;
   }
 }
@@ -232,13 +242,13 @@
    - .header 는 본문 흐름에서 접힌 높이만 차지하고,
      .header-wrap 이 그 위에 떠서 펼쳐질 때 본문을 덮는다.
    ========================================================= */
-.header {
+.IT_nav .header {
   position: relative;
   z-index: var(--z-header);
   height: calc(var(--header-top-h) + var(--gnb-h));
 }
 
-.header-wrap {
+.IT_nav .header-wrap {
   position: absolute;
   top: var(--space-0);
   left: var(--space-0);
@@ -254,12 +264,12 @@
 
 /* 관련사이트 드롭다운이 열려 있을 때는 헤더 밖으로 나와도 잘리지 않게 함
    (드롭다운을 연 상태에서 메가메뉴가 열리면 script.js 가 드롭다운을 먼저 닫음) */
-.header-wrap:has(.util-related.is-open) {
+.IT_nav .header-wrap:has(.util-related.is-open) {
   overflow: visible;
 }
 
 /* ---------- 상단 바 ---------- */
-.header-top-inner {
+.IT_nav .header-top-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -269,14 +279,14 @@
 }
 
 /* 로고: 피그마 YBMIT 인스턴스의 두 그룹 위치를 비율 그대로 배치 */
-.logo-ybmit {
+.IT_nav .logo-ybmit {
   position: relative;
   display: block;
   width: var(--logo-ybmit-w);
   height: var(--logo-h);
 }
 
-.logo-ybmit-symbol {
+.IT_nav .logo-ybmit-symbol {
   position: absolute;
   top: 0;
   left: 0;
@@ -284,7 +294,7 @@
   height: 100%;
 }
 
-.logo-ybmit-text {
+.IT_nav .logo-ybmit-text {
   position: absolute;
   top: 4.76%;
   left: 68.7%;
@@ -293,13 +303,13 @@
 }
 
 /* ---------- 유틸 메뉴 ---------- */
-.util {
+.IT_nav .util {
   display: flex;
   align-items: center;
   gap: var(--space-20);
 }
 
-.util-link {
+.IT_nav .util-link {
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -310,49 +320,49 @@
   white-space: nowrap;
 }
 
-.util-link:hover,
-.util-link:focus-visible {
+.IT_nav .util-link:hover,
+.IT_nav .util-link:focus-visible {
   font-weight: var(--weight-semibold);
   color: var(--text-primary);
 }
 
-.icon-chevron {
+.IT_nav .icon-chevron {
   width: var(--icon-16);
   height: var(--icon-16);
 }
 
 /* 관련사이트 드롭다운 */
-.util-related {
+.IT_nav .util-related {
   position: relative;
 }
 
-.util-related.is-open .icon-chevron {
+.IT_nav .util-related.is-open .icon-chevron {
   transform: rotate(180deg);
 }
 
 /* 펼친 창은 YDS Popover 를 그대로 쓴다 (모양, 그림자, 크기, 열고 닫기 모두 ybm-ds.css / ybm-ds.js) */
 
 /* 모바일 전용 요소는 기본 숨김 */
-.menu-btn,
-.gnb-util {
+.IT_nav .menu-btn,
+.IT_nav .gnb-util {
   display: none;
 }
 
 /* ---------- GNB ---------- */
-.gnb-list {
+.IT_nav .gnb-list {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
 }
 
-.gnb-item {
+.IT_nav .gnb-item {
   display: flex;
   flex-direction: column;
   flex: 0 1 var(--gnb-col-w);
   min-width: 0;
 }
 
-.gnb-link {
+.IT_nav .gnb-link {
   position: relative;
   display: flex;
   align-items: center;
@@ -367,7 +377,7 @@
 /* 상위 메뉴 밑줄
    - ::before 로 그려 글자 세로 위치에 영향이 없게 함
    - 왼쪽 끝에서 오른쪽으로 늘어남 */
-.gnb-link::before {
+.IT_nav .gnb-link::before {
   content: "";
   position: absolute;
   left: var(--space-0);
@@ -381,20 +391,20 @@
 }
 
 /* 펼침 상태에서 마우스/포커스가 있는 열의 상위 메뉴 강조 */
-.header.is-open .gnb-item:hover .gnb-link,
-.header.is-open .gnb-item:focus-within .gnb-link {
+.IT_nav .header.is-open .gnb-item:hover .gnb-link,
+.IT_nav .header.is-open .gnb-item:focus-within .gnb-link {
   font-weight: var(--weight-bold);
   color: var(--text-primary);
 }
 
-.header.is-open .gnb-item:hover .gnb-link::before,
-.header.is-open .gnb-item:focus-within .gnb-link::before {
+.IT_nav .header.is-open .gnb-item:hover .gnb-link::before,
+.IT_nav .header.is-open .gnb-item:focus-within .gnb-link::before {
   transform: scaleX(1);
 }
 
 /* 움직임 줄이기 설정을 켠 사용자는 모션 없이 표시 */
 @media (prefers-reduced-motion: reduce) {
-  .gnb-link::before {
+  .IT_nav .gnb-link::before {
     transition: none;
   }
 }
@@ -403,26 +413,26 @@
    - 소메뉴와 하단 로고는 항상 배치해 두고 .header-wrap 높이로 가림
    - 닫혀 있을 때는 visibility 로 숨겨 Tab 포커스가 들어가지 않게 함
      (닫히는 0.2초 동안은 보이도록 visibility 전환을 늦춤) */
-.gnb-sub,
-.gnb-footer {
+.IT_nav .gnb-sub,
+.IT_nav .gnb-footer {
   visibility: hidden;
   transition: visibility 0s linear var(--duration-normal);
 }
 
-.header.is-open .gnb-sub,
-.header.is-open .gnb-footer {
+.IT_nav .header.is-open .gnb-sub,
+.IT_nav .header.is-open .gnb-footer {
   visibility: visible;
   transition-delay: 0s;
 }
 
-.gnb-sub {
+.IT_nav .gnb-sub {
   display: flex;
   flex-direction: column;
   gap: var(--space-24);
   padding: var(--space-20) var(--space-0);
 }
 
-.gnb-sub-group {
+.IT_nav .gnb-sub-group {
   display: flex;
   flex-direction: column;
   gap: var(--space-16);
@@ -430,12 +440,12 @@
 
 /* 그룹 사이 구분선
    - 피그마 선은 높이 0이라 간격(24 + 24)에 선 두께를 포함시킴 */
-.gnb-sub-group + .gnb-sub-group {
+.IT_nav .gnb-sub-group + .gnb-sub-group {
   padding-top: calc(var(--space-24) - var(--border-1));
   border-top: var(--border-1) solid var(--border-default);
 }
 
-.gnb-sub-link {
+.IT_nav .gnb-sub-link {
   display: block;
   font-size: var(--text-14);
   font-weight: var(--weight-regular);
@@ -445,17 +455,17 @@
 }
 
 /* 피그마에서 두세 줄로 나뉜 항목 */
-.gnb-sub-link.is-multiline {
+.IT_nav .gnb-sub-link.is-multiline {
   line-height: var(--line-height-150);
 }
 
-.gnb-sub-link:hover,
-.gnb-sub-link:focus-visible {
+.IT_nav .gnb-sub-link:hover,
+.IT_nav .gnb-sub-link:focus-visible {
   font-weight: var(--weight-semibold);
   color: var(--brand-600);
 }
 
-.gnb-footer {
+.IT_nav .gnb-footer {
   display: flex;
   justify-content: center;
   padding: var(--space-30) var(--space-0);
@@ -463,14 +473,14 @@
 
 /* 움직임 줄이기 설정을 켠 사용자는 높이 전환 없이 바로 열고 닫음 */
 @media (prefers-reduced-motion: reduce) {
-  .header-wrap,
-  .gnb-sub,
-  .gnb-footer {
+  .IT_nav .header-wrap,
+  .IT_nav .gnb-sub,
+  .IT_nav .gnb-footer {
     transition: none;
   }
 }
 
-.logo-ybm {
+.IT_nav .logo-ybm {
   width: var(--logo-ybm-w);
   height: var(--logo-h);
 }
@@ -478,7 +488,7 @@
 /* ---------- 배경 딤 ----------
    - 메가메뉴가 열리면(.header.is-open) 헤더 아래 본문을 어둡게 덮음
    - 클릭을 막지 않도록 pointer-events 없음 */
-.dim {
+.IT_nav .dim {
   position: fixed;
   inset: 0;
   z-index: var(--z-dim);
@@ -490,13 +500,13 @@
               visibility var(--duration-slow) var(--ease-default);
 }
 
-.header.is-open ~ .dim {
+.IT_nav .header.is-open ~ .dim {
   opacity: 1;
   visibility: visible;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dim {
+  .IT_nav .dim {
     transition: none;
   }
 }
@@ -506,46 +516,46 @@
    ========================================================= */
 @media (max-width: 1024px) {
   /* 열 폭이 좁아지므로 메뉴 글자는 단어 단위로 줄바꿈 */
-  .gnb-link {
+  .IT_nav .gnb-link {
     font-size: var(--text-14);
     line-height: var(--line-height-130);
     white-space: normal;
     word-break: keep-all;
   }
 
-  .gnb-sub-link {
+  .IT_nav .gnb-sub-link {
     font-size: var(--text-13);
     white-space: normal;
     word-break: keep-all;
   }
 
   /* 피그마 강제 줄바꿈 대신 열 폭에 맞춰 자연스럽게 줄바꿈 */
-  .gnb-sub-link.is-multiline br {
+  .IT_nav .gnb-sub-link.is-multiline br {
     display: none;
   }
 
-  .gnb-item + .gnb-item {
+  .IT_nav .gnb-item + .gnb-item {
     margin-left: var(--space-12);
   }
 
   /* 채용정보 배너: 한 화면에 3장, 화살표는 카드 양옆 여백 안으로 */
-  .recruit-slider {
+  .IT_nav .recruit-slider {
     --slider-inset: var(--space-40);
   }
 
-  .recruit-card {
+  .IT_nav .recruit-card {
     flex-basis: calc((100% - var(--space-16) * 2) / 3);
   }
 
-  .recruit-slider-prev {
+  .IT_nav .recruit-slider-prev {
     left: var(--space-0);
   }
 
-  .recruit-slider-next {
+  .IT_nav .recruit-slider-next {
     right: var(--space-0);
   }
 
-  .recruit-slider-btn svg {
+  .IT_nav .recruit-slider-btn svg {
     width: var(--icon-24);
     height: var(--icon-24);
   }
@@ -557,23 +567,23 @@
    - 상위 메뉴를 누르면 하위 메뉴가 아코디언으로 열림
    ========================================================= */
 @media (max-width: 768px) {
-  .header {
+  .IT_nav .header {
     height: var(--header-top-h);
   }
 
   /* 모바일은 높이 커튼 대신 전체 메뉴가 자연 높이로 열림 */
-  .header-wrap {
+  .IT_nav .header-wrap {
     height: auto;
     overflow: visible;
     transition: none;
   }
 
-  .util {
+  .IT_nav .util {
     display: none;
   }
 
   /* 햄버거 버튼 */
-  .menu-btn {
+  .IT_nav .menu-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -583,108 +593,108 @@
     height: var(--icon-24);
   }
 
-  .menu-btn-line {
+  .IT_nav .menu-btn-line {
     width: var(--menu-line-w);
     height: var(--border-2);
     background: var(--text-primary);
   }
 
   /* 열린 상태: X 모양 */
-  .header.is-menu-open .menu-btn-line:nth-child(1) {
+  .IT_nav .header.is-menu-open .menu-btn-line:nth-child(1) {
     transform: translateY(calc(var(--space-4) + var(--border-2))) rotate(45deg);
   }
 
-  .header.is-menu-open .menu-btn-line:nth-child(2) {
+  .IT_nav .header.is-menu-open .menu-btn-line:nth-child(2) {
     opacity: 0;
   }
 
-  .header.is-menu-open .menu-btn-line:nth-child(3) {
+  .IT_nav .header.is-menu-open .menu-btn-line:nth-child(3) {
     transform: translateY(calc((var(--space-4) + var(--border-2)) * -1)) rotate(-45deg);
   }
 
   /* 전체 메뉴 */
-  .gnb {
+  .IT_nav .gnb {
     display: none;
     max-height: calc(100vh - var(--header-top-h));
     overflow-y: auto;
     border-bottom: var(--border-1) solid var(--border-default);
   }
 
-  .header.is-menu-open .gnb {
+  .IT_nav .header.is-menu-open .gnb {
     display: block;
   }
 
-  .gnb-list {
+  .IT_nav .gnb-list {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .gnb-item {
+  .IT_nav .gnb-item {
     flex: none;
     border-bottom: var(--border-1) solid var(--border-default);
   }
 
-  .gnb-item + .gnb-item {
+  .IT_nav .gnb-item + .gnb-item {
     margin-left: var(--space-0);
   }
 
-  .gnb-item:last-child {
+  .IT_nav .gnb-item:last-child {
     border-bottom: 0;
   }
 
-  .gnb-link {
+  .IT_nav .gnb-link {
     justify-content: space-between;
     height: var(--gnb-mobile-h);
     font-size: var(--text-16);
   }
 
   /* 하위 메뉴가 있는 항목에만 화살표 표시 */
-  .gnb-item.has-sub .gnb-link::after {
+  .IT_nav .gnb-item.has-sub .gnb-link::after {
     content: "";
     width: var(--icon-16);
     height: var(--icon-16);
     background: url("images/icon-chevron-down.svg") no-repeat center / contain;
   }
 
-  .gnb-item.is-expanded .gnb-link::after {
+  .IT_nav .gnb-item.is-expanded .gnb-link::after {
     transform: rotate(180deg);
   }
 
   /* 모바일은 밑줄 없음 */
-  .gnb-link::before {
+  .IT_nav .gnb-link::before {
     content: none;
   }
 
-  .gnb-item.is-expanded .gnb-link {
+  .IT_nav .gnb-item.is-expanded .gnb-link {
     font-weight: var(--weight-bold);
     color: var(--text-primary);
   }
 
   /* 데스크톱 펼침 규칙 대신 아코디언 상태만 따름 */
-  .gnb-sub {
+  .IT_nav .gnb-sub {
     display: none;
     visibility: visible;
     transition: none;
   }
 
-  .header .gnb-item.is-expanded .gnb-sub {
+  .IT_nav .header .gnb-item.is-expanded .gnb-sub {
     display: flex;
   }
 
-  .gnb-sub {
+  .IT_nav .gnb-sub {
     padding: var(--space-0) var(--space-0) var(--space-20);
   }
 
-  .gnb-sub-link {
+  .IT_nav .gnb-sub-link {
     font-size: var(--text-14);
   }
 
-  .gnb-footer {
+  .IT_nav .gnb-footer {
     display: none;
   }
 
   /* 모바일 유틸 메뉴 */
-  .gnb-util {
+  .IT_nav .gnb-util {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-12) var(--space-20);
@@ -698,50 +708,237 @@
   /* 채용정보 배너
      - 1줄: 로고 + 오늘 하루 닫기 / X, 2줄: 안내 문구 + 열기·닫기
      - 카드는 한 화면에 2장 */
-  .recruit-banner-head {
+  .IT_nav .recruit-banner-head {
     flex-wrap: wrap;
     gap: var(--space-10) var(--space-16);
   }
 
-  .recruit-banner-toggle {
+  .IT_nav .recruit-banner-toggle {
     order: 2;
     flex: 1 1 100%;
     justify-content: space-between;
     text-align: left;
   }
 
-  .recruit-banner-right {
+  .IT_nav .recruit-banner-right {
     order: 1;
   }
 
-  .recruit-banner-title {
+  .IT_nav .recruit-banner-title {
     font-size: var(--text-14);
     word-break: keep-all;
   }
 
-  .recruit-slider {
+  .IT_nav .recruit-slider {
     --slider-inset: var(--space-30);
   }
 
-  .recruit-card {
+  .IT_nav .recruit-card {
     flex-basis: calc((100% - var(--space-16)) / 2);
     padding: var(--space-16);
   }
 
-  .recruit-card-company {
+  .IT_nav .recruit-card-company {
     font-size: var(--text-16);
   }
 
-  .recruit-card-status,
-  .recruit-card-desc {
+  .IT_nav .recruit-card-status,
+  .IT_nav .recruit-card-desc {
     font-size: var(--text-13);
     word-break: keep-all;
   }
 
-  .recruit-slider-btn {
+  .IT_nav .recruit-slider-btn {
     width: var(--space-30);
   }
 }
 
 /* 공용 리셋(img max-width)과 충돌 방지 */
-.header img, .recruit-banner img { max-width: none; }
+.IT_nav .header img, .IT_nav .recruit-banner img { max-width: none; }
+/* =========================================================
+   시안 H · 시안 1(E) 기반 + 시안 2(G) 시험접수 호버 — 단독 스타일시트
+   - 공용 파일(common.css · banner.css · career.css)을 불러오지 않고
+     시안 E 에 쓰이는 값만 이 파일에 한 번씩만 선언 (덮어쓰기 · 중복 없음)
+   - 헤더(header.css) · 푸터(footer.css)는 원본 그대로 별도 파일 사용
+   - 반응형 블록에는 실제로 값이 바뀌는 속성만 둠
+
+   - 토큰은 ybmit.com 실제 DS 파일(ybm-ds-tokens.css)만 사용하고,
+     거기에 없는 값은 변수를 만들지 않고 실제 값으로 직접 적음
+
+   1) 헤더 의존 값  2) 리셋 · 레이아웃  3) 공용 컴포넌트(원형 버튼 · 칩 · 탭 · 배지)
+   4) 메인 배너  5) 시험접수  6) 소식 · 시험활용 · 바로가기  7) 문의 · 배너
+   8) 반응형
+   ========================================================= */
+
+/* ---------- 1) :root 값 ----------
+   본문 폭(--container-max)을 포함한 :root 값은 yds-root.css 에 모았다 */
+
+/* ---------- 2) 리셋 · 레이아웃 ---------- */
+:where(.IT_nav), :where(.IT_nav) *, :where(.IT_nav)::before, :where(.IT_nav) *::before, :where(.IT_nav)::after, :where(.IT_nav) *::after { box-sizing: border-box; }
+/* 여백 초기화 : YDS 컴포넌트(ds-*)는 빼서 YDS 기본 여백을 살림 (:where 로 우선순위 0 유지) */
+:where(.IT_nav) :where(:not([class*="ds-"])),
+:where(.IT_nav) :where(:not([class*="ds-"]))::before,
+:where(.IT_nav) :where(:not([class*="ds-"]))::after { margin: 0; padding: 0; }
+:where(.IT_nav) { -webkit-text-size-adjust: 100%; }
+:where(.IT_nav) {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+  font-size: var(--text-15);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--surface-muted); /* 메인 배경 : gray-50 → gray-100 한 단계 올림 */
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+:where(.IT_nav) a { color: inherit; text-decoration: none; }
+:where(.IT_nav) ul, :where(.IT_nav) ol { list-style: none; }
+:where(.IT_nav) img, :where(.IT_nav) svg { display: block; max-width: 100%; }
+:where(.IT_nav) button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:where(.IT_nav) :focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+
+/* ---------- GNB 글자 크기 : 대메뉴는 공용보다 2px 크게(16→18), 하위 메뉴는 14 ---------- */
+.IT_nav .gnb-link { font-size: var(--text-18); }
+.IT_nav .gnb-sub-link { font-size: var(--text-14); }
+
+/* ---------- 관련사이트 드롭다운 : YDS Menu 모양을 착안 ----------
+   열고 닫기는 YDS Popover(ybm-ds.js) 그대로, 모양은 YDS Menu(.ds-menu / .ds-menu-item) 값으로 맞춤
+   - Menu 는 화면 이동용이 아니라 클래스는 쓰지 않고 같은 토큰 값만 가져옴
+   - 가로는 글자에 맞춤(hug) : Menu 최소 폭 220 · Popover 320 대신 max-content, 아이콘 없음 ---------- */
+.IT_nav .related-pop {
+  width: max-content;
+  padding: var(--ds-space-x1);                      /* Menu 안쪽 여백 4 */
+  gap: 0px;
+  border-radius: var(--ds-shape-md);                /* 호버 항목과 같은 모서리 10 (Menu 기본 20 대신) */
+  box-shadow: var(--ds-elevation-overlay);          /* Menu 그림자 */
+}
+.IT_nav .related-pop__list { display: flex; flex-direction: column; }
+.IT_nav .related-pop__link {
+  display: block;
+  padding: var(--ds-space-x2_5) var(--ds-space-x3); /* Menu 항목 여백 10 · 12 */
+  border-radius: var(--ds-shape-md);                /* Menu 항목 모서리 10 */
+  font-size: var(--ds-font-size-t04);               /* 14 */
+  line-height: var(--ds-line-height-t04);           /* 21 → 항목 높이 41 */
+  font-weight: var(--weight-regular);
+  color: var(--ds-color-fg-neutral);
+  white-space: nowrap;
+  text-align: center;                              /* 항목 글자 가운데 */
+}
+.IT_nav .related-pop__link:hover,
+.IT_nav .related-pop__link:focus-visible {
+  background: var(--ds-color-bg-neutral-weak-alpha); /* Menu 항목 호버 바탕 */
+  outline: none;
+}
+
+/* ---------- GNB 정렬 : 대메뉴는 칸 가운데, 소메뉴 묶음도 대메뉴 아래 가운데 · 글자는 왼쪽 정렬 ----------
+   모바일(768 이하)은 아코디언 메뉴라 제외 */
+@media (min-width: 769px) {
+  .IT_nav .gnb-link { justify-content: center; } /* 칸 폭은 그대로 둬서 호버 밑줄 길이 유지 */
+  .IT_nav .gnb-sub { align-self: center; }       /* 소메뉴 묶음을 내용 폭으로 줄여 칸 가운데에 */
+  .IT_nav .gnb-sub-link { text-align: left; }
+
+  /* 호버로 굵어져도 글자 위치가 밀리지 않게 : 굵은 글자 폭만큼 보이지 않는 자리를 미리 잡아 둠
+     (data-text 에 같은 글자를 넣어 두고, 글자 아래 줄에 높이 0으로 숨김 → 칸 폭은 굵은 글자 기준) */
+  .IT_nav .gnb-link[data-text] { display: grid; align-content: center; justify-content: center; text-align: left; } /* 굵은 폭 칸을 가운데에 두고 글자는 칸 왼쪽부터 → 굵어져도 시작점 고정 */
+  .IT_nav .gnb-sub-link[data-text] { display: grid; }
+  .IT_nav .gnb-link[data-text]::after,
+  .IT_nav .gnb-sub-link[data-text]::after {
+    content: attr(data-text);
+    height: 0px;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+  .IT_nav .gnb-link[data-text]::after { font-weight: var(--weight-bold); }         /* 대메뉴 호버 굵기 */
+  .IT_nav .gnb-sub-link[data-text]::after { font-weight: var(--weight-semibold); } /* 소메뉴 호버 굵기 */
+  .IT_nav .gnb-sub-link.is-multiline[data-text]::after { white-space: pre; }      /* 두세 줄 항목 : data-text 의 줄바꿈(&#10;)대로 폭 계산 */
+
+}
+
+/* ---------- 8) 반응형 : 태블릿 ---------- */
+/* 모바일 전체 메뉴 하단 고정 바 : 데스크톱 · 태블릿에서는 숨김 (모바일 규칙은 아래 768 블록) */
+.IT_nav .gnb-bottom { display: none; }
+
+@media (max-width: 1024px) {
+
+  /* GNB 글자 크기 : 태블릿도 공용보다 2px 크게 (대메뉴 14→16, 하위 13→15) */
+  .IT_nav .gnb-link { font-size: var(--text-16); }
+  .IT_nav .gnb-sub-link { font-size: var(--text-15); }
+  .IT_nav .gnb-sub-link.is-multiline[data-text]::after { white-space: normal; }
+}
+
+/* ---------- 8) 반응형 : 모바일 ---------- */
+@media (max-width: 768px) {
+  /* ---------- 모바일 전체 메뉴 : 라인형 → 아코디언형 (mobile-menu-proposal A 안) ----------
+     공용 header.css 는 그대로 두고 여기서 덮어씀 · 호버는 PC 와 같게(대메뉴 Bold, 하위 SemiBold + 주황, 유틸 SemiBold) */
+  .IT_nav .gnb { border-bottom: 0px; }
+  .IT_nav .header.is-menu-open .gnb { display: flex; flex-direction: column; }
+
+  /* 상단 유틸 : 메뉴 목록 위 · 회색 알약 버튼 */
+  .IT_nav .gnb-util {
+    order: -1;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-20) var(--space-16);
+    font-size: var(--text-14);
+    font-weight: var(--weight-regular);
+    background: var(--surface-default);
+  }
+  .IT_nav .gnb-util a {
+    display: block;
+    padding: var(--space-8) var(--space-12);
+    color: var(--text-secondary);
+    background: var(--ds-color-bg-neutral-weak-alpha); /* YDS 2026-11-11 : 옅은 회색 칸은 반투명 회색 */
+    border-radius: var(--radius-pill);
+  }
+  .IT_nav .gnb-util a:hover,
+  .IT_nav .gnb-util a:focus-visible { font-weight: var(--weight-semibold); color: var(--text-primary); }
+
+  /* 메뉴 목록 : 위쪽 8px 연회색 띠로 구분, 항목 사이 선 없음 */
+  .IT_nav .gnb .container { padding: 0px; border-top: 8px solid var(--surface-subtle); }
+  .IT_nav .gnb-item { border-bottom: 0px; }
+  .IT_nav .gnb-link {
+    height: 56px;
+    padding: 0px var(--space-20);
+    font-size: var(--text-17);
+    font-weight: var(--weight-medium);
+  }
+  .IT_nav .gnb-link:hover,
+  .IT_nav .gnb-link:focus-visible { font-weight: var(--weight-bold); }
+
+  /* 펼친 하위 메뉴 : 연회색 바탕 · 그룹 구분선 없이 한 목록으로 */
+  .IT_nav .gnb-sub { gap: 0px; padding: var(--space-8) 0px; background: var(--surface-subtle); }
+  .IT_nav .gnb-sub-group { gap: 0px; }
+  .IT_nav .gnb-sub-group + .gnb-sub-group { padding-top: 0px; border-top: 0px; }
+  .IT_nav .gnb-sub-link {
+    padding: var(--space-10) var(--space-20) var(--space-10) var(--space-32);
+    font-size: var(--text-15);
+    white-space: normal;
+  }
+
+  /* 하단 고정 바 : 어학시험 | 온라인 강의 (메뉴를 스크롤해도 아래에 붙어 있음) */
+  .IT_nav .gnb-bottom {
+    position: sticky;
+    bottom: 0px;
+    display: flex;
+    background: var(--surface-default);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .IT_nav .gnb-bottom li { flex: 1; }
+  .IT_nav .gnb-bottom li + li { border-left: 1px solid var(--border-subtle); }
+  .IT_nav .gnb-bottom a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    font-size: var(--text-15);
+    color: var(--text-secondary);
+  }
+  .IT_nav .gnb-bottom a:hover,
+  .IT_nav .gnb-bottom a:focus-visible { font-weight: var(--weight-semibold); color: var(--text-primary); }
+
+  /* 메뉴 열림 : 채용 배너는 숨기고 헤더(로고 · ✕ + 메뉴)만 화면 전체를 덮음, 뒤 페이지 스크롤 잠금 */
+  body:has(.IT_nav .header.is-menu-open) { overflow: hidden; }
+  body:has(.IT_nav .header.is-menu-open) .IT_nav .recruit-banner { display: none; }
+  .IT_nav .header.is-menu-open { position: fixed; inset: 0px; z-index: 1000; height: auto; }
+  .IT_nav .header.is-menu-open .header-wrap { bottom: 0px; display: flex; flex-direction: column; }
+  .IT_nav .header.is-menu-open .gnb { flex: 1; min-height: 0px; max-height: none; }
+  .IT_nav .gnb-bottom { margin-top: auto; }
+}

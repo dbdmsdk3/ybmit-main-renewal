@@ -88,3 +88,21 @@
   .noti_massage { word-break: keep-all; }
   #footer .footer_right .info br { display: none; }
 }
+
+
+/* ==========================================================================
+   [시안 전용] 시안 화면용 푸터 덮어쓰기 (원래 main-yds.css 에 있던 규칙). 서버에는 가져가지 않는다
+   ========================================================================== */
+
+
+/* ---------- 푸터 (원본 footer.css 는 A~D 공용이라 시안 E 에서만 조정) ---------- */
+#footer { border-top: 0; } /* 푸터 위 구분선 제거 */
+/* 푸터 위 YBM 로고 : 시안 E 전용 (원본 .gnb_ybmlogo 를 쓰지 않아 덮어쓰기 없음) */
+.footer-logo { display: flex; justify-content: center; margin: var(--space-24) 0px var(--space-40); }
+.footer-logo img { height: 20px; }
+
+@media (max-width: 768px) {
+
+  /* 푸터 메뉴 글씨 : 원본 13px → 14px (footer.css 는 공용이라 여기서 덮어씀) */
+  #footer .f_menu li a { font-size: var(--text-14); }
+}

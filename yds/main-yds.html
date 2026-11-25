@@ -13,13 +13,15 @@
   <!-- :root 값 모음 (YDS 토큰 연결 + 화면 고정 크기) -->
   <link rel="stylesheet" href="yds-root.css">
   <!-- 원본 헤더 · 푸터 + 시안 E 단독 스타일 (공용 common/banner/career.css 미사용) -->
-  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="nav.css">
   <link rel="stylesheet" href="footer.css">
   <link rel="stylesheet" href="main-yds.css">
 </head>
 <body>
 
   <!-- 채용정보 배너 (ybmit.com 상단 배너) -->
+  <!-- 상단 영역 : nav.html 과 같은 내용 (nav.css · header.js) -->
+  <div class="IT_nav">
   <div class="recruit-banner" id="recruit-banner">
     <div class="container">
       <div class="recruit-banner-head">
@@ -255,7 +257,10 @@
 
   <!-- 메가메뉴가 열릴 때 본문을 덮는 배경 딤 -->
   <div class="dim" aria-hidden="true"></div>
+  </div><!-- // .IT_nav -->
 
+  <!-- 메인 콘텐츠 : .IT_main 안 (main-yds.css). 헤더 · 푸터는 사이트 기존 것, 상단 nav 는 nav.html -->
+  <div class="IT_main">
   <main class="main">
 
     <!-- 메인 배너 : 2장 나란히 (현재 ybmit.com 구도 유지) -->
@@ -481,6 +486,7 @@
       </div>
     </section>
   </main>
+  </div><!-- // .IT_main -->
 
   <!-- 푸터 : ybmit.com 기존 푸터 그대로 -->
   <div class="footer-logo"><img src="https://imagesisa.ybmnet.co.kr/platform/common/logo/ybm_kor.svg" alt="YBM"></div>
