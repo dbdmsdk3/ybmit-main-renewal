@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YDS 시안 | YBM IT</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <!-- 헤더 원본과 동일한 Pretendard(정적) -->
-  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <!-- YDS : 화면 CSS 보다 먼저 불러온다. DS 는 @layer 안에 있어 아래 화면 CSS 가 항상 이긴다(원본 모양 유지).
-       시안이라 최신 주소를 쓴다. 운영에 올릴 때는 버전을 고정한 주소로 바꾼다. -->
-  <link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">
-  <script src="https://luvms012-rgb.github.io/yds/dist/ybm-ds.js" defer></script>
+       회사 서버(design.ybmnet.co.kr) 최신 주소 (2026-11-25 기준 v1.2.0). 화면이 저절로 바뀌면 안 되면 /yds/v1.2.0/dist/ 고정 주소로 바꾼다. -->
+  <link rel="stylesheet" href="https://design.ybmnet.co.kr/yds/dist/ybm-ds.css">
+  <script src="https://design.ybmnet.co.kr/yds/dist/ybm-ds.js" defer></script>
+  <!-- 글꼴 : 회사 공용 글꼴 CSS (Pretendard 100~900 등). YDS CSS 다음에 둬야 YDS 의 Pretendard 정의보다 우선한다
+       (YDS 서버 글꼴은 다른 주소에서 쓰는 것을 막아 두어 불러오지 못함) -->
+  <link rel="stylesheet" href="https://upsisa.ybmnet.co.kr/platform/design_ybmnet_co_kr/resources/css/font.css">
   <!-- 기존 변수 이름 → YDS 토큰 연결표 -->
   <link rel="stylesheet" href="yds-token-map.css">
   <!-- 원본 헤더 · 푸터 + 시안 E 단독 스타일 (공용 common/banner/career.css 미사용) -->
