@@ -2,7 +2,7 @@
    푸터 — ybmit.com 기존 푸터 그대로 유지
    원본: https://www.ybmit.com/ (resources/css/base.css · common.css · main.css 에서
          #footer · .gnb_ybmlogo 에 적용되는 규칙만 추출)
-   - 배치는 원본 그대로 두고, 색 / 글자 크기 / 간격 값만 YDS 토큰(yds-token-map.css)으로 바꿈
+   - 배치는 원본 그대로 두고, 색 / 글자 크기 / 간격 값만 YDS 토큰(yds-root.css)으로 바꿈
    - 시안 공통 스타일(Pretendard, keep-all 등)이 섞이지 않도록 원본 기본 글꼴 환경을 범위 안에 고정
    - 원본은 1100px 고정 폭이라, 태블릿·모바일에서만 깨지지 않도록 최소한의 반응형을 덧붙임
    ========================================================= */

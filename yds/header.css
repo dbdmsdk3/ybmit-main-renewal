@@ -4,38 +4,7 @@
    - 공통 토큰은 common.css 에 있으므로 여기에는 헤더 전용 확장 토큰만 둠
    - 데모 본문(.demo-content) 스타일은 제외
    ========================================================= */
-:root {
-  /* 색상, 간격, 그림자, 모션 값은 yds-token-map.css 에서 YDS 토큰으로 연결한다 */
-
-  /* 행간 */
-  --line-height-normal: normal;
-  --line-height-130: 1.3;
-  --line-height-150: 1.5;
-
-  /* 크기 */
-  --header-top-h: 58px;
-  --gnb-h: 60px;
-  --gnb-col-w: 130px;
-  --gnb-mobile-h: 52px;
-  --logo-ybmit-w: 94.739px;
-  --logo-ybm-w: 55.161px;
-  --logo-h: 30px;
-  --icon-14: 14px;
-  --icon-16: 16px;
-  --icon-24: 24px;
-  --icon-32: 32px;
-  --menu-line-w: 18px;
-  --border-1: 1px;
-  --border-2: 2px;
-  --border-3: 3px;
-  --banner-btn-size: 40px;
-  --banner-body-max-h: 260px;
-
-  /* 쌓임 순서 */
-  --z-header: 100;
-  --z-dim: 99;
-  --z-banner: 100;
-}
+/* :root 값(크기 · 행간 · 쌓임 순서 · YDS 토큰 연결)은 yds-root.css 에 모았다 */
 
 /* 원본(5577) 기본 글꼴 환경 그대로 고정
    - 시안 본문(body)의 폰트·크기·행간·줄바꿈 설정이 헤더로 상속되지 않게 차단 */
