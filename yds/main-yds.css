@@ -93,31 +93,10 @@
   stroke-linejoin: round;
 }
 
-/* 칩 : 배너 아래 넘버링 · 전체보기 (옆 화살표와 같은 32px) */
-.IT_main .hero-banner__count,
-.IT_main .hero-banner__meta .more-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--ds-space-x0_5);
-  height: 32px;
-  padding: 0px var(--ds-space-x3);
-  font-size: var(--ds-font-size-t04);
-  line-height: 1;
-  background: var(--ds-color-bg-layer-default);
-  border: 1px solid var(--ds-color-stroke-neutral-weak);
-  border-radius: var(--ds-shape-pill);
-}
-
-/* 배너 좌우 화살표 : 칩과 같은 라인 타입 (흰 바탕 + 1px 회색 선)
-   — 아래 공통 호버가 덮어쓸 수 있도록 호버 규칙보다 앞에 둠 */
-.IT_main .hero-banner .icon-btn { background: var(--ds-color-bg-layer-default); border: 1px solid var(--ds-color-stroke-neutral-weak); }
-
-/* 호버 : 진한 바탕 + 흰 글자·아이콘 (원형 버튼 · 전체보기 칩 공통, 카드 전체가 링크면 카드 호버에도 반응) */
+/* 호버 : 진한 바탕 + 흰 글자·아이콘 (원형 버튼 공통, 카드 전체가 링크면 카드 호버에도 반응) */
 .IT_main .icon-btn:hover,
 .IT_main .icon-btn:focus-visible,
-.IT_main .cta-card:hover .icon-btn,
-.IT_main .hero-banner__meta .more-link:hover,
-.IT_main .hero-banner__meta .more-link:focus-visible {
+.IT_main .cta-card:hover .icon-btn {
   color: var(--ds-color-palette-static-white);
   background: var(--ds-color-palette-gray-1000);
   border-color: var(--ds-color-fg-neutral);
@@ -135,25 +114,125 @@
 .IT_main .tab__item:hover,
 .IT_main .tab__item.is-active { color: var(--ds-color-fg-neutral); }
 
-/* ---------- 4) 메인 배너 : 540×360 두 장 + 아래 [화살표 · 넘버링 · 화살표 · 전체보기] ---------- */
-.IT_main .hero-banner { padding: var(--ds-space-x8) 0px 0px; }
-/* 1100 = 배너 540 + 간격 20 + 배너 540 (배너는 540×360 그대로, 화살표는 아래 넘버링 양옆으로 이동) */
-.IT_main .hero-banner__stage { display: block; }
-.IT_main .hero-banner__list { display: flex; justify-content: space-between; gap: var(--ds-space-x5); }
-.IT_main .hero-banner__list li { flex: 0 1 540px; min-width: 0; }
-.IT_main .hero-banner__list a { display: block; }
-.IT_main .hero-banner__list img { width: 100%; aspect-ratio: 540 / 360; object-fit: cover; border-radius: var(--ds-shape-md); }
-
-.IT_main .hero-banner__meta {
+/* ---------- 4) 메인 배너 : 운영 사이트 마크업(main-slide · number-pager · arrow-slider) 그대로, 모양만 YDS ----------
+   - 배너 540×360 두 장 + 아래 한 줄 [이전 · 번호 · 다음 · 전체보기]
+   - slick 설정 · 번호를 쓰는 스크립트는 운영 사이트 것 그대로 (2장 보기, 3초 자동, 점 개수로 번호 계산)
+   - 운영 사이트 기존 main.css 의 같은 이름 규칙(절대 위치 화살표, 1120·1200 폭 등)을 여기서 모두 덮어쓴다 */
+.IT_main .main-slide-inner {
+  position: static;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: var(--ds-space-x5);
+  column-gap: var(--ds-space-x1_5);
+  width: 100%;
+  max-width: 1148px; /* .wrap 과 같음 : 본문 1100 + 좌우 여백 24 × 2 */
+  margin: 0 auto;
+  padding: var(--ds-space-x8) var(--ds-space-x6) 0px;
+}
+/* 아래 한 줄 : 묶음 상자를 풀어 화살표 · 번호 · 전체보기를 한 줄에 순서대로 놓음 */
+.IT_main .number-pager,
+.IT_main .arrow-slider { display: contents; }
+
+.IT_main .main-slide { order: 0; flex: 0 0 100%; width: 100%; height: auto; margin: 0px; }
+.IT_main .main-slide .slick-list { margin: 0px calc(var(--ds-space-x2_5) * -1); } /* 배너 사이 20 = 양쪽 10 씩 */
+.IT_main .main-slide__item { padding: 0px var(--ds-space-x2_5); }
+.IT_main .main-slide__item a { display: block; }
+.IT_main .main-slide__item img { display: block; width: 100%; aspect-ratio: 540 / 360; object-fit: cover; border-radius: var(--ds-shape-md); }
+/* 점은 숨김 — 스크립트가 점 개수로 전체 장수를 세므로 지우지 않음.
+   slick 이 display:block 을 직접 넣으므로 display 대신 자리에서 빼고 안 보이게 (보이지 않는 점에 포커스도 가지 않음) */
+.IT_main .main-slide .slick-dots { position: absolute; width: 1px; height: 1px; overflow: hidden; visibility: hidden; }
+
+/* 이전 · 다음 화살표 : 흰 바탕 + 1px 회색 선 원형 (32px), 아이콘은 YDS chevron */
+.IT_main .arrow-slider .prev,
+.IT_main .arrow-slider .next {
+  position: static;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--ds-space-x1_5);
-  margin-top: var(--ds-space-x5);
+  flex: none;
+  width: 32px;
+  height: 32px;
+  margin: 0px;
+  color: var(--ds-color-fg-neutral);
+  background: var(--ds-color-bg-layer-default);
+  border: 1px solid var(--ds-color-stroke-neutral-weak);
+  border-radius: var(--ds-shape-pill);
+  transform: none;
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-enter), color var(--ds-duration-fast) var(--ds-easing-enter);
 }
-.IT_main .hero-banner__count { color: var(--ds-color-fg-neutral-subtle); font-variant-numeric: tabular-nums; border-color: transparent; } /* 넘버링 칩 : 선 없이 (높이 유지)*/
-.IT_main .hero-banner__count strong { margin-right: var(--ds-space-x0_5); font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-fg-neutral); }
-.IT_main .hero-banner__meta .more-link { flex: none; font-weight: var(--ds-font-weight-medium); color: var(--ds-color-fg-neutral-muted); }
+.IT_main .arrow-slider .prev { order: 1; }
+.IT_main .arrow-slider .next { order: 3; }
+.IT_main .arrow-slider .prev::before,
+.IT_main .arrow-slider .next::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  -webkit-mask: var(--ds-icon-chevron-left) center / contain no-repeat;
+  mask: var(--ds-icon-chevron-left) center / contain no-repeat;
+}
+.IT_main .arrow-slider .next::before {
+  -webkit-mask-image: var(--ds-icon-chevron-right);
+  mask-image: var(--ds-icon-chevron-right);
+}
+
+/* 번호(1/6) : 선 없는 칩 */
+.IT_main .number-pager .number-pager__count {
+  order: 2;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  height: 32px;
+  padding: 0px var(--ds-space-x3);
+  font-size: var(--ds-font-size-t04);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: 1;
+  letter-spacing: normal;
+  color: var(--ds-color-fg-neutral);
+  font-variant-numeric: tabular-nums;
+  background: transparent;
+  border-radius: var(--ds-shape-pill);
+}
+
+/* 전체보기 : 흰 바탕 + 1px 회색 선 칩 */
+.IT_main .number-pager .number-pager__more {
+  order: 4;
+  display: inline-flex;
+  width: auto;
+  height: 32px;
+  margin: 0px;
+  background: var(--ds-color-bg-layer-default);
+  border: 1px solid var(--ds-color-stroke-neutral-weak);
+  border-radius: var(--ds-shape-pill);
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-enter), border-color var(--ds-duration-fast) var(--ds-easing-enter);
+}
+.IT_main .number-pager .number-pager__more--link {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  padding: 0px var(--ds-space-x3);
+  font-size: var(--ds-font-size-t04);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: 1;
+  color: var(--ds-color-fg-neutral-muted);
+  transition: color var(--ds-duration-fast) var(--ds-easing-enter);
+}
+.IT_main .number-pager .number-pager__more--link span::after { content: none; } /* 운영 사이트의 꺾쇠 표시 없앰 (시안 모양) */
+
+/* 호버 · 키보드 포커스 : 진한 바탕 + 흰 글자 (다른 원형 버튼과 같음) */
+.IT_main .arrow-slider .prev:hover,
+.IT_main .arrow-slider .next:hover,
+.IT_main .number-pager .number-pager__more:hover,
+.IT_main .number-pager .number-pager__more:focus-within {
+  color: var(--ds-color-palette-static-white);
+  background: var(--ds-color-palette-gray-1000);
+  border-color: var(--ds-color-fg-neutral);
+}
+.IT_main .number-pager .number-pager__more:hover .number-pager__more--link,
+.IT_main .number-pager .number-pager__more:focus-within .number-pager__more--link { color: var(--ds-color-palette-static-white); }
 
 /* ---------- 5) 시험접수 : 카드 5장, 호버 시 시험별 색 ---------- */
 .IT_main .exam-list {
@@ -451,7 +530,7 @@
   .IT_main .board-box__title,
   .IT_main .career-live__title h2 { font-size: var(--ds-font-size-t08); }
 
-  .IT_main .hero-banner__list { gap: var(--ds-space-x3); }
+  .IT_main .main-slide-inner { padding-inline: var(--ds-space-x5); }
 
   /* 시험 카드 : 한 줄씩 (시험명 | 배지 | 로고 | 버튼) */
   .IT_main .exam-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-space-x3); } /* 시안 2 와 같은 3열 */
@@ -474,18 +553,9 @@
   .IT_main .board-box__title,
   .IT_main .career-live__title h2 { font-size: var(--ds-font-size-t07); }
 
-  /* 배너 : 폭에 꽉 채우고 손가락으로 넘기기 (스크롤 스냅) · 아래 넘버링 양옆 화살표는 유지 */
-  .IT_main .hero-banner { padding-top: var(--ds-space-x4); }
-  .IT_main .hero-banner__list {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* 스크롤바 숨김 */
-  }
-  .IT_main .hero-banner__list::-webkit-scrollbar { display: none; }
-  .IT_main .hero-banner__list li { flex: 0 0 100%; scroll-snap-align: start; }
-  .IT_main .hero-banner__meta { margin-top: var(--ds-space-x3); }
-  .IT_main .hero-banner__meta .more-link { display: none; } /* 모바일은 넘버링만 */
+  /* 배너 : 위 여백 · 아래 줄 간격만 줄임 (몇 장씩 보일지는 운영 사이트 slick 설정을 따름) */
+  .IT_main .main-slide-inner { row-gap: var(--ds-space-x3); padding: var(--ds-space-x4) var(--ds-space-x4) 0px; }
+  .IT_main .number-pager .number-pager__more { display: none; } /* 모바일은 번호만 */
 
   /* 시험 카드 : 시험명 → 배지 → 로고 → 버튼 세로 */
   /* 시험 카드 : 한 칸 (높이는 내용만큼) — 시안 2 와 같음 */

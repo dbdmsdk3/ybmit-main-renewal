@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="main-yds.css">
   <link rel="stylesheet" href="footer.css">
   <link rel="stylesheet" href="nav.css">
+  <!-- [시안 확인용 · 서버에 복사하지 않음] 운영 사이트에 이미 있는 slick 기본 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 </head>
 <body>
 
@@ -500,25 +502,32 @@
   <div class="IT_main">
   <main class="main">
 
-    <!-- 메인 배너 : 2장 나란히 (현재 ybmit.com 구도 유지) -->
-    <section class="hero-banner">
-      <div class="wrap">
-        <h2 class="blind">메인 배너</h2>
-        <div class="hero-banner__stage">
-          <ul class="hero-banner__list">
-            <li><a href="https://www.ybmit.com/event/revent/2026/0930/event.jsp"><img src="https://moscontrol.ybmit.com/Data/main/YBM%20IT%20%EB%A9%94%EC%9D%B8%20%EB%A1%A4%EB%A7%81%20540_360(2).png" alt="YBM IT 이벤트"></a></li>
-            <li><a href="https://www.ybmit.com/cs/group_test.jsp"><img src="https://moscontrol.ybmit.com/Data/main/%EB%8B%A8%EC%B2%B4%EC%8B%9C%ED%97%98%20%ED%99%8D%EB%B3%B4%20%EB%B0%B0%EB%84%88%201.png" alt="단체시험 안내"></a></li>
-          </ul>
-        </div>
-        <!-- 이전 화살표 + 넘버링 + 다음 화살표 + 전체보기 -->
-        <div class="hero-banner__meta">
-          <button type="button" class="icon-btn hero-banner__arrow--prev" aria-label="이전 배너"><svg class="ico" aria-hidden="true"><use href="images/icons.svg#icon-chevron-left"/></svg></button>
-          <span class="hero-banner__count"><strong>1</strong> / 6</span>
-          <button type="button" class="icon-btn hero-banner__arrow--next" aria-label="다음 배너"><svg class="ico" aria-hidden="true"><use href="images/icons.svg#icon-chevron-right"/></svg></button>
-          <a href="#" class="more-link">전체보기</a>
-        </div>
+    <!-- 메인 배너 : 운영 사이트(ybmit.com) 마크업 그대로 — 클래스 · id · slick 설정 스크립트 변경 없음, 모양만 main-yds.css 에서 YDS 로
+         [회사 적용 시] 이 블록은 서버 JSP 의 기존 main-slide-inner 를 그대로 쓴다 (아래 배너 6장은 시안 확인용으로 반복문 결과를 적어 둔 것) -->
+    <div class="main-slide-inner">
+
+      <section class="main-slide" style="visibility:hidden">
+        <section class="main-slide__item"><a href="https://www.ybmit.com/event/revent/2026/0930/event.jsp" target="_self"><img src="https://moscontrol.ybmit.com/Data/main/YBM IT 메인 롤링 540_360(2).png" onerror="this.src='//imagesisa.ybmsisa.com/platform/www_ybmit_com/images/main_slide_01.png'" /></a></section>
+        <section class="main-slide__item"><a href="https://www.ybmit.com/cs/group_test.jsp" target="_self"><img src="https://moscontrol.ybmit.com/Data/main/단체시험 홍보 배너 1.png" onerror="this.src='//imagesisa.ybmsisa.com/platform/www_ybmit_com/images/main_slide_01.png'" /></a></section>
+        <section class="main-slide__item"><a href="https://smartstore.naver.com/kegbook/category/b3b533438a274d64979e981f0aedf386?cp=1" target="_new"><img src="https://moscontrol.ybmit.com/Data/main/SBS_365_540360.jpg" onerror="this.src='//imagesisa.ybmsisa.com/platform/www_ybmit_com/images/main_slide_01.png'" /></a></section>
+        <section class="main-slide__item"><a href="https://www.ybmit.com/mos_use/mos_use_ex.jsp" target="_self"><img src="https://moscontrol.ybmit.com/Data/main/540360_250310.png" onerror="this.src='//imagesisa.ybmsisa.com/platform/www_ybmit_com/images/main_slide_01.png'" /></a></section>
+        <section class="main-slide__item"><a href="https://ybmit.com/cs/notice_detail.jsp?keyIndex=3418" target="_self"><img src="https://moscontrol.ybmit.com/Data/main/PC_540_360.png" onerror="this.src='//imagesisa.ybmsisa.com/platform/www_ybmit_com/images/main_slide_01.png'" /></a></section>
+        <section class="main-slide__item"><a href="http://www.ybmaidx.co.kr" target="_new"><img src="https://moscontrol.ybmit.com/Data/main/bn_540360.png" onerror="this.src='//imagesisa.ybmsisa.com/platform/www_ybmit_com/images/main_slide_01.png'" /></a></section>
+      </section>
+
+      <section class="number-pager">
+        <p class="number-pager__count"></p>
+        <p class="number-pager__more">
+          <a class="number-pager__more--link" href="/cs/event_list.jsp"><span>전체보기</span></a>
+        </p>
+      </section>
+
+      <div class="arrow-slider">
+        <span class="prev" id="aro1_prev"></span>
+        <span class="next" id="aro1_next"></span>
       </div>
-    </section>
+
+    </div>
 
     <!-- 시험 : 카드 5장 (로고 → 설명 → 접수 버튼), 호버 시 시험별 색 -->
     <section class="section exam">
@@ -729,7 +738,7 @@
      메인 콘텐츠(.IT_main) 동작 모음
      1) 시험활용 채용정보 : 탭 전환 + 실시간 롤링   (원래 career.js)
      2) 공용 탭 전환 : [data-tabs]                  (원래 tabs.js)
-     3) 메인 배너 넘버링 : 모바일 스크롤 시 번호 갱신 (원래 hero-banner.js)
+     (메인 배너는 운영 사이트 slick 스크립트를 그대로 쓴다 — 아래 [시안 확인용] 참고)
      각 블록은 서로 독립된 즉시 실행 함수라 순서와 상관없이 동작한다.
      상단 nav 동작은 nav 블록 끝 <script> 에 따로 있다.
      ========================================================================= */
@@ -889,30 +898,6 @@
   })();
 
 
-  /* ---------- 3) 메인 배너 넘버링 (원래 hero-banner.js) ---------- */
-  /* =========================================================
-     메인 배너 넘버링 (시안 E · F)
-     - 모바일에서 손가락으로 배너를 넘기면(스크롤 스냅) 현재 번호를 갱신
-     - 데스크톱은 가로 스크롤이 없으므로 번호가 바뀌지 않음
-     ========================================================= */
-  (function () {
-    const list = document.querySelector('.hero-banner__list');
-    const current = document.querySelector('.hero-banner__count strong');
-    if (!list || !current) return;
-
-    let ticking = false;
-    list.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        const item = list.querySelector('li');
-        const gap = parseFloat(getComputedStyle(list).columnGap) || 0;
-        const step = item ? item.getBoundingClientRect().width + gap : 0;
-        if (step > 0) current.textContent = String(Math.round(list.scrollLeft / step) + 1);
-        ticking = false;
-      });
-    }, { passive: true });
-  })();
   </script>
   </div><!-- // .IT_main -->
   <!-- ████████████████████████████████████████████████████████████████████████ -->
@@ -972,6 +957,44 @@
     </section>
     <!-- //footer_wrap -->
   </footer>
+
+  <!-- ████ [시안 확인용 · 서버에 복사하지 않음] 운영 사이트에 이미 있는 jQuery · slick 과 메인 슬라이드 설정 ████
+       운영 사이트 하단 인라인 스크립트의 "메인 슬라이드" 부분을 한 글자도 바꾸지 않고 옮겨 왔다. -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script>
+	//메인 슬라이드 -->
+	$(document).ready(function(){
+		var $status = $('.number-pager__count');
+		var $slickElement = $('.main-slide');
+
+		$slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+			//currentSlide is undefined on init -- set it to 0 in this case (currentSlide is 0 based)
+			if(!slick.$dots){
+			return;
+			}
+			
+			var i = (currentSlide ? currentSlide : 0) + 1;
+			$status.text(i + '/' + (slick.$dots[0].children.length));
+		});
+
+		$slickElement.slick({
+			infinite: true,
+			slidesToShow: 2,
+			slidesToScroll: 1,
+			autoplay: true,
+			autoplaySpeed: 3000,
+			dots: true,
+			arrows:true,
+			prevArrow: $('#aro1_prev'),
+			nextArrow: $('#aro1_next'),
+		});
+
+		//show
+		$('.main-slide').css('visibility','unset');
+		//메인 슬라이드
+	});
+  </script>
 
 </body>
 </html>
