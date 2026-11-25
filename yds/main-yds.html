@@ -257,6 +257,236 @@
 
   <!-- 메가메뉴가 열릴 때 본문을 덮는 배경 딤 -->
   <div class="dim" aria-hidden="true"></div>
+  <!-- 상단 nav 동작 (메가메뉴 · 관련사이트 · 모바일 메뉴 · 채용 배너) -->
+  <script>
+  /* =========================================================================
+     상단 nav(.IT_nav) 동작 (원래 header.js)
+     메가메뉴 · 관련사이트 · 모바일 전체 메뉴 · 채용정보 배너
+     HTML 은 nav.html, 스타일은 nav.css
+     ========================================================================= */
+
+  (function () {
+    const header = document.getElementById('header');
+    const headerWrap = header.querySelector('.header-wrap');
+    const gnb = document.getElementById('gnb');
+    const gnbItems = gnb.querySelectorAll('.gnb-item');
+    const related = header.querySelector('.util-related');
+    const relatedBtn = header.querySelector('.util-related-btn');
+    const menuBtn = header.querySelector('.menu-btn');
+
+    // 반응형 구간 / 터치 기기 판별
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    const touchQuery = window.matchMedia('(hover: none)');
+
+    // 하위 메뉴가 있는 항목 표시 (모바일 화살표용)
+    gnbItems.forEach(function (item) {
+      if (item.querySelector('.gnb-sub')) item.classList.add('has-sub');
+    });
+
+    /* ---------- 메가메뉴 (데스크톱 · 태블릿) ----------
+       열 때 소메뉴까지 포함한 실제 높이로 늘리고, 닫을 때 CSS 기본 높이로 되돌림
+       (높이 전환 자체는 style.css 의 .header-wrap transition) */
+    function openMega() {
+      if (mobileQuery.matches) return;
+      closeRelated();
+      header.classList.add('is-open');
+      headerWrap.style.height = headerWrap.scrollHeight + 'px';
+    }
+
+    function closeMega() {
+      header.classList.remove('is-open');
+      headerWrap.style.height = '';
+    }
+
+    gnb.addEventListener('mouseenter', openMega);
+    gnb.addEventListener('mouseleave', closeMega);
+
+    // 키보드 탐색: GNB 안으로 포커스가 들어오면 열고, 밖으로 나가면 닫음
+    gnb.addEventListener('focusin', openMega);
+    gnb.addEventListener('focusout', function (e) {
+      if (!gnb.contains(e.relatedTarget)) closeMega();
+    });
+
+    gnbItems.forEach(function (item) {
+      const link = item.querySelector('.gnb-link');
+
+      link.addEventListener('click', function (e) {
+        if (!item.classList.contains('has-sub')) return;
+
+        // 모바일: 상위 메뉴를 누르면 아코디언 토글
+        if (mobileQuery.matches) {
+          e.preventDefault();
+          toggleAccordion(item);
+          return;
+        }
+
+        // 터치 태블릿: 첫 탭은 메뉴 열기, 열린 뒤 탭하면 이동
+        if (touchQuery.matches && !header.classList.contains('is-open')) {
+          e.preventDefault();
+          openMega();
+        }
+      });
+    });
+
+    /* ---------- 관련사이트 드롭다운 ---------- */
+    function closeRelated() {
+      related.classList.remove('is-open');
+      relatedBtn.setAttribute('aria-expanded', 'false');
+      // 펼친 창은 YDS Popover : 메가메뉴가 열릴 때처럼 스크립트로 닫을 때도 함께 숨긴다
+      const relatedPop = document.getElementById(relatedBtn.getAttribute('aria-controls'));
+      if (relatedPop) relatedPop.hidden = true;
+    }
+
+    relatedBtn.addEventListener('click', function () {
+      const willOpen = !related.classList.contains('is-open');
+      related.classList.toggle('is-open', willOpen);
+      relatedBtn.setAttribute('aria-expanded', String(willOpen));
+    });
+
+    /* ---------- 모바일 전체 메뉴 ---------- */
+    function setMenuOpen(open) {
+      header.classList.toggle('is-menu-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? '전체 메뉴 닫기' : '전체 메뉴 열기');
+    }
+
+    function toggleAccordion(target) {
+      const willExpand = !target.classList.contains('is-expanded');
+      // 한 번에 하나의 하위 메뉴만 열림
+      gnbItems.forEach(function (item) {
+        item.classList.remove('is-expanded');
+      });
+      target.classList.toggle('is-expanded', willExpand);
+    }
+
+    menuBtn.addEventListener('click', function () {
+      setMenuOpen(!header.classList.contains('is-menu-open'));
+    });
+
+    // 모바일 → 태블릿/데스크톱 전환 시 모바일 상태 초기화
+    mobileQuery.addEventListener('change', function () {
+      setMenuOpen(false);
+      closeMega();
+      gnbItems.forEach(function (item) {
+        item.classList.remove('is-expanded');
+      });
+    });
+
+    /* ---------- 공통 닫기 ---------- */
+    // 바깥 영역 클릭 시 드롭다운 / 터치로 연 메가메뉴 닫기
+    document.addEventListener('click', function (e) {
+      if (!related.contains(e.target)) closeRelated();
+      if (!gnb.contains(e.target)) closeMega();
+    });
+
+    // ESC 키로 열린 메뉴 모두 닫기
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      closeRelated();
+      closeMega();
+    });
+  })();
+
+  /* ---------- 채용정보 배너 ---------- */
+  (function () {
+    const banner = document.getElementById('recruit-banner');
+    if (!banner) return;
+
+    const toggleBtn = banner.querySelector('.recruit-banner-toggle');
+    const toggleText = banner.querySelector('.recruit-banner-badge-text');
+    const body = banner.querySelector('.recruit-banner-body');
+    const viewport = banner.querySelector('.recruit-slider-viewport');
+    const track = banner.querySelector('.recruit-slider-track');
+    const cards = track.children;
+    const prevBtn = banner.querySelector('.recruit-slider-prev');
+    const nextBtn = banner.querySelector('.recruit-slider-next');
+    const closeBtn = banner.querySelector('.recruit-banner-close');
+    const todayCheck = banner.querySelector('.recruit-banner-today-check');
+    const HIDDEN_KEY = 'ybm_banner_hidden_until';
+
+    // 오늘 하루 닫기를 선택한 경우 자정까지 숨김
+    try {
+      const hiddenUntil = Number(localStorage.getItem(HIDDEN_KEY));
+      if (hiddenUntil && Date.now() < hiddenUntil) banner.classList.add('is-hidden');
+    } catch (e) {
+      // 저장소를 쓸 수 없는 환경이면 항상 표시
+    }
+
+    /* 펼치기 / 접기 */
+    body.classList.add('is-settled');
+
+    toggleBtn.addEventListener('click', function () {
+      const willOpen = !body.classList.contains('is-open');
+      body.classList.remove('is-settled');
+      body.classList.toggle('is-open', willOpen);
+      banner.classList.toggle('is-collapsed', !willOpen);
+      toggleBtn.setAttribute('aria-expanded', String(willOpen));
+      toggleText.textContent = willOpen ? '닫기' : '열기';
+
+      // 움직임 줄이기 설정 등으로 전환이 없으면 transitionend 가 오지 않으므로 바로 처리
+      if (willOpen && parseFloat(getComputedStyle(body).transitionDuration) === 0) {
+        body.classList.add('is-settled');
+      }
+    });
+
+    // 펼침 전환이 끝나면 바깥 화살표가 보이도록 overflow 해제
+    body.addEventListener('transitionend', function (e) {
+      if (e.propertyName === 'max-height' && body.classList.contains('is-open')) {
+        body.classList.add('is-settled');
+      }
+    });
+
+    /* 슬라이더: 한 번에 한 기업씩 이동, 끝에 닿으면 반대쪽 끝으로 순환
+       한 화면 카드 수는 CSS(반응형)에서 정한 카드 폭으로 계산 */
+    let index = 0;
+
+    function getStep() {
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return cards[0].offsetWidth + gap;
+    }
+
+    function getMaxIndex() {
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      const visible = Math.round((viewport.clientWidth + gap) / getStep());
+      return Math.max(cards.length - visible, 0);
+    }
+
+    function render() {
+      track.style.transform = 'translateX(' + (-index * getStep()) + 'px)';
+    }
+
+    function move(dir) {
+      const maxIndex = getMaxIndex();
+      index += dir;
+      if (index > maxIndex) index = 0;
+      if (index < 0) index = maxIndex;
+      render();
+    }
+
+    prevBtn.addEventListener('click', function () { move(-1); });
+    nextBtn.addEventListener('click', function () { move(1); });
+
+    // 화면 폭이 바뀌면 카드 폭이 달라지므로 위치 다시 계산
+    window.addEventListener('resize', function () {
+      index = Math.min(index, getMaxIndex());
+      render();
+    });
+
+    /* 배너 닫기 */
+    closeBtn.addEventListener('click', function () {
+      if (todayCheck.checked) {
+        const midnight = new Date();
+        midnight.setHours(24, 0, 0, 0);
+        try {
+          localStorage.setItem(HIDDEN_KEY, String(midnight.getTime()));
+        } catch (e) {
+          // 저장 실패 시 이번 화면에서만 닫힘
+        }
+      }
+      banner.classList.add('is-hidden');
+    });
+  })();
+  </script>
   </div><!-- // .IT_nav -->
 
   <!-- 메인 콘텐츠 : .IT_main 안 (main-yds.css). 헤더 · 푸터는 사이트 기존 것, 상단 nav 는 nav.html -->
@@ -486,6 +716,197 @@
       </div>
     </section>
   </main>
+  <!-- 메인 콘텐츠 동작 (채용정보 탭 · 롤링 · 소식 탭 · 배너 번호) -->
+  <script>
+  /* =========================================================================
+     메인 콘텐츠(.IT_main) 동작 모음
+     1) 시험활용 채용정보 : 탭 전환 + 실시간 롤링   (원래 career.js)
+     2) 공용 탭 전환 : [data-tabs]                  (원래 tabs.js)
+     3) 메인 배너 넘버링 : 모바일 스크롤 시 번호 갱신 (원래 hero-banner.js)
+     각 블록은 서로 독립된 즉시 실행 함수라 순서와 상관없이 동작한다.
+     상단 nav 동작은 nav 블록 끝 <script> 에 따로 있다.
+     ========================================================================= */
+
+  /* ---------- 1) 시험활용 채용정보 (원래 career.js) ---------- */
+  /* =========================================================
+     시험활용 채용정보 (career-live)
+     - 탭 전환 : 채용정보 / 기업 / 대학
+     - 실시간 롤링 : 일정 간격으로 맨 위 줄이 올라가고 맨 아래에 새 줄이 들어옴
+     - 마우스를 올리거나 포커스가 들어오면 멈춤, 화면 밖으로 나가면 멈춤
+     ========================================================= */
+  (function () {
+    const ROLL_INTERVAL = 2800; // 다음 줄로 넘어가는 간격(ms)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    document.querySelectorAll('.career-live').forEach(function (root) {
+      const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+      let timer = null;
+      let paused = false;
+      let inView = true;
+
+
+      /* 보이는 줄 수보다 항목이 적으면 복제해서 계속 돌 수 있게 함 */
+      function ensureLoop(list) {
+        const rows = parseInt(getComputedStyle(root).getPropertyValue('--career-rows'), 10) || 4;
+        const items = Array.from(list.children).filter(function (li) { return !li.hasAttribute('data-clone'); });
+        if (list.querySelector('[data-clone]') || items.length > rows) return;
+        let i = 0;
+        while (list.children.length <= rows) {
+          const clone = items[i % items.length].cloneNode(true);
+          clone.setAttribute('data-clone', '');
+          clone.setAttribute('aria-hidden', 'true');
+          clone.querySelectorAll('a').forEach(function (a) { a.tabIndex = -1; });
+          list.appendChild(clone);
+          i++;
+        }
+      }
+
+      function activeList() {
+        const panel = panels.find(function (p) { return !p.hidden; });
+        return panel ? panel.querySelector('.career-live__list') : null;
+      }
+
+      /* 한 줄 올리기 : 이동이 끝나면 맨 위 줄을 맨 아래로 옮기고 위치를 되돌림 */
+      function roll() {
+        const list = activeList();
+        if (!list || paused || !inView || reduceMotion.matches) return;
+        list.classList.add('is-rolling');
+        // transitionend 는 탭이 백그라운드일 때 등 오지 않을 수 있어 이동 시간만큼 기다린 뒤 처리
+        const rollMs = parseFloat(getComputedStyle(root).getPropertyValue('--career-roll-ms')) || 450;
+        window.setTimeout(function () {
+          const first = list.firstElementChild;
+          list.classList.remove('is-rolling');
+          first.classList.remove('is-new'); // 옮겨진 줄에서 강조가 다시 재생되지 않게
+          list.appendChild(first);
+          // 새로 화면에 들어온 맨 아래 줄 강조 (시안 E 는 main-e.css 에서 끔)
+          const rows = parseInt(getComputedStyle(root).getPropertyValue('--career-rows'), 10) || 4;
+          const entered = list.children[rows - 1];
+          if (entered) {
+            entered.classList.remove('is-new');
+            void entered.offsetWidth; // 애니메이션 재시작
+            entered.classList.add('is-new');
+            window.setTimeout(function () { entered.classList.remove('is-new'); }, 1700);
+          }
+        }, rollMs + 30);
+      }
+
+      function start() {
+        stop();
+        timer = window.setInterval(roll, ROLL_INTERVAL);
+      }
+      function stop() {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      }
+
+      /* 탭 전환 */
+      function select(tab, focus) {
+        tabs.forEach(function (t) {
+          const on = t === tab;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        });
+        if (focus) tab.focus();
+        const list = activeList();
+        if (list) ensureLoop(list);
+        start();
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { select(tab, false); });
+        // 좌우 화살표로 탭 이동
+        tab.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          e.preventDefault();
+          const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+          select(next, true);
+        });
+      });
+
+      /* 일시정지 : 마우스 오버 · 포커스 */
+      let hovering = false;
+      let keyboardFocus = false;
+      function syncPause() { paused = hovering || keyboardFocus; }
+      root.addEventListener('mouseenter', function () { hovering = true; syncPause(); });
+      root.addEventListener('mouseleave', function () { hovering = false; syncPause(); });
+      // 키보드로 들어온 포커스일 때만 멈춤 (마우스로 탭을 눌러 생긴 포커스로는 멈추지 않음)
+      root.addEventListener('focusin', function (e) { keyboardFocus = e.target.matches(':focus-visible'); syncPause(); });
+      root.addEventListener('focusout', function (e) { if (!root.contains(e.relatedTarget)) { keyboardFocus = false; syncPause(); } });
+
+      /* 화면 밖에 있을 때는 롤링하지 않음 */
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) { inView = entries[0].isIntersecting; }).observe(root);
+      }
+
+      select(tabs.find(function (t) { return t.classList.contains('is-active'); }) || tabs[0], false);
+    });
+  })();
+
+
+  /* ---------- 2) 공용 탭 전환 (원래 tabs.js) ---------- */
+  /* =========================================================
+     공용 탭 전환 ([data-tabs] 컨테이너)
+     - role="tab" 버튼의 aria-controls 로 연결된 패널만 보이게 함
+     - 좌우 화살표 키로 탭 이동
+     ※ 시험활용 채용정보(career-live)는 career.js 에서 따로 처리
+     ========================================================= */
+  (function () {
+    document.querySelectorAll('[data-tabs]').forEach(function (root) {
+      const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+
+      function select(tab, focus) {
+        tabs.forEach(function (t) {
+          const on = t === tab;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          const panel = document.getElementById(t.getAttribute('aria-controls'));
+          if (panel) panel.hidden = !on;
+        });
+        if (focus) tab.focus();
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { select(tab, false); });
+        tab.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          e.preventDefault();
+          const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+          select(next, true);
+        });
+      });
+    });
+  })();
+
+
+  /* ---------- 3) 메인 배너 넘버링 (원래 hero-banner.js) ---------- */
+  /* =========================================================
+     메인 배너 넘버링 (시안 E · F)
+     - 모바일에서 손가락으로 배너를 넘기면(스크롤 스냅) 현재 번호를 갱신
+     - 데스크톱은 가로 스크롤이 없으므로 번호가 바뀌지 않음
+     ========================================================= */
+  (function () {
+    const list = document.querySelector('.hero-banner__list');
+    const current = document.querySelector('.hero-banner__count strong');
+    if (!list || !current) return;
+
+    let ticking = false;
+    list.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        const item = list.querySelector('li');
+        const gap = parseFloat(getComputedStyle(list).columnGap) || 0;
+        const step = item ? item.getBoundingClientRect().width + gap : 0;
+        if (step > 0) current.textContent = String(Math.round(list.scrollLeft / step) + 1);
+        ticking = false;
+      });
+    }, { passive: true });
+  })();
+  </script>
   </div><!-- // .IT_main -->
 
   <!-- 푸터 : ybmit.com 기존 푸터 그대로 -->
@@ -542,9 +963,5 @@
     <!-- //footer_wrap -->
   </footer>
 
-  <script src="header.js"></script>
-  <script src="career.js"></script>
-  <script src="tabs.js"></script>
-  <script src="hero-banner.js"></script>
 </body>
 </html>
