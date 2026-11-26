@@ -82,7 +82,7 @@
   border-radius: var(--ds-shape-pill);
   transition: background-color var(--ds-duration-fast) var(--ds-easing-enter), color var(--ds-duration-fast) var(--ds-easing-enter);
 }
-/* 화살표 이미지(yds/ic-*.png)를 마스크로 써서 글자색(currentColor)을 따라가게 함 : 호버 시 흰색 */
+/* 화살표 : YDS 아이콘을 마스크로 써서 글자색(currentColor)을 따라가게 함 : 호버 시 흰색 */
 .IT_main .icon-btn .ico {
   flex: none;
   width: 16px;
@@ -96,12 +96,13 @@
   mask-size: contain;
 }
 .IT_main .ico--chevron-right {
-  -webkit-mask-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-chevron-right.png");
-  mask-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-chevron-right.png");
+  -webkit-mask-image: var(--ds-icon-chevron-right);
+  mask-image: var(--ds-icon-chevron-right);
 }
+/* ↗ : YDS 목록에 없어 YDS 와 같은 Lucide 세트(arrow-up-right)를 같은 형식으로 사용 */
 .IT_main .ico--arrow-up-right {
-  -webkit-mask-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-arrow-up-right.png");
-  mask-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-arrow-up-right.png");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M7 7h10v10%22/%3E%3Cpath d=%22M7 17 17 7%22/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M7 7h10v10%22/%3E%3Cpath d=%22M7 17 17 7%22/%3E%3C/svg%3E");
 }
 
 /* 호버 : 진한 바탕 + 흰 글자·아이콘 (원형 버튼 공통, 카드 전체가 링크면 카드 호버에도 반응) */

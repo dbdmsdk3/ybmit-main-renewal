@@ -653,7 +653,9 @@
     content: "";
     width: 16px;
     height: 16px;
-    background: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-chevron-down.png") no-repeat center / contain;
+    background-color: currentColor; /* YDS 아이콘(chevron-down)을 마스크로 : 글자색을 따라감 */
+    -webkit-mask: var(--ds-icon-chevron-down) no-repeat center / contain;
+    mask: var(--ds-icon-chevron-down) no-repeat center / contain;
   }
 
   .IT_nav .gnb-item.is-expanded .gnb-link::after {
