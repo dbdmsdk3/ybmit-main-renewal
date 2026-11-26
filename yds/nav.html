@@ -87,7 +87,7 @@
           <li class="util-related ds-popover-anchor">
             <button type="button" class="util-link util-related-btn" data-ds-popover="related-list" aria-expanded="false" aria-controls="related-list">
               관련사이트
-              <!-- hover 시 글자색을 따라가도록 인라인 SVG + currentColor 사용 (모바일 메뉴는 YDS --ds-icon-chevron-down) -->
+              <!-- hover 시 글자색을 따라가도록 인라인 SVG + currentColor 사용 (모바일 메뉴 ˅ 는 스크립트가 인라인 SVG 로 붙임) -->
               <svg class="icon-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -266,7 +266,11 @@
 
   // 하위 메뉴가 있는 항목 표시 (모바일 화살표용)
   gnbItems.forEach(function (item) {
-    if (item.querySelector('.gnb-sub')) item.classList.add('has-sub');
+    if (item.querySelector('.gnb-sub')) {
+      item.classList.add('has-sub');
+      // 모바일 메뉴 ˅ 화살표 : 인라인 SVG (사이트 보안 설정(CSP)이 data: 이미지를 막아서 CSS 대신 직접 넣음)
+      item.querySelector('.gnb-link').insertAdjacentHTML('beforeend', '<svg class="gnb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>');
+    }
   });
 
   /* ---------- 메가메뉴 (데스크톱 · 태블릿) ----------

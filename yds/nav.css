@@ -373,6 +373,8 @@
   color: var(--ds-color-fg-neutral);
   white-space: nowrap;
 }
+/* 모바일 메뉴 ˅ (스크립트가 붙임) : 데스크톱에서는 숨김 */
+.IT_nav .gnb-arrow { display: none; }
 
 /* 상위 메뉴 밑줄
    - ::before 로 그려 글자 세로 위치에 영향이 없게 함
@@ -648,17 +650,21 @@
     font-size: var(--ds-font-size-t05);
   }
 
-  /* 하위 메뉴가 있는 항목에만 화살표 표시 */
-  .IT_nav .gnb-item.has-sub .gnb-link::after {
-    content: "";
+  /* 하위 메뉴가 있는 항목에만 화살표 표시 : 스크립트가 붙인 인라인 SVG(.gnb-arrow), YDS chevron-down 모양
+     사이트 보안 설정(CSP)이 data: 이미지를 막아 CSS 마스크 대신 SVG 사용. 선 색은 글자색을 따라감 */
+  .IT_nav .gnb-item.has-sub .gnb-arrow {
+    display: block;
+    flex: none;
     width: 16px;
     height: 16px;
-    background-color: currentColor; /* YDS 아이콘(chevron-down)을 마스크로 : 글자색을 따라감 */
-    -webkit-mask: var(--ds-icon-chevron-down) no-repeat center / contain;
-    mask: var(--ds-icon-chevron-down) no-repeat center / contain;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
-  .IT_nav .gnb-item.is-expanded .gnb-link::after {
+  .IT_nav .gnb-item.is-expanded .gnb-arrow {
     transform: rotate(180deg);
   }
 

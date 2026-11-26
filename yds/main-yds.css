@@ -82,27 +82,18 @@
   border-radius: var(--ds-shape-pill);
   transition: background-color var(--ds-duration-fast) var(--ds-easing-enter), color var(--ds-duration-fast) var(--ds-easing-enter);
 }
-/* 화살표 : YDS 아이콘을 마스크로 써서 글자색(currentColor)을 따라가게 함 : 호버 시 흰색 */
-.IT_main .icon-btn .ico {
+/* 화살표 (카드 ›, 소식·시험활용 ↗, 배너 ‹ ›) : HTML 안 인라인 SVG — YDS(Lucide) 모양, 선 2px
+   사이트 보안 설정(CSP img-src *)이 data: 이미지를 막아 CSS 마스크 대신 HTML 에 직접 넣음. 선 색은 글자색을 따라가 호버 시 흰색 */
+.IT_main .icon-btn .ico,
+.IT_main .arrow-slider .ico {
   flex: none;
   width: 16px;
   height: 16px;
-  background-color: currentColor;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-}
-.IT_main .ico--chevron-right {
-  -webkit-mask-image: var(--ds-icon-chevron-right);
-  mask-image: var(--ds-icon-chevron-right);
-}
-/* ↗ : YDS 목록에 없어 YDS 와 같은 Lucide 세트(arrow-up-right)를 같은 형식으로 사용 */
-.IT_main .ico--arrow-up-right {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M7 7h10v10%22/%3E%3Cpath d=%22M7 17 17 7%22/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M7 7h10v10%22/%3E%3Cpath d=%22M7 17 17 7%22/%3E%3C/svg%3E");
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* 호버 : 진한 바탕 + 흰 글자·아이콘 (원형 버튼 공통, 카드 전체가 링크면 카드 호버에도 반응) */
@@ -156,7 +147,7 @@
    slick 이 display:block 을 직접 넣으므로 display 대신 자리에서 빼고 안 보이게 (보이지 않는 점에 포커스도 가지 않음) */
 .IT_main .main-slide .slick-dots { position: absolute; width: 1px; height: 1px; overflow: hidden; visibility: hidden; }
 
-/* 이전 · 다음 화살표 : 흰 바탕 + 1px 회색 선 원형 (32px), 아이콘은 YDS chevron */
+/* 이전 · 다음 화살표 : 흰 바탕 + 1px 회색 선 원형 (32px), 아이콘은 안의 인라인 SVG (위 .ico) */
 .IT_main .arrow-slider .prev,
 .IT_main .arrow-slider .next {
   position: static;
@@ -177,19 +168,6 @@
 }
 .IT_main .arrow-slider .prev { order: 1; }
 .IT_main .arrow-slider .next { order: 3; }
-.IT_main .arrow-slider .prev::before,
-.IT_main .arrow-slider .next::before {
-  content: "";
-  width: 16px;
-  height: 16px;
-  background-color: currentColor;
-  -webkit-mask: var(--ds-icon-chevron-left) center / contain no-repeat;
-  mask: var(--ds-icon-chevron-left) center / contain no-repeat;
-}
-.IT_main .arrow-slider .next::before {
-  -webkit-mask-image: var(--ds-icon-chevron-right);
-  mask-image: var(--ds-icon-chevron-right);
-}
 
 /* 번호(1/6) : 선 없는 칩 */
 .IT_main .number-pager .number-pager__count {
@@ -477,11 +455,8 @@
 
 /* 고객센터 (링크 아님) : 시험문의 · 회원가입 두 묶음을 위아래 끝에 붙이고 사이 간격 자동 */
 .IT_main .cta-card--static {
-  grid-template-columns: minmax(0, 1fr); /* 전화기 아이콘(yds/menu_icon10.svg)을 위에, 내용은 아래 : 운영 시간 한 줄 유지 */
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "icon"
-    "body";
+  grid-template-columns: minmax(0, 1fr); /* 아이콘 없이 연락처만 */
+  grid-template-areas: "body";
   row-gap: var(--ds-space-x3_5);
   align-content: stretch;
   height: 100%;
