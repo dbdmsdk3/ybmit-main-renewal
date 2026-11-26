@@ -82,15 +82,26 @@
   border-radius: var(--ds-shape-pill);
   transition: background-color var(--ds-duration-fast) var(--ds-easing-enter), color var(--ds-duration-fast) var(--ds-easing-enter);
 }
+/* 화살표 이미지(yds/ic-*.png)를 마스크로 써서 글자색(currentColor)을 따라가게 함 : 호버 시 흰색 */
 .IT_main .icon-btn .ico {
   flex: none;
   width: 16px;
   height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.IT_main .ico--chevron-right {
+  -webkit-mask-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-chevron-right.png");
+  mask-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-chevron-right.png");
+}
+.IT_main .ico--arrow-up-right {
+  -webkit-mask-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-arrow-up-right.png");
+  mask-image: url("https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/yds/ic-arrow-up-right.png");
 }
 
 /* 호버 : 진한 바탕 + 흰 글자·아이콘 (원형 버튼 공통, 카드 전체가 링크면 카드 호버에도 반응) */
@@ -268,28 +279,7 @@
   white-space: nowrap;
 }
 .IT_main .exam-card__logo { display: flex; align-items: center; height: 40px; }
-.IT_main .exam-card__logo img { height: 100%; width: auto; }
-/* AI 자격증 : 텍스트 로고 2줄 — Generative AI(26 · SemiBold) + Foundations(12 · Medium), 줄 사이 -2px (피그마 19:2) */
-.IT_main .exam-card__logo--text {
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  height: auto;
-  color: var(--ds-color-fg-neutral);
-  white-space: nowrap;
-}
-.IT_main .exam-card__logo-main {
-  font-size: var(--ds-font-size-t10);
-  font-weight: var(--ds-font-weight-semibold);
-  line-height: 31px;
-  letter-spacing: -1px;
-}
-.IT_main .exam-card__logo-sub {
-  margin-top: calc(var(--ds-space-x0_5) * -1);
-  font-size: var(--ds-font-size-t02);
-  font-weight: var(--ds-font-weight-medium);
-  line-height: 14px;  letter-spacing: -1px;
-}
+.IT_main .exam-card__logo img { width: auto; height: auto; } /* 로고 이미지 원본 크기 그대로 (AI 145×40, MOS 110×37 등) */
 .IT_main .exam-card__link {
   display: flex;
   align-items: center;
@@ -419,17 +409,17 @@
 }
 .IT_main .qtile:hover,
 .IT_main .qtile:focus-visible { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-semibold); background: var(--ds-color-bg-neutral-weak-alpha); } /* 바탕 : 관련사이트 드롭다운 호버와 같은 색 */
-/* 피그마 컬러 아이콘 (images/e-icons) : 바탕 없이 이미지만 */
+/* 컬러 아이콘 (yds/menu-*.png) : 바탕 없이 이미지만 */
 .IT_main .qtile__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   color: var(--ds-color-fg-neutral);
   border-radius: var(--ds-shape-sm);
 }
-.IT_main .qtile__icon img { width: 32px; height: 32px; object-fit: contain; }
+.IT_main .qtile__icon img { width: auto; height: auto; } /* 아이콘 원본 크기 그대로 (40×40, FAQ 35×35) */
 
 /* ---------- 7) 문의 · 배너 : [단체시험 / 커리어캠퍼스] [고객센터] [소형 배너 453×205] ---------- */
 .IT_main .support__grid {
@@ -459,7 +449,7 @@
   color: var(--ds-color-fg-neutral);
   border-radius: var(--ds-shape-lg);
 }
-.IT_main .cta-card__icon img { width: 36px; height: 36px; object-fit: contain; }
+.IT_main .cta-card__icon img { width: auto; height: auto; } /* 아이콘 원본 크기 그대로 (40×40) */
 .IT_main .cta-card__body { grid-area: body; display: flex; flex-direction: column; gap: var(--ds-space-x1_5); min-width: 0; }
 /* 카드 제목 : 단체시험 상담 · 커리어캠퍼스 제목과 고객센터 시험문의 · 회원가입 · 인증문의 공통 */
 .IT_main .cta-card__title,
@@ -486,16 +476,17 @@
 
 /* 고객센터 (링크 아님) : 시험문의 · 회원가입 두 묶음을 위아래 끝에 붙이고 사이 간격 자동 */
 .IT_main .cta-card--static {
-  grid-template-columns: minmax(0, 1fr); /* 전화기 아이콘 없이 내용만 */
+  grid-template-columns: minmax(0, 1fr); /* 전화기 아이콘(yds/cta-cs-phone.png)을 위에, 내용은 아래 : 운영 시간 한 줄 유지 */
+  grid-template-rows: auto 1fr;
   grid-template-areas:
-    "body"
-    "link";
+    "icon"
+    "body";
   row-gap: var(--ds-space-x3_5);
   align-content: stretch;
   height: 100%;
 }
 .IT_main .cs-contact {
-  grid-area: body / body / link / body;
+  grid-area: body;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
