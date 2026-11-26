@@ -738,6 +738,7 @@
      메인 콘텐츠(.IT_main) 동작 모음
      1) 시험활용 채용정보 : 탭 전환 + 실시간 롤링   (원래 career.js)
      2) 공용 탭 전환 : [data-tabs]                  (원래 tabs.js)
+     3) 메인 배너 번호(1/6) 색·간격 나누기
      (메인 배너는 운영 사이트 slick 스크립트를 그대로 쓴다 — 아래 [시안 확인용] 참고)
      각 블록은 서로 독립된 즉시 실행 함수라 순서와 상관없이 동작한다.
      상단 nav 동작은 nav 블록 끝 <script> 에 따로 있다.
@@ -897,6 +898,30 @@
     });
   })();
 
+  /* ---------- 3) 메인 배너 번호(1/6) 색·간격 나누기 ---------- */
+  /* 운영 사이트 메인 슬라이드 스크립트는 그대로 두고, 그 스크립트가 넣은 "1/6" 글자를
+     지금 번호 · 빗금 · 전체 개수 세 칸으로 나눠 다시 그린다. (색과 간격은 main-yds.css)
+     글자가 바뀔 때마다 감지하므로 슬라이드 스크립트보다 먼저 실행돼도, 나중에 실행돼도 동작한다. */
+  (function () {
+    const box = document.querySelector('.IT_main .number-pager__count');
+    if (!box || !window.MutationObserver) return;
+
+    function split() {
+      const m = /^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec(box.textContent);
+      if (!m || box.children.length) return; // 이미 나눴거나 숫자가 아니면 그대로 둔다
+      const parts = [[m[1], 'number-pager__current'], ['/', ''], [m[2], '']];
+      box.textContent = '';
+      parts.forEach(function (p) {
+        const span = document.createElement('span');
+        if (p[1]) span.className = p[1];
+        span.textContent = p[0];
+        box.appendChild(span);
+      });
+    }
+
+    new MutationObserver(split).observe(box, { childList: true, characterData: true, subtree: true });
+    split();
+  })();
 
   </script>
   </div><!-- // .IT_main -->
@@ -975,8 +1000,7 @@
 			}
 			
 			var i = (currentSlide ? currentSlide : 0) + 1;
-			// 지금 번호 / 전체 개수를 각각 span 으로 나눠 색과 간격을 따로 준다
-			$status.html('<span class="number-pager__current">' + i + '</span><span>/</span><span>' + (slick.$dots[0].children.length) + '</span>');
+			$status.text(i + '/' + (slick.$dots[0].children.length));
 		});
 
 		$slickElement.slick({
