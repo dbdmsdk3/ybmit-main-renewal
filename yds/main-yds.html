@@ -975,7 +975,8 @@
 			}
 			
 			var i = (currentSlide ? currentSlide : 0) + 1;
-			$status.text(i + '/' + (slick.$dots[0].children.length));
+			// 지금 번호 / 전체 개수를 각각 span 으로 나눠 색과 간격을 따로 준다
+			$status.html('<span class="number-pager__current">' + i + '</span><span>/</span><span>' + (slick.$dots[0].children.length) + '</span>');
 		});
 
 		$slickElement.slick({
