@@ -420,7 +420,7 @@
   color: var(--ds-color-fg-neutral);
   border-radius: var(--ds-shape-sm);
 }
-.IT_main .qtile__icon img { width: auto; height: auto; } /* SVG(menu_icon01~07) 원본 크기 그대로 : 40×40, FAQ(04)만 35×35 */
+.IT_main .qtile__icon img { width: auto; height: auto; } /* SVG(menu_icon01~07) 원본 크기 그대로 : 모두 40×40 */
 
 /* ---------- 7) 문의 · 배너 : [단체시험 / 커리어캠퍼스] [고객센터] [소형 배너 453×205] ---------- */
 .IT_main .support__grid {
