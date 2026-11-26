@@ -410,7 +410,7 @@
 }
 .IT_main .qtile:hover,
 .IT_main .qtile:focus-visible { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-semibold); background: var(--ds-color-bg-neutral-weak-alpha); } /* 바탕 : 관련사이트 드롭다운 호버와 같은 색 */
-/* 컬러 아이콘 (yds/menu-*.png) : 바탕 없이 이미지만 */
+/* 컬러 아이콘 (yds/menu_icon01~07.svg) : 바탕 없이 이미지만 */
 .IT_main .qtile__icon {
   display: flex;
   align-items: center;
@@ -420,7 +420,7 @@
   color: var(--ds-color-fg-neutral);
   border-radius: var(--ds-shape-sm);
 }
-.IT_main .qtile__icon img { width: auto; height: auto; } /* 아이콘 원본 크기 그대로 (40×40, FAQ 35×35) */
+.IT_main .qtile__icon img { width: auto; height: auto; } /* SVG(menu_icon01~07) 원본 크기 그대로 : 40×40, FAQ(04)만 35×35 */
 
 /* ---------- 7) 문의 · 배너 : [단체시험 / 커리어캠퍼스] [고객센터] [소형 배너 453×205] ---------- */
 .IT_main .support__grid {
@@ -450,7 +450,7 @@
   color: var(--ds-color-fg-neutral);
   border-radius: var(--ds-shape-lg);
 }
-.IT_main .cta-card__icon img { width: auto; height: auto; } /* 아이콘 원본 크기 그대로 (40×40) */
+.IT_main .cta-card__icon img { width: auto; height: auto; } /* menu_icon08~10 SVG 원본 크기 그대로 : 40×40 */
 .IT_main .cta-card__body { grid-area: body; display: flex; flex-direction: column; gap: var(--ds-space-x1_5); min-width: 0; }
 /* 카드 제목 : 단체시험 상담 · 커리어캠퍼스 제목과 고객센터 시험문의 · 회원가입 · 인증문의 공통 */
 .IT_main .cta-card__title,
@@ -477,7 +477,7 @@
 
 /* 고객센터 (링크 아님) : 시험문의 · 회원가입 두 묶음을 위아래 끝에 붙이고 사이 간격 자동 */
 .IT_main .cta-card--static {
-  grid-template-columns: minmax(0, 1fr); /* 전화기 아이콘(yds/cta-cs-phone.png)을 위에, 내용은 아래 : 운영 시간 한 줄 유지 */
+  grid-template-columns: minmax(0, 1fr); /* 전화기 아이콘(yds/menu_icon10.svg)을 위에, 내용은 아래 : 운영 시간 한 줄 유지 */
   grid-template-rows: auto 1fr;
   grid-template-areas:
     "icon"
