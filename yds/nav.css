@@ -1074,7 +1074,7 @@
 .IT_main_recruit .nvb-card .st {
   padding-bottom: var(--ds-space-x3);
   border-bottom: 1px solid var(--ds-color-stroke-neutral-weak);
-  font-size: var(--ds-font-size-t04);
+  font-size: var(--ds-font-size-t05);
   color: var(--ds-color-fg-neutral);
 }
 
