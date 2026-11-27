@@ -46,7 +46,7 @@
 .IT_m_main .exam-list {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: var(--ds-space-x2);
+  gap: var(--ds-space-x3); /* 카드 사이 12 : PC 시안과 같음 */
 }
 .IT_m_main .exam-card { grid-column: span 2; }
 .IT_m_main .exam--new,
@@ -58,7 +58,7 @@
   justify-content: space-between;
   gap: var(--ds-space-x4);
   min-width: 0;
-  padding: var(--ds-space-x4) var(--ds-space-x3) var(--ds-space-x3);
+  padding: var(--ds-space-x3_5); /* 테두리 2 포함 바깥에서 16 : 모든 박스 안쪽 여백 16 으로 통일 */
   background: var(--ds-color-bg-layer-default);
   border: 2px solid transparent; /* 호버 때 그라데이션 라인만 나타나도록 자리 확보 */
   border-radius: var(--ds-shape-xl);
@@ -70,8 +70,8 @@
   gap: var(--ds-space-x3);
 }
 .IT_m_main .exam-card__title {
-  font-size: var(--ds-font-size-t03);
-  line-height: var(--ds-line-height-t03);
+  font-size: var(--ds-font-size-t04);
+  line-height: var(--ds-line-height-t04);
   font-weight: var(--ds-font-weight-semibold);
   color: var(--ds-color-fg-neutral-muted);
 }
@@ -103,7 +103,7 @@
 
 /* ---------- 3) 바로가기 : PC 시안 MOS 활용 박스(qbox · qtile) 그대로 ---------- */
 .IT_m_main .qbox {
-  padding: var(--ds-space-x5);
+  padding: var(--ds-space-x4); /* 모든 박스 안쪽 여백 16 */
   background: var(--ds-color-bg-layer-default);
   border-radius: var(--ds-shape-xl);
 }
@@ -118,7 +118,7 @@
   min-width: 0;
   padding: var(--ds-space-x1_5) var(--ds-space-x0_5);
   font-size: var(--ds-font-size-t04);
-  font-weight: var(--ds-font-weight-medium);
+  font-weight: var(--ds-font-weight-semibold); /* 시험 카드 시험명과 같은 굵기 */
   color: var(--ds-color-fg-neutral-muted);
   text-align: center;
   border-radius: var(--ds-shape-lg);
@@ -139,12 +139,13 @@
   display: flex;
   align-items: center;
   gap: var(--ds-space-x2);
-  padding: var(--ds-space-x3) var(--ds-space-x4);
+  padding: var(--ds-space-x4); /* 모든 박스 안쪽 여백 16 */
   color: var(--ds-color-fg-neutral-muted);
   background: var(--ds-color-bg-layer-default);
   border-radius: var(--ds-shape-xl);
 }
-.IT_m_main .notice__text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ds-color-fg-neutral); }
+.IT_m_main .notice__icon { flex: none; width: 20px; height: 20px; } /* 공지 아이콘(m_icon04, 원본 40×40)을 YDS 기본 아이콘 크기 20 으로 */
+.IT_m_main .notice__text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: var(--ds-font-weight-medium); color: var(--ds-color-fg-neutral-muted); }
 
 /* ---------- 6) 푸터 ---------- */
 .IT_m_main .m-footer {
@@ -165,8 +166,10 @@
   .IT_m_main .wrap { padding: 0 var(--ds-space-x6); }
   .IT_m_main .section { padding-top: var(--ds-space-x6); }
   /* 시험 카드 : 위 2장 / 아래 3장 배치 그대로, 칸이 넓어져 시험명은 한 줄 */
-  .IT_m_main .exam-list { gap: var(--ds-space-x3); }
-  .IT_m_main .exam-card { padding: var(--ds-space-x6) var(--ds-space-x4) var(--ds-space-x4); }
+  /* 박스 안쪽 여백 : PC 시안 값 (시험 카드 바깥에서 위 30 · 옆 아래 20, 나머지 박스 20) */
+  .IT_m_main .exam-card { padding: var(--ds-space-x7) var(--ds-space-x4_5) var(--ds-space-x4_5); }
+  .IT_m_main .qbox,
+  .IT_m_main .notice__line { padding: var(--ds-space-x5); }
   .IT_m_main .exam-card__title { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); white-space: nowrap; }
   .IT_m_main .exam-card__link { font-size: var(--ds-font-size-t05); }
   .IT_m_main .m-br { display: none; }
