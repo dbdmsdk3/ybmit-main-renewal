@@ -1,0 +1,237 @@
+/* =========================================================
+   YBM IT 모바일 — 메인 본문 (YDS 디자인 덮어쓰기)
+   - HTML : 개발 원본 그대로 + <section id="container" class="main IT_m_main"> class 하나만 추가 (m-main.html)
+     ★ 바뀐 곳 : 생성형 AI 카드 추가, 시험명 글자 / 카드 순서 · 시험소개 숨김 · 로고 · 아이콘은 이 CSS 에서
+   - 배너 슬라이드는 개발 swiper 그대로
+   - 서버에서 기존 default.css 다음에 불러온다
+   - 색 · 간격 · 글자 · 모서리는 --ds-* 토큰만, YDS 에 없는 치수(로고 · 아이콘 크기, 선 굵기)만 숫자
+   - 이미지 주소 images/yds/… 는 이 CSS 파일 위치 기준 → 서버에 올린 실제 위치로 바꾼다
+   - 모바일 먼저 → 768px 에서 여백 · 글자, 1280px 에서 시험 카드 5칸
+
+   3) 본문 틀  4) 시험접수 카드  5) 아이콘 메뉴  6) 이벤트 배너  7) 공지 한 줄  8) 반응형
+   ========================================================= */
+
+/* ---------- 3) 본문 틀 ---------- */
+.IT_m_main.main {
+  padding: calc(56px + var(--ds-space-x4)) 0 var(--ds-space-x6); /* 상단 바 높이 56 + 16 */
+  background: var(--ds-color-bg-neutral);
+  word-break: keep-all;
+}
+.IT_m_main .box_bg { display: none; } /* 상단 배경 사진 : 새 디자인에서 쓰지 않음 */
+.IT_m_main .main_exam,
+.IT_m_main .direct_mn,
+.IT_m_main .main_visual,
+.IT_m_main .main_notice { max-width: 1148px; margin-inline: auto; }
+
+/* ---------- 4) 시험접수 카드 : PC 시안(main-yds.css 5번) 모양 ----------
+   폰 : 6칸 바둑판 → 위 AI · Microsoft 3칸씩 / 아래 COS · COS Pro · DATA 2칸씩
+   순서는 CSS order 로 (HTML 순서는 개발 원본 그대로 MOS → DATA → COS → COS Pro) */
+.IT_m_main .main_exam { margin-top: 0; padding: 0 var(--ds-space-x4); }
+.IT_m_main .main_exam ul {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--ds-space-x3);
+}
+.IT_m_main .main_exam ul li,
+.IT_m_main .main_exam ul li:nth-child(2n) { float: none; width: auto; min-width: 0; padding: 0; grid-column: span 2; }
+.IT_m_main .main_exam ul li:has(.ai),
+.IT_m_main .main_exam ul li:has(.mos) { grid-column: span 3; }
+.IT_m_main .main_exam ul li:has(.ai)     { order: 1; }
+.IT_m_main .main_exam ul li:has(.mos)    { order: 2; }
+.IT_m_main .main_exam ul li:has(.cos)    { order: 3; }
+.IT_m_main .main_exam ul li:has(.cospro) { order: 4; }
+.IT_m_main .main_exam ul li:has(.data)   { order: 5; }
+
+/* 카드 : 테두리 2 포함 바깥에서 16 */
+.IT_m_main .main_exam .box_bs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--ds-space-x4);
+  height: 100%;
+  padding: var(--ds-space-x3_5);
+  background: var(--ds-color-bg-layer-default);
+  border: 2px solid transparent; /* 호버 때 그라데이션 라인만 나타나도록 자리 확보 */
+  border-radius: var(--ds-shape-xl);
+}
+/* 시험명(위) + 로고(아래) : 원본은 로고 → 시험명 순이라 order 로 바꿈 */
+.IT_m_main .main_exam .box_bs .top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ds-space-x3);
+  flex: 1;
+  padding: 0;
+  text-align: left;
+  background: none;
+}
+.IT_m_main .main_exam .box_bs .top p.detail {
+  order: -1;
+  font-size: var(--ds-font-size-t04);
+  line-height: var(--ds-line-height-t04);
+  font-weight: var(--ds-font-weight-semibold);
+  letter-spacing: normal;
+  color: var(--ds-color-fg-neutral-muted);
+}
+/* 로고 : 높이 32 칸 안에 원본 비율로 맞춤, 왼쪽 정렬 */
+.IT_m_main .main_exam .box_bs .top p.logo,
+.IT_m_main .main_exam .box_bs.mos .logo,
+.IT_m_main .main_exam .box_bs.data .logo,
+.IT_m_main .main_exam .box_bs.cos .logo,
+.IT_m_main .main_exam .box_bs.cospro .logo {
+  width: 100%;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
+.IT_m_main .main_exam .box_bs.ai .logo     { background-image: url(images/yds/logo-ai-rec.png); } /* ★ 서버에 이미지 올린 뒤 주소 교체 */
+.IT_m_main .main_exam .box_bs.mos .logo    { background-image: url(https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_mos_rec.png); }
+.IT_m_main .main_exam .box_bs.cos .logo    { background-image: url(https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_cos_rec.png); }
+.IT_m_main .main_exam .box_bs.cospro .logo { background-image: url(https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_cospro_rec.png); }
+.IT_m_main .main_exam .box_bs.data .logo   { background-image: url(https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_data_rec.png); }
+
+/* 버튼 : 시험접수 하나만 (시험소개는 숨김 — HTML 은 그대로 남김) */
+.IT_m_main .main_exam .box_bs .btn_tbl { display: block; }
+.IT_m_main .main_exam .box_bs .btn_tbl > a.btn_fill:nth-child(2) { display: none; }
+.IT_m_main .main_exam .box_bs .btn_tbl > a.btn_fill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  padding: var(--ds-space-x1_5);
+  font-size: var(--ds-font-size-t04);
+  line-height: var(--ds-line-height-t04);
+  font-weight: var(--ds-font-weight-medium);
+  letter-spacing: normal;
+  background: var(--ds-color-palette-gray-800);
+  border: 0;
+  border-radius: var(--ds-shape-sm);
+}
+/* 호버 · 포커스 : PC 시안과 같음 (버튼 검정 + 카드 2px 그라데이션 라인) */
+.IT_m_main .main_exam .box_bs .btn_tbl > a.btn_fill:hover,
+.IT_m_main .main_exam .box_bs .btn_tbl > a.btn_fill:focus-visible { font-weight: var(--ds-font-weight-semibold); background: var(--ds-color-palette-gray-1000); }
+.IT_m_main .main_exam .box_bs.ai:has(.btn_fill:hover, .btn_fill:focus-visible) { background: linear-gradient(var(--ds-color-bg-layer-default), var(--ds-color-bg-layer-default)) padding-box, linear-gradient(135deg, var(--ds-color-palette-orange-600), var(--ds-color-palette-purple-800)) border-box; }
+.IT_m_main .main_exam .box_bs.mos:has(.btn_fill:hover, .btn_fill:focus-visible) { background: linear-gradient(var(--ds-color-bg-layer-default), var(--ds-color-bg-layer-default)) padding-box, linear-gradient(135deg, var(--ds-color-palette-purple-800), var(--ds-color-palette-blue-700)) border-box; }
+.IT_m_main .main_exam .box_bs.cos:has(.btn_fill:hover, .btn_fill:focus-visible) { background: linear-gradient(var(--ds-color-bg-layer-default), var(--ds-color-bg-layer-default)) padding-box, linear-gradient(135deg, var(--ds-color-palette-blue-700), var(--ds-color-palette-blue-800)) border-box; }
+.IT_m_main .main_exam .box_bs.cospro:has(.btn_fill:hover, .btn_fill:focus-visible) { background: linear-gradient(var(--ds-color-bg-layer-default), var(--ds-color-bg-layer-default)) padding-box, linear-gradient(135deg, var(--ds-color-palette-blue-800), var(--ds-color-palette-purple-700)) border-box; }
+.IT_m_main .main_exam .box_bs.data:has(.btn_fill:hover, .btn_fill:focus-visible) { background: linear-gradient(var(--ds-color-bg-layer-default), var(--ds-color-bg-layer-default)) padding-box, linear-gradient(135deg, var(--ds-color-palette-purple-700), var(--ds-color-palette-orange-600)) border-box; }
+
+/* ---------- 5) 아이콘 메뉴 (접수확인 · 이벤트 · 공지사항) : PC 시안 MOS 활용 박스 모양 ---------- */
+.IT_m_main .direct_mn { margin-top: var(--ds-space-x3); padding: 0 var(--ds-space-x4); }
+.IT_m_main .icon_mn {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-x3);
+  padding: var(--ds-space-x4);
+  background: var(--ds-color-bg-layer-default);
+  border-radius: var(--ds-shape-xl);
+}
+.IT_m_main .icon_mn li { display: block; width: auto; min-width: 0; }
+.IT_m_main .icon_mn li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-x1_5);
+  padding: var(--ds-space-x1_5) var(--ds-space-x0_5);
+  font-size: var(--ds-font-size-t04);
+  line-height: var(--ds-line-height-t04);
+  font-weight: var(--ds-font-weight-semibold);
+  letter-spacing: normal;
+  color: var(--ds-color-fg-neutral-muted);
+  border-radius: var(--ds-shape-lg);
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-enter);
+}
+.IT_m_main .icon_mn li a:hover,
+.IT_m_main .icon_mn li a:focus-visible { color: var(--ds-color-fg-neutral); background: var(--ds-color-bg-neutral-weak-alpha); }
+/* 아이콘 : 원본 이미지 대신 m_icon01~03 (40×40) */
+.IT_m_main .icon_mn li:nth-child(n) a::before {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+}
+.IT_m_main .icon_mn li:nth-child(1) a::before { background-image: url(images/yds/m_icon01.svg); }
+.IT_m_main .icon_mn li:nth-child(2) a::before { background-image: url(images/yds/m_icon02.svg); }
+.IT_m_main .icon_mn li:nth-child(3) a::before { background-image: url(images/yds/m_icon03.svg); }
+
+/* ---------- 6) 이벤트 배너 : 슬라이드 동작은 개발 swiper 그대로 ---------- */
+.IT_m_main .main_visual { height: auto; margin-top: var(--ds-space-x3); padding: 0; }
+.IT_m_main .main_visual .swiper-slide .th_img { margin: 0 var(--ds-space-x4); border-radius: var(--ds-shape-xl); }
+.IT_m_main .main_visual .swiper-slide .th_img img { display: block; aspect-ratio: 600 / 290; object-fit: cover; }
+/* 번호 점 : 배너 아래 */
+.IT_m_main .main_visual .main_visual_page { position: static; display: flex; justify-content: center; gap: var(--ds-space-x1_5); margin-top: var(--ds-space-x3); }
+.IT_m_main .main_visual .main_visual_page .swiper-pagination-bullet { width: 6px; height: 6px; margin: 0; background: var(--ds-color-stroke-neutral); opacity: 1; }
+.IT_m_main .main_visual .main_visual_page .swiper-pagination-bullet-active { width: 16px; background: var(--ds-color-fg-neutral); border-radius: var(--ds-shape-pill); }
+
+/* ---------- 7) 공지 한 줄 ---------- */
+.IT_m_main .main_notice { margin-top: var(--ds-space-x3); padding: 0 var(--ds-space-x4); border-top: 0; }
+.IT_m_main .main_notice p { padding: 0; }
+.IT_m_main .main_notice p > a {
+  position: relative;
+  padding: var(--ds-space-x4) 40px var(--ds-space-x4) var(--ds-space-x4); /* 오른쪽 40 = 꺾쇠 자리 */
+  font-size: var(--ds-font-size-t04);
+  line-height: var(--ds-line-height-t04);
+  font-weight: var(--ds-font-weight-medium);
+  letter-spacing: normal;
+  color: var(--ds-color-fg-neutral-muted);
+  background: var(--ds-color-bg-layer-default);
+  border-radius: var(--ds-shape-xl);
+}
+/* 앞 아이콘 : 원본 이미지 대신 m_icon04 를 YDS 기본 아이콘 크기 20 으로 */
+.IT_m_main .main_notice p > a::before {
+  width: 20px;
+  height: 20px;
+  margin: -2px var(--ds-space-x2) 0 0;
+  background: url(images/yds/m_icon04.svg) center / 20px 20px no-repeat;
+}
+/* 뒤 꺾쇠 : YDS chevron-right */
+.IT_m_main .main_notice p > a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: var(--ds-space-x4);
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  background: var(--ds-color-fg-neutral-subtle);
+  -webkit-mask: var(--ds-icon-chevron-right) center / contain no-repeat;
+  mask: var(--ds-icon-chevron-right) center / contain no-repeat;
+}
+
+/* ---------- 8) 반응형 ---------- */
+@media (min-width: 768px) {
+  .IT_m_main .main_exam,
+  .IT_m_main .direct_mn,
+  .IT_m_main .main_notice { padding: 0 var(--ds-space-x6); }
+  .IT_m_main .main_visual .swiper-slide .th_img { margin: 0 var(--ds-space-x6); }
+  .IT_m_main .direct_mn,
+  .IT_m_main .main_visual,
+  .IT_m_main .main_notice { margin-top: var(--ds-space-x6); }
+  /* 박스 안쪽 여백 : PC 시안 값 (시험 카드 바깥에서 위 30 · 옆 아래 20, 나머지 박스 20) */
+  .IT_m_main .main_exam .box_bs { padding: var(--ds-space-x7) var(--ds-space-x4_5) var(--ds-space-x4_5); }
+  .IT_m_main .icon_mn { padding: var(--ds-space-x5); }
+  .IT_m_main .main_notice p > a { padding: var(--ds-space-x5) 44px var(--ds-space-x5) var(--ds-space-x5); }
+  .IT_m_main .main_notice p > a::after { right: var(--ds-space-x5); }
+  /* 시험명 한 줄 */
+  .IT_m_main .main_exam .box_bs .top p.detail { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); white-space: nowrap; }
+  .IT_m_main .main_exam .box_bs .btn_tbl > a.btn_fill { font-size: var(--ds-font-size-t05); }
+  .IT_m_main .m-br { display: none; }
+}
+
+@media (min-width: 1280px) {
+  /* 시험 카드 : 5장 한 줄 (PC 시안과 같은 배치) */
+  .IT_m_main .main_exam ul { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .IT_m_main .main_exam ul li,
+  .IT_m_main .main_exam ul li:nth-child(2n),
+  .IT_m_main .main_exam ul li:has(.ai),
+  .IT_m_main .main_exam ul li:has(.mos) { grid-column: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .IT_m_main .icon_mn li a { transition: none; }
+}

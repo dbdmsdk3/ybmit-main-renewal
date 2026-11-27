@@ -1,0 +1,152 @@
+/* =========================================================
+   YBM IT 모바일 — 전체 메뉴 (YDS 디자인 덮어쓰기)
+   - HTML : 개발 원본 그대로 + <aside class="side_menu IT_m_menu"> class 하나만 추가 (m-menu.html)
+     ★ 바뀐 곳 : Generative AI 메뉴 추가
+   - 열고 닫기는 개발 스크립트 common.allMenuOpen() 그대로 (#header.open .side_menu)
+   - 서버에서 기존 default.css 다음에 불러온다
+   - 색 · 간격 · 글자 · 모서리는 --ds-* 토큰만, YDS 에 없는 치수(아이콘 크기, 선 굵기)만 숫자
+   - 이미지 주소 images/yds/menu/… 는 이 CSS 파일 위치 기준 → 서버에 올린 실제 위치로 바꾼다
+   ========================================================= */
+
+/* ---------- 2) 전체 메뉴 (.side_menu) : 열고 닫기는 개발 스크립트 그대로 (#header.open) ---------- */
+.IT_m_menu.side_menu { background: var(--ds-color-bg-layer-default); }
+
+/* 맨 위 : 로그인 안내 + 버튼 + 닫기 */
+.IT_m_menu .side_top {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-x2);
+  height: 56px;
+  padding: 0 56px 0 var(--ds-space-x4);
+  line-height: normal;
+  background: var(--ds-color-bg-layer-default);
+  border-bottom: 1px solid var(--ds-color-stroke-neutral-muted);
+}
+.IT_m_menu .side_top .info_user {
+  margin-right: 0;
+  font-size: var(--ds-font-size-t04); /* PC 유틸 메뉴(로그인 · 너의페이지)와 같음 : t04 · Regular · muted */
+  font-weight: var(--ds-font-weight-regular);
+  letter-spacing: normal;
+  color: var(--ds-color-fg-neutral-muted);
+}
+/* 로그인 · 회원정보수정 · 로그아웃 버튼 : YDS Action Button small neutralWeak 모양 */
+.IT_m_menu .side_top .btn_line {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  min-width: 0;
+  padding: 0 var(--ds-space-x3);
+  font-size: var(--ds-font-size-t04); /* PC 유틸 메뉴와 같은 글자 */
+  font-weight: var(--ds-font-weight-regular);
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--ds-color-fg-neutral-muted);
+  background: var(--ds-color-bg-neutral-weak-alpha);
+  border: 0;
+  border-radius: var(--ds-shape-sm);
+}
+/* 닫기 : 원본 X 선은 숨기고 YDS x 아이콘 */
+.IT_m_menu .side_top .btn_side_close {
+  right: var(--ds-space-x1_5);
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  color: var(--ds-color-fg-neutral);
+}
+.IT_m_menu .side_top .btn_side_close::before {
+  inset: 0;
+  margin: auto;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  border-radius: 0;
+  transform: none;
+  -webkit-mask: var(--ds-icon-x) center / contain no-repeat;
+  mask: var(--ds-icon-x) center / contain no-repeat;
+}
+.IT_m_menu .side_top .btn_side_close::after { display: none; }
+
+/* 메뉴 목록 : 아이콘 이미지는 개발 원본 그대로, 글자 · 높이 · 선만 */
+.IT_m_menu .side_inner { padding: var(--ds-space-x2) var(--ds-space-x4); } /* 원본 15 · 20 → 위 막대와 같은 왼쪽 16 */
+.IT_m_menu .side_content .all_service li { border-bottom-color: var(--ds-color-stroke-neutral-muted); }
+/* 대메뉴 : PC 대메뉴(.nav-top)와 같음 — t05 · SemiBold · fg-neutral, 누르면 Bold */
+.IT_m_menu .side_content .all_service li a {
+  height: 52px;
+  padding-left: 36px;
+  font-size: var(--ds-font-size-t05);
+  line-height: 52px;
+  font-weight: var(--ds-font-weight-semibold);
+  letter-spacing: normal;
+  color: var(--ds-color-fg-neutral);
+}
+/* 메뉴 아이콘 : 원본 PNG 대신 images/yds/menu/*.svg (피그마 아이콘 세트 20 크기, 선 2)
+   SVG 를 마스크로 써서 색은 토큰으로 칠한다. Generative AI 는 세트에 없어 같은 방식으로 새로 그림 */
+.IT_m_menu .side_content .all_service > li[class] > a { background: none; } /* [class] : 원본 li.menu_01 a 규칙보다 우선 */
+.IT_m_menu .side_content .all_service > li > a::before {
+  content: "";
+  position: absolute;
+  top: 16px; /* 줄 높이 52 의 가운데 : (52 - 20) / 2 */
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--ds-color-fg-neutral-muted);
+  -webkit-mask: var(--m-menu-icon) center / contain no-repeat;
+  mask: var(--m-menu-icon) center / contain no-repeat;
+}
+.IT_m_menu .side_content .all_service > li.menu_01 { --m-menu-icon: url(images/yds/menu/menu-home.svg); }   /* 홈 */
+.IT_m_menu .side_content .all_service > li.menu_02 { --m-menu-icon: url(images/yds/menu/menu-apply.svg); }  /* 시험접수 */
+.IT_m_menu .side_content .all_service > li.menu_11 { --m-menu-icon: url(images/yds/menu/menu-ai.svg); }     /* ★ Generative AI (새로 그림) */
+.IT_m_menu .side_content .all_service > li.menu_03 { --m-menu-icon: url(images/yds/menu/menu-mos.svg); }    /* MOS */
+.IT_m_menu .side_content .all_service > li.menu_05 { --m-menu-icon: url(images/yds/menu/menu-cos.svg); }    /* COS */
+.IT_m_menu .side_content .all_service > li.menu_06 { --m-menu-icon: url(images/yds/menu/menu-cospro.svg); } /* COS Pro */
+.IT_m_menu .side_content .all_service > li.menu_04 { --m-menu-icon: url(images/yds/menu/menu-data.svg); }   /* DATA */
+.IT_m_menu .side_content .all_service > li.menu_07 { --m-menu-icon: url(images/yds/menu/menu-mypage.svg); } /* 마이페이지 */
+.IT_m_menu .side_content .all_service > li.menu_10 { --m-menu-icon: url(images/yds/menu/menu-book.svg); }   /* 시험 교재 */
+.IT_m_menu .side_content .all_service > li.menu_08 { --m-menu-icon: url(images/yds/menu/menu-event.svg); }  /* 이벤트 */
+.IT_m_menu .side_content .all_service > li.menu_09 { --m-menu-icon: url(images/yds/menu/menu-notice.svg); } /* 공지사항 */
+.IT_m_menu .side_content .all_service > li > a:hover,
+.IT_m_menu .side_content .all_service > li > a:focus-visible { font-weight: var(--ds-font-weight-bold); }
+
+/* 마이페이지 하위 메뉴 : PC 소메뉴(.nav-link)와 같음 — t04 · Regular · muted, 누르면 SemiBold · 주황
+   원본의 앞 점(::before)은 빼고, 글자는 대메뉴 글자 시작(36)에 맞춤 */
+.IT_m_menu .side_content .all_service li > .snb { margin-bottom: var(--ds-space-x3); }
+.IT_m_menu .side_content .all_service li > .snb > li > a {
+  height: 36px;
+  padding-left: 36px;
+  font-size: var(--ds-font-size-t04);
+  line-height: 36px;
+  font-weight: var(--ds-font-weight-regular);
+  color: var(--ds-color-fg-neutral-muted);
+}
+.IT_m_menu .side_content .all_service li > .snb > li > a::before { display: none; }
+.IT_m_menu .side_content .all_service li > .snb > li > a:hover,
+.IT_m_menu .side_content .all_service li > .snb > li > a:focus-visible { font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-palette-orange-600); }
+
+/* 고객센터 : 진한 회색 면 → 옅은 회색 면 */
+.IT_m_menu .side_customer { padding: var(--ds-space-x5) var(--ds-space-x4); background: var(--ds-color-bg-neutral); }
+.IT_m_menu .side_customer h3 { display: flex; gap: var(--ds-space-x2); margin-bottom: var(--ds-space-x2); }
+.IT_m_menu .side_customer h3 > span {
+  padding: var(--ds-space-x1_5) var(--ds-space-x3);
+  font-size: var(--ds-font-size-t04);
+  font-weight: var(--ds-font-weight-medium);
+  color: var(--ds-color-fg-neutral);
+  background: var(--ds-color-bg-layer-default);
+  border-radius: var(--ds-shape-sm);
+}
+.IT_m_menu .side_customer dl { height: auto; line-height: var(--ds-line-height-t05); padding: var(--ds-space-x1) 0; color: var(--ds-color-fg-neutral); }
+.IT_m_menu .side_customer dl dt { font-size: var(--ds-font-size-t04); letter-spacing: normal; color: var(--ds-color-fg-neutral-muted); }
+.IT_m_menu .side_customer dl dd { margin-left: var(--ds-space-x2); font-size: var(--ds-font-size-t05); font-weight: var(--ds-font-weight-semibold); }
+.IT_m_menu .side_customer .customer__btn a {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 var(--ds-space-x2_5);
+  font-size: var(--ds-font-size-t04);
+  font-weight: var(--ds-font-weight-medium);
+  color: var(--ds-color-fg-neutral);
+  background: var(--ds-color-bg-layer-default);
+  border-radius: var(--ds-shape-sm);
+}
+/* 원본 .customer__btn(dd) 테두리 · 바탕 걷어 냄 */
+.IT_m_menu .side_customer dd.customer__btn { height: auto; padding: 0; line-height: normal; background: none; border: 0; }
+
