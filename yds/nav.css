@@ -989,7 +989,7 @@
      YDS 토큰 중 가장 가까운 것으로 다시 정한다.
      (회색 #f9fafb → bg-neutral-muted, 선 #e5e7eb → stroke-neutral-weak, 카드 선 #f3f4f6 → stroke-neutral-muted,
       글자 #030712 / #4b5563 / #9ca3af → fg-neutral / -muted / -subtle, 회사명 파랑 #0068f0 → fg-informative,
-      화살표 호버 주황 #e8600c → palette-orange-700, 15px → t04)
+      화살표 호버 → palette-gray-1000 (메인 슬라이드 화살표 호버 바탕과 같은 색), 15px → t04)
    - 카드 사이 16 과 한 화면 4장은 개발자 스크립트가 이동 거리를 계산하는 값이라 바꾸지 않는다. */
 .IT_main_recruit .nvb {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
@@ -1074,7 +1074,8 @@
 .IT_main_recruit .nvb-card .st {
   padding-bottom: var(--ds-space-x3);
   border-bottom: 1px solid var(--ds-color-stroke-neutral-weak);
-  font-size: var(--ds-font-size-t05);
+  font-size: var(--ds-font-size-t04);
+  font-weight: var(--ds-font-weight-medium);
   color: var(--ds-color-fg-neutral);
 }
 
@@ -1089,7 +1090,7 @@
 }
 
 .IT_main_recruit .nvb-btn:hover {
-  color: var(--ds-color-palette-orange-700);
+  color: var(--ds-color-palette-gray-1000);
 }
 
 .IT_main_recruit a:focus-visible,
