@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YDS 모바일 시안 | YBM IT</title>
+  <!-- YDS : 화면 CSS 보다 먼저 불러온다. (PC 시안과 같은 시안용 주소)
+       [회사 적용 시] https://design.ybmnet.co.kr/yds/dist/ybm-ds.css · ybm-ds.js 로 바꾼다. -->
+  <link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">
+  <script src="https://luvms012-rgb.github.io/yds/dist/ybm-ds.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="IT_m_main">
+
+  <!-- 상단 : YDS Top App Bar (로고 + 전체 메뉴) -->
+  <header class="ds-appbar" data-platform="android">
+    <div class="ds-appbar__main">
+      <h1 class="ds-appbar__title"><a class="m-logo" href="/m/index_m.jsp"><img src="https://design.ybmnet.co.kr/ds/logo/ybmit.svg" alt="YBM IT"></a></h1>
+    </div>
+    <div class="ds-appbar__right">
+      <a class="ds-appbar__button" href="javascript:common.allMenuOpen();" aria-label="전체 메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 시험접수 : PC 시안 카드 그대로 (위 2장 AI · Microsoft / 아래 3장 COS · COS Pro · DATA) -->
+    <section class="section exam">
+      <div class="wrap">
+        <h2 class="blind">시험접수</h2>
+        <ul class="exam-list">
+          <li class="exam-card exam--new">
+            <div class="exam-card__head">
+              <p class="exam-card__title">생성형 AI 자격증</p>
+              <div class="exam-card__logo"><img src="images/yds/logo-ai-rec.png" alt="Generative AI Foundations"></div>
+            </div>
+            <a href="#" class="exam-card__link">시험접수</a>
+          </li>
+          <li class="exam-card exam--mos">
+            <div class="exam-card__head">
+              <p class="exam-card__title">Microsoft 인증 자격증</p>
+              <div class="exam-card__logo"><img src="https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_mos_rec.png" alt="Microsoft Office Specialist"></div>
+            </div>
+            <a href="javascript:goRec('MOS')" class="exam-card__link">시험접수</a>
+          </li>
+          <li class="exam-card exam--cos">
+            <div class="exam-card__head">
+              <p class="exam-card__title">코딩활용<br class="m-br">능력시험</p>
+              <div class="exam-card__logo"><img src="https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_cos_rec.png" alt="COS 코딩활용능력시험"></div>
+            </div>
+            <a href="javascript:goRec('COS')" class="exam-card__link">시험접수</a>
+          </li>
+          <li class="exam-card exam--cospro">
+            <div class="exam-card__head">
+              <p class="exam-card__title">코딩전문가<br class="m-br">자격시험</p>
+              <div class="exam-card__logo"><img src="https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_cospro_rec.png" alt="COS Pro"></div>
+            </div>
+            <a href="javascript:goRec('PRO')" class="exam-card__link">시험접수</a>
+          </li>
+          <li class="exam-card exam--data">
+            <div class="exam-card__head">
+              <p class="exam-card__title">데이터분석<br class="m-br">기술평가</p>
+              <div class="exam-card__logo"><img src="https://imagesisa.ybmsisa.com/platform/www_ybmit_com/images/logo_data_rec.png" alt="DATA 데이터분석기술평가"></div>
+            </div>
+            <a href="javascript:goRec('DATA')" class="exam-card__link">시험접수</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 바로가기 : PC 시안 MOS 활용 박스(qbox · qtile) 모양 그대로. 아이콘 이미지는 나중에 교체 -->
+    <section class="section quick">
+      <div class="wrap">
+        <div class="qbox">
+          <h2 class="blind">바로가기</h2>
+          <div class="qbox__grid qbox__grid--3">
+            <a href="/m_mytest/my_rec_list.jsp" class="qtile"><span class="qtile__icon"><img src="images/yds/menu_icon05.svg" alt=""></span><span>접수확인</span></a>
+            <a href="/m_cs/event_list.jsp" class="qtile"><span class="qtile__icon"><img src="images/yds/menu_icon06.svg" alt=""></span><span>이벤트</span></a>
+            <a href="/m_cs/notice_list.jsp" class="qtile"><span class="qtile__icon"><img src="images/yds/menu_icon07.svg" alt=""></span><span>공지사항</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 배너 : 지금 모바일 메인 배너 이미지 (600×290) -->
+    <section class="section banner">
+      <div class="wrap">
+        <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="이벤트 배너">
+          <div class="ds-carousel__scroller">
+            <div class="ds-carousel__item"><a class="banner__link" href="https://smartstore.naver.com/kegbook/category/b3b533438a274d64979e981f0aedf386?cp=1"><img src="https://moscontrol.ybmit.com/Data/main/SBS_365_600290.jpg" alt="MOS 자격취득 응원"></a></div>
+            <div class="ds-carousel__item"><a class="banner__link" href="https://www.ybmit.com/m_event/event_20260930.jsp"><img src="https://moscontrol.ybmit.com/Data/main/YBM%20IT%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EB%AA%A9%EB%A1%9D,%20%EB%AA%A8%EB%B0%94%EC%9D%BC%20%EB%A9%94%EC%9D%B8%20600_290(5).jpg" alt="YBM IT 이벤트"></a></div>
+            <div class="ds-carousel__item"><a class="banner__link" href="https://ybmit.com/cs/notice_detail.jsp?keyIndex=3418"><img src="https://moscontrol.ybmit.com/Data/main/M_600_290.jpg" alt="공지 배너"></a></div>
+          </div>
+          <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전 배너"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+          <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음 배너"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 공지 한 줄 -->
+    <section class="section notice">
+      <div class="wrap">
+        <a class="notice__line" href="/m_cs/notice_list.jsp">
+          <i class="ds-icon ds-icon--bell ds-icon--sm" aria-hidden="true"></i>
+          <span class="notice__text">[중요] MOS 시험 아이디 생성 안내</span>
+          <i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 : 지금 모바일 푸터 내용 그대로 -->
+  <footer class="m-footer">
+    <div class="wrap">
+      <img class="m-footer__logo" src="https://imagesisa.ybmnet.co.kr/platform/common/logo/ybm_kor.svg" alt="YBM 와이비엠">
+      <nav class="m-footer__util" aria-label="바로가기">
+        <a href="https://m.ybmnet.co.kr/common/login.asp?url=/m/index_m.jsp&amp;what=www.ybmit.com">로그인</a>
+        <a href="/main/index.jsp?ckr=p">PC버전</a>
+        <a href="https://m.ybmnet.co.kr/center_2014/m_index.asp">고객센터</a>
+        <a href="https://m.ybmnet.co.kr/center_2014/m_consultWrite.asp">1 : 1 문의</a>
+      </nav>
+      <nav class="m-footer__policy" aria-label="약관">
+        <a href="#">이용약관</a>
+        <a href="https://member.ybmnet.co.kr/join/terms/ybmIndiv_new.html"><strong>개인정보처리방침</strong></a>
+        <a href="https://www.ybmnet.co.kr/footer/ibkBank.htm">채무지급보증안내</a>
+        <a href="javascript:companyInfo()">사업자정보</a>
+      </nav>
+      <p class="m-footer__info">㈜와이비엠넷은 통신판매중개자로서 YBM IT 서비스는 ㈜와이비엠의 책임하에 운영되고 있습니다.</p>
+      <p class="m-footer__info">Copyright © ㈜와이비엠&amp;㈜와이비엠넷. All rights reserved.<br>
+        사업자 : ㈜와이비엠 서울 종로구 종로 104 / 대표이사 : 허문호 /<br>
+        사업자등록번호 : 101-81-14655 / 02.2000.0509 / ybmit@ybm.co.kr</p>
+    </div>
+  </footer>
+
+</div><!-- // .IT_m_main -->
+
+</body>
+</html>
