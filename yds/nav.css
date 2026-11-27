@@ -1016,18 +1016,28 @@
   color: var(--ds-color-fg-neutral);
 }
 
+/* 열기 · 닫기 : 글자 배지 대신 좌우 슬라이드 화살표(.nvb-btn)와 같은 크기 · 색의 위아래 꺾쇠만 보임
+   (열기/닫기 글자는 스크립트가 바꾸므로 지우지 않고 화면에서만 숨김 — 화면 읽기 프로그램은 읽음) */
 .IT_main_recruit .nvb-toggle .badge {
-  gap: var(--ds-space-x1);
-  padding: var(--ds-space-x1) var(--ds-space-x2_5);
-  border: 1px solid var(--ds-color-stroke-neutral-weak);
-  border-radius: var(--ds-shape-sm);
-  font-size: var(--ds-font-size-t02);
-  font-weight: var(--ds-font-weight-medium);
-  color: var(--ds-color-fg-neutral-muted);
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--ds-color-fg-neutral-subtle);
+}
+
+.IT_main_recruit .nvb-toggle .badge #nvbToggleText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .IT_main_recruit .nvb-toggle .badge svg {
-  transition: transform var(--ds-duration-fast) var(--ds-easing-enter);
+  flex: none;
+  width: 32px;
+  height: 32px;
 }
 
 .IT_main_recruit .nvb-right {
@@ -1075,7 +1085,7 @@
   padding-bottom: var(--ds-space-x3);
   border-bottom: 1px solid var(--ds-color-stroke-neutral-weak);
   font-size: var(--ds-font-size-t04);
-  font-weight: var(--ds-font-weight-medium);
+  font-weight: var(--ds-font-weight-semibold);
   color: var(--ds-color-fg-neutral);
 }
 
