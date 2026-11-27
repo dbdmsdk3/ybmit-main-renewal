@@ -950,3 +950,127 @@
   .IT_nav .header.is-menu-open .gnb { flex: 1; min-height: 0px; max-height: none; }
   .IT_nav .gnb-bottom { margin-top: auto; }
 }
+
+/* ---------- 7) 채용정보 배너 (.IT_main_recruit) ----------
+   - 지금(개발자) 디자인 모양 그대로 : 폭 1180 · 로고 22 · 카드 4장 · 화살표 위치(-56, 1300 이하 -44)는
+     개발자 CSS 의 숫자 값을 그대로 쓰고, 예전 토큰(--space-* · --text-* · --surface-* …)으로 정하던 값만
+     YDS 토큰 중 가장 가까운 것으로 다시 정한다.
+     (회색 #f9fafb → bg-neutral-muted, 선 #e5e7eb → stroke-neutral-weak, 카드 선 #f3f4f6 → stroke-neutral-muted,
+      글자 #030712 / #4b5563 / #9ca3af → fg-neutral / -muted / -subtle, 회사명 파랑 #0068f0 → fg-informative,
+      화살표 호버 주황 #e8600c → palette-orange-700, 15px → t04)
+   - 카드 사이 16 과 한 화면 4장은 개발자 스크립트가 이동 거리를 계산하는 값이라 바꾸지 않는다. */
+.IT_main_recruit .nvb {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+  background: var(--ds-color-bg-neutral-muted);
+  border-bottom: 1px solid var(--ds-color-stroke-neutral-weak);
+}
+
+.IT_main_recruit .nvb-inner {
+  padding: var(--ds-space-x0) var(--ds-space-x6);
+}
+
+.IT_main_recruit .nvb-head {
+  gap: var(--ds-space-x4);
+  padding: var(--ds-space-x3) var(--ds-space-x0);
+}
+
+.IT_main_recruit .nvb-toggle {
+  gap: var(--ds-space-x3);
+}
+
+.IT_main_recruit .nvb-toggle .txt {
+  font-size: var(--ds-font-size-t04);
+  font-weight: var(--ds-font-weight-semibold);
+  color: var(--ds-color-fg-neutral);
+}
+
+.IT_main_recruit .nvb-toggle .badge {
+  gap: var(--ds-space-x1);
+  padding: var(--ds-space-x1) var(--ds-space-x2_5);
+  border: 1px solid var(--ds-color-stroke-neutral-weak);
+  border-radius: var(--ds-shape-sm);
+  font-size: var(--ds-font-size-t02);
+  font-weight: var(--ds-font-weight-medium);
+  color: var(--ds-color-fg-neutral-muted);
+}
+
+.IT_main_recruit .nvb-toggle .badge svg {
+  transition: transform var(--ds-duration-fast) var(--ds-easing-enter);
+}
+
+.IT_main_recruit .nvb-right {
+  gap: var(--ds-space-x3);
+  font-size: var(--ds-font-size-t02);
+  color: var(--ds-color-fg-neutral-muted);
+}
+
+.IT_main_recruit .nvb-x {
+  color: var(--ds-color-fg-neutral-subtle);
+}
+
+.IT_main_recruit .nvb-x:hover {
+  color: var(--ds-color-fg-neutral-muted);
+}
+
+.IT_main_recruit .nvb-body {
+  transition: max-height var(--ds-duration-normal) var(--ds-easing-enter);
+}
+
+.IT_main_recruit .nvb-slider {
+  padding: var(--ds-space-x2) var(--ds-space-x0) var(--ds-space-x6);
+}
+
+.IT_main_recruit .nvb-track {
+  transition: transform var(--ds-duration-normal) var(--ds-easing-enter);
+}
+
+.IT_main_recruit .nvb-card {
+  padding: var(--ds-space-x5) var(--ds-space-x6);
+  background: var(--ds-color-bg-layer-default);
+  border: 1px solid var(--ds-color-stroke-neutral-muted);
+  border-radius: var(--ds-shape-lg);
+  box-shadow: var(--ds-elevation-raised);
+}
+
+.IT_main_recruit .nvb-card h3 {
+  margin: var(--ds-space-x0) var(--ds-space-x0) var(--ds-space-x2_5);
+  font-size: var(--ds-font-size-t06);
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-color-fg-informative);
+}
+
+.IT_main_recruit .nvb-card .st {
+  padding-bottom: var(--ds-space-x3);
+  border-bottom: 1px solid var(--ds-color-stroke-neutral-weak);
+  font-size: var(--ds-font-size-t04);
+  color: var(--ds-color-fg-neutral);
+}
+
+.IT_main_recruit .nvb-card p {
+  margin: var(--ds-space-x3) var(--ds-space-x0) var(--ds-space-x0);
+  font-size: var(--ds-font-size-t04);
+  color: var(--ds-color-fg-neutral-subtle);
+}
+
+.IT_main_recruit .nvb-btn {
+  color: var(--ds-color-fg-neutral-subtle);
+}
+
+.IT_main_recruit .nvb-btn:hover {
+  color: var(--ds-color-palette-orange-700);
+}
+
+.IT_main_recruit a:focus-visible,
+.IT_main_recruit button:focus-visible {
+  outline: 2px solid var(--ds-color-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .IT_main_recruit .nvb-toggle .badge svg,
+  .IT_main_recruit .nvb-body,
+  .IT_main_recruit .nvb-track {
+    transition: none;
+  }
+}
+

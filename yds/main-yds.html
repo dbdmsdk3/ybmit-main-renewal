@@ -15,6 +15,8 @@
   <!-- 원본 헤더 · 푸터 + 시안 E 단독 스타일 (공용 common/banner/career.css 미사용) -->
   <link rel="stylesheet" href="main-yds.css">
   <link rel="stylesheet" href="footer.css">
+  <!-- [시안 확인용] 운영 사이트 개발자 CSS : 채용 배너의 기본 구조(배치 · 접고 펴기 · 화살표 위치). 색 · 글자 · 간격은 nav.css 7) 의 YDS 값 -->
+  <link rel="stylesheet" href="https://www.ybmit.com/resources/css/pages/main.css?ver.1">
   <link rel="stylesheet" href="nav.css">
   <!-- [시안 확인용 · 서버에 복사하지 않음] 운영 사이트에 이미 있는 slick 기본 CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
@@ -22,66 +24,100 @@
 <body>
 
   <!-- 채용정보 배너 (ybmit.com 상단 배너) -->
+  <!-- ████ 채용정보 배너 : 운영 사이트 원본 배너 + IT_main_recruit 틀 (모양은 지금 그대로, 값만 YDS · 스타일은 nav.css 7)) ████ -->
+<div class="IT_main_recruit"><!-- ★ 추가 : 채용 배너 디자인 틀 시작 -->
+<div class="nvb" id="nvb">
+  <div class="nvb-inner">
+    <div class="nvb-head">
+      <a class="nvb-logo"><img src="https://imagesisa.ybmnet.co.kr/platform/common/logo/ybm_ybm.svg" alt="YBM 와이비엠"></a>
+      <button class="nvb-toggle" id="nvbToggle" type="button">
+        <span class="txt">MOS, COS, COS Pro 활용 기업을 확인해 보세요 !</span>
+        <span class="badge"><span id="nvbToggleText">닫기</span><svg id="nvbToggleIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></span>
+      </button>
+      <div class="nvb-right">
+        <label><input type="checkbox" id="nvbDontToday"> 오늘 하루 닫기</label>
+        <button class="nvb-x" id="nvbClose" type="button" aria-label="배너 닫기"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </div>
+    </div>
+    <div class="nvb-body is-open" id="nvbBody">
+      <div class="nvb-slider">
+        <div class="nvb-viewport"><div class="nvb-track" id="nvbTrack"></div></div>
+        <button class="nvb-btn nvb-prev" id="nvbPrev" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button class="nvb-btn nvb-next" id="nvbNext" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- // .IT_main_recruit ★ 추가 : 채용 배너 디자인 틀 끝 -->
+<script>
+/* 채용정보 커튼 배너 */
+(function(){
+  var data = 
+[ ["코레일", "채용 예정", "MOS 가산점 부여"] 
+, ["SK 하이닉스", "경력직 상시채용", "MOS 채용시 활용"] 
+, ["롯데", "신입, 경력직 상시채용", "MOS 채용시 활용"] 
+, ["대한항공", "경력직 채용 중", "COS Pro, COS 소지자 우대"] 
+, ["대한민국 육군", "부사관 일반 전형", "MOS 가산점 부여"] 
+, ["대한민국 해군", "부사관 일반 전형", "MOS 가산점 부여"] 
+, ["네이버", "경력직 상시채용", "MOS 채용시 활용"] 
+, ["카카오", "경력직 상시채용", "MOS 채용시 활용"] 
+, ["셀트리온", "경력직 상시채용", "MOS 채용시 참고"] 
+, ["LS", "경력직 상시채용", "MOS 채용시 활용"] 
+, ["SM그룹", "경력직 상시채용", "MOS 채용시 활용"] 
+, ["삼성전자", "경력직 상시채용", "MOS 채용시 활용"] 
+];
+  var banner = document.getElementById('nvb');
+  var body   = document.getElementById('nvbBody');
+  var track  = document.getElementById('nvbTrack');
+  var prev   = document.getElementById('nvbPrev');
+  var next   = document.getElementById('nvbNext');
+  var VISIBLE = 4, GAP = 16, idx = 0, maxIdx = data.length - VISIBLE;
+
+  track.innerHTML = data.map(function(d){
+    return '<div class="nvb-card"><h3>'+d[0]+'</h3><div class="st">'+d[1]+'</div><p>'+d[2]+'</p></div>';
+  }).join('');
+
+  function move(dir){
+    /* 한 번 누를 때마다 한 회사씩 롤링, 끝에 도달하면 반대쪽 끝으로 순환 */
+    idx += dir;
+    if(idx > maxIdx) idx = 0;
+    if(idx < 0) idx = maxIdx;
+    var pct = (idx / VISIBLE) * 100, gap = (idx / VISIBLE) * GAP;
+    track.style.transform = 'translateX(calc(-' + pct + '% - ' + gap + 'px))';
+  }
+  prev.addEventListener('click', function(){ move(-1); });
+  next.addEventListener('click', function(){ move(1); });
+
+  /* 펼침 상태에서는 overflow:visible — 카드 밖 커서가 잘리지 않도록 */
+  body.style.overflow = 'visible';
+  body.addEventListener('transitionend', function(e){
+    if(e.propertyName === 'max-height' && body.classList.contains('is-open')) body.style.overflow = 'visible';
+  });
+
+  document.getElementById('nvbToggle').addEventListener('click', function(){
+    var open = body.classList.toggle('is-open');
+    if(!open) body.style.overflow = 'hidden';
+    document.getElementById('nvbToggleText').innerText = open ? '닫기' : '열기';
+    document.getElementById('nvbToggleIcon').innerHTML = open ? '<path d="m18 15-6-6-6 6"/>' : '<path d="m6 9 6 6 6-6"/>';
+  });
+
+  document.getElementById('nvbClose').addEventListener('click', function(){
+    if(document.getElementById('nvbDontToday').checked){
+      var t = new Date(); t.setHours(24,0,0,0);
+      localStorage.setItem('ybm_banner_hidden_until', String(t.getTime()));
+    }
+    banner.classList.add('hidden');
+  });
+
+  var hiddenUntil = localStorage.getItem('ybm_banner_hidden_until');
+  if(hiddenUntil && Date.now() < parseInt(hiddenUntil, 10)) banner.classList.add('hidden');
+})();
+</script>
+
   <!-- ████████████████████████████████████████████████████████████████████████ -->
   <!-- ▼▼▼ [nav 복사 시작] 여기부터 ▼▼▼  ybmit.com 의 "header" ~ "//header" 주석 사이를 통째로 교체  (스타일 : yds.css → nav.css / 동작 : 이 블록 끝 script 포함) -->
   <!-- ████████████████████████████████████████████████████████████████████████ -->
   <div class="IT_nav">
-  <div class="recruit-banner" id="recruit-banner">
-    <div class="container">
-      <div class="recruit-banner-head">
-        <img class="recruit-banner-logo" src="https://imagesisa.ybmnet.co.kr/platform/common/logo/ybm_ybm.svg" alt="YBM 와이비엠">
-
-        <!-- 배너 펼치기 / 접기 -->
-        <button type="button" class="recruit-banner-toggle" aria-expanded="true" aria-controls="recruit-banner-body">
-          <span class="recruit-banner-title">MOS, COS, COS Pro 활용 기업을 확인해 보세요 !</span>
-          <span class="recruit-banner-badge">
-            <span class="recruit-banner-badge-text">닫기</span>
-            <svg class="icon-chevron recruit-banner-badge-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </button>
-
-        <div class="recruit-banner-right">
-          <label class="recruit-banner-today">
-            <input type="checkbox" class="recruit-banner-today-check"> 오늘 하루 닫기
-          </label>
-          <button type="button" class="recruit-banner-close" aria-label="배너 닫기">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="recruit-banner-body is-open" id="recruit-banner-body">
-        <div class="recruit-slider">
-          <div class="recruit-slider-viewport">
-            <ul class="recruit-slider-track">
-              <li class="recruit-card"><h3 class="recruit-card-company">코레일</h3><p class="recruit-card-status">채용 예정</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">SK 하이닉스</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">롯데</h3><p class="recruit-card-status">신입, 경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">대한항공</h3><p class="recruit-card-status">경력직 채용 중</p><p class="recruit-card-desc">COS Pro, COS 소지자 우대</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">대한민국 육군</h3><p class="recruit-card-status">부사관 일반 전형</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">대한민국 해군</h3><p class="recruit-card-status">부사관 일반 전형</p><p class="recruit-card-desc">MOS 가산점 부여</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">네이버</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">카카오</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">셀트리온</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 참고</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">LS</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">SM그룹</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
-              <li class="recruit-card"><h3 class="recruit-card-company">삼성전자</h3><p class="recruit-card-status">경력직 상시채용</p><p class="recruit-card-desc">MOS 채용시 활용</p></li>
-            </ul>
-          </div>
-          <button type="button" class="recruit-slider-btn recruit-slider-prev" aria-label="이전 기업">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <button type="button" class="recruit-slider-btn recruit-slider-next" aria-label="다음 기업">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <header class="header" id="header">
     <div class="header-wrap">
