@@ -951,6 +951,38 @@
   .IT_nav .gnb-bottom { margin-top: auto; }
 }
 
+/* ---------- 7-0) 채용정보 배너 기본 구조 [깃허브 시안 전용] ----------
+   서버에서는 개발자 CSS(/resources/css/pages/main.css)에 이미 있는 규칙이라 서버에는 넣지 않는다.
+   깃허브 시안(github.io)에서는 다른 사이트(ybmit.com) CSS 를 불러올 수 없어서, 같은 구조를 여기에 그대로 옮겼다.
+   (개발자 CSS 의 숫자 값 그대로 : 폭 1180 · 로고 22 · 카드 4장 · 펼친 높이 260 · 화살표 -56 / 1300 이하 -44) */
+.IT_main_recruit .nvb { position: relative; z-index: 1001; }
+.IT_main_recruit .nvb.hidden { display: none; }
+.IT_main_recruit .nvb a:link,
+.IT_main_recruit .nvb a:visited { text-decoration: none; color: inherit; }
+.IT_main_recruit .nvb-inner { max-width: 1180px; margin: 0 auto; }
+.IT_main_recruit .nvb-head { display: flex; align-items: center; justify-content: space-between; }
+.IT_main_recruit .nvb-logo img { display: block; height: 22px; }
+.IT_main_recruit .nvb-toggle { display: flex; align-items: center; padding: var(--ds-space-x0); font: inherit; background: none; border: 0; cursor: pointer; }
+.IT_main_recruit .nvb-toggle .badge { display: flex; align-items: center; }
+.IT_main_recruit .nvb-toggle .badge svg { width: 14px; height: 14px; }
+.IT_main_recruit .nvb-right { display: flex; align-items: center; }
+.IT_main_recruit .nvb-right label { display: flex; align-items: center; gap: var(--ds-space-x1); cursor: pointer; }
+.IT_main_recruit .nvb-x { padding: var(--ds-space-x0_5); line-height: 0; background: none; border: 0; cursor: pointer; }
+.IT_main_recruit .nvb-body { max-height: 0px; overflow: hidden; }
+.IT_main_recruit .nvb-body.is-open { max-height: 260px; }
+.IT_main_recruit .nvb-slider { position: relative; }
+.IT_main_recruit .nvb-viewport { overflow: hidden; }
+.IT_main_recruit .nvb-track { display: flex; gap: var(--ds-space-x4); }
+.IT_main_recruit .nvb-card { flex: 0 0 calc((100% - var(--ds-space-x4) * 3) / 4); box-sizing: border-box; }
+.IT_main_recruit .nvb-btn { position: absolute; top: 50%; z-index: 2; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: var(--ds-space-x0); background: none; border: 0; cursor: pointer; transform: translateY(-50%); }
+.IT_main_recruit .nvb-btn svg { width: 32px; height: 32px; }
+.IT_main_recruit .nvb-prev { left: calc(var(--ds-space-x14) * -1); }
+.IT_main_recruit .nvb-next { right: calc(var(--ds-space-x14) * -1); }
+@media (max-width: 1300px) {
+  .IT_main_recruit .nvb-prev { left: calc(var(--ds-space-x11) * -1); }
+  .IT_main_recruit .nvb-next { right: calc(var(--ds-space-x11) * -1); }
+}
+
 /* ---------- 7) 채용정보 배너 (.IT_main_recruit) ----------
    - 지금(개발자) 디자인 모양 그대로 : 폭 1180 · 로고 22 · 카드 4장 · 화살표 위치(-56, 1300 이하 -44)는
      개발자 CSS 의 숫자 값을 그대로 쓰고, 예전 토큰(--space-* · --text-* · --surface-* …)으로 정하던 값만
