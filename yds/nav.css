@@ -1011,7 +1011,7 @@
 }
 
 .IT_main_recruit .nvb-toggle .txt {
-  font-size: var(--ds-font-size-t04);
+  font-size: var(--ds-font-size-t06);
   font-weight: var(--ds-font-weight-semibold);
   color: var(--ds-color-fg-neutral);
 }
