@@ -29,7 +29,7 @@
 /* 헤더 내부 컨테이너 */
 .IT_nav .container {
   width: 100%;
-  max-width: calc(1100px + var(--ds-space-x5) * 2);
+  max-width: calc(1140px + var(--ds-space-x5) * 2); /* 안쪽 폭 1140 : 서버 v2 (.nav-wrap 1140 + 좌우 20) 와 같게 */
   margin: var(--ds-space-x0) auto;
   padding: var(--ds-space-x0) var(--ds-space-x5);
 }
