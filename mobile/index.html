@@ -41,10 +41,10 @@
   <!-- wrap -->
   <section id="wrap">
 <!-- ████████████████████████████████████████████████████████████████████
-     ▼▼▼ [header 복사 시작] ▼▼▼  위 막대 : 운영 원본 그대로 + <header> 에 class="IT_m_header" 하나만 추가
-     (전체 메뉴 side_menu 는 이 header 안에 있지만 [menu 복사] 블록으로 따로 둔다)
+     ▼▼▼ [header 영역 시작] ▼▼▼  위 막대 : 운영 원본 그대로 (바뀐 것 없음, m-header.css 만 적용)
+     (전체 메뉴 side_menu 는 이 header 안에 있다 : 아래 menu 영역)
      ████████████████████████████████████████████████████████████████████ -->
-    <header id="header" class="IT_m_header"><!-- ★ 추가 : class="IT_m_header" -->
+    <header id="header">
 
       <!-- header_wrap -->
       <section class="header_wrap nav_trans">
@@ -52,10 +52,10 @@
         <a href="javascript:common.allMenuOpen();" class="btn_all_menu"><span></span><span></span><span></span></a>
       </section>
       <!-- header_wrap -->
-<!-- ▲▲▲ [header 복사 끝] ▲▲▲ -->
+<!-- ▲▲▲ [header 영역 끝] ▲▲▲ -->
 
 <!-- ████████████████████████████████████████████████████████████████████
-     ▼▼▼ [menu 복사 시작] ▼▼▼  전체 메뉴 : 운영 원본 그대로 + <aside class="side_menu"> 에 class="IT_m_menu" 하나만 추가
+     ▼▼▼ [menu 영역 시작] ▼▼▼  전체 메뉴 : 운영 원본 그대로 (m-menu.css 적용)
      ★ 표시가 바뀐 곳 : Generative AI 메뉴 추가
      (로그인 상태에 따라 JSP 가 바꿔 넣는 .side_top 안쪽은 서버 원래 코드를 그대로 쓴다. 이 블록은 로그아웃 화면)
      ████████████████████████████████████████████████████████████████████ -->
@@ -73,7 +73,7 @@
         }
       </script>
 
-      <aside class="side_menu IT_m_menu"><!-- ★ 추가 : class="IT_m_menu" -->
+      <aside class="side_menu">
         <!-- side_top -->
         <div class="side_top">
           <p class="info_user"><a href="https://m.ybmnet.co.kr/common/login.asp?url=/m/index_m.jsp&what=www.ybmit.com" title="로그인"> 로그인해 주세요.</a></p>
@@ -155,19 +155,19 @@
         </div>
       </aside>
       <!-- side_menu -->
-<!-- ▲▲▲ [menu 복사 끝] ▲▲▲ -->
+<!-- ▲▲▲ [menu 영역 끝] ▲▲▲ -->
 
     </header><!-- 운영 원본 그대로 (header 를 닫는 태그) -->
 
 
 <!-- ████████████████████████████████████████████████████████████████████
-     ▼▼▼ [main 복사 시작] ▼▼▼  운영 원본 그대로 + <section id="container"> 에 class="IT_m_main" 하나만 추가
+     ▼▼▼ [main 영역 시작] ▼▼▼  운영 원본 그대로 (m-main.css 적용)
      ★ 표시가 바뀐 곳 : 생성형 AI 카드 추가, 시험명 글자
      (카드 순서 · 시험소개 버튼 숨김 · 로고 · 아이콘은 모두 m-main.css 에서 처리 — 기존 카드 HTML 순서는 그대로)
      ※ 운영 원본 container 맨 끝의 닫는 div (주석 /mkt_popup_overlay) 는 서버 코드 그대로 둔다
      ████████████████████████████████████████████████████████████████████ -->
     <!-- container -->
-    <section id="container" class="main IT_m_main"><!-- ★ 추가 : class="IT_m_main" -->
+    <section id="container" class="main">
       <!-- box_bg-->
       <div class="box_bg"></div>
       <!-- box_bg-->
@@ -293,7 +293,7 @@
 
     </section>
     <!-- container -->
-<!-- ▲▲▲ [main 복사 끝] ▲▲▲ -->
+<!-- ▲▲▲ [main 영역 끝] ▲▲▲ -->
 
 
     <!-- footer : 운영 원본 그대로 (이번 작업 범위 아님) -->
